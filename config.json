@@ -1,6 +1,6 @@
 {
     "Authors": [
-        "Eric Schurter"
+        "Alex Muller", "Timur Pulathaneli", "Eric Schurter", "Justin Dickow"
     ],
     "languages": [
         "en"
@@ -13,7 +13,7 @@
             "name": "Software Architecture"
         },
         {
-            "name": "Mobile Navigation - Video Streaming"
+            "name": "Mobile Navigation"
         }
     ]
 }
