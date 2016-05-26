@@ -1,0 +1,17 @@
+{
+    "Authors": [
+        "Eric Schurter"
+    ],
+    "languages": [
+        "en"
+    ],
+    "navigation": [
+        {
+            "name": "Getting Started"
+        },
+
+		{
+            "name": "Software Architecture"
+        }
+    ]
+}
