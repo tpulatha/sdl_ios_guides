@@ -109,13 +109,13 @@ The example app's `startProxyWithTransportType` handles starting up the proxy wh
 
 ```objc
 switch (transportType) {
-case ProxyTransportTypeTCP: {
-self.proxy = [SDLProxyFactory buildSDLProxyWithListener:self tcpIPAddress:@"192.168.1.1" tcpPort:@"1234"];
-} break;
-case ProxyTransportTypeIAP: {
-self.proxy = [SDLProxyFactory buildSDLProxyWithListener:self];
-} break;
-default: NSAssert(NO, @"Unknown transport setup: %@", @(transportType));
+  case ProxyTransportTypeTCP: {
+    self.proxy = [SDLProxyFactory buildSDLProxyWithListener:self tcpIPAddress:@"192.168.1.1" tcpPort:@"1234"];
+  } break;
+  case ProxyTransportTypeIAP: {
+    self.proxy = [SDLProxyFactory buildSDLProxyWithListener:self];
+  } break;
+  default: NSAssert(NO, @"Unknown transport setup: %@", @(transportType));
 }
 ```
 
@@ -162,8 +162,8 @@ When the proxy is closed, you will receive a call to `onProxyClosed`. This is wh
 self.state = ProxyStateStopped;
 
 if (self.proxy != nil) {
-[self.proxy dispose];
-self.proxy = nil;
+  [self.proxy dispose];
+  self.proxy = nil;
 }
 ```
 
@@ -174,8 +174,8 @@ You will want to track your first HMI FULL, for instance with a boolean value. T
 
 ```objc
 if ((notification.hmiLevel == [SDLHMILevel FULL]) && self.isFirstHMIFull) {
-[self showInitialData];
-self.isFirstHMIFull = NO;
+  [self showInitialData];
+  self.isFirstHMIFull = NO;
 }
 ```
 
@@ -185,13 +185,13 @@ As described in the section "Creating the SDLProxy", you need will have separate
 
 ```objc
 switch (transportType) {
-case ProxyTransportTypeTCP: {
-self.proxy = [SDLProxyFactory buildSDLProxyWithListener:self tcpIPAddress:@"192.168.1.1" tcpPort:@"1234"];
-} break;
-case ProxyTransportTypeIAP: {
-self.proxy = [SDLProxyFactory buildSDLProxyWithListener:self];
-} break;
-default: NSAssert(NO, @"Unknown transport setup: %@", @(transportType));
+  case ProxyTransportTypeTCP: {
+    self.proxy = [SDLProxyFactory buildSDLProxyWithListener:self tcpIPAddress:@"192.168.1.1" tcpPort:@"1234"];
+  } break;
+  case ProxyTransportTypeIAP: {
+    self.proxy = [SDLProxyFactory buildSDLProxyWithListener:self];
+  } break;
+  default: NSAssert(NO, @"Unknown transport setup: %@", @(transportType));
 }
 ```
 
