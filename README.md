@@ -1,5 +1,5 @@
-# livio-sample-guide-ios
-Sample iOS Guide content for SDL
+# SDL iOS Guide Content
+Sample iOS Guide content for the [SDL Developer Portal](https://smartdevicelink.com/guides/iOS/getting-started/).
 
 ## How to Use This Guide
 
