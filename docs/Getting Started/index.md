@@ -1,5 +1,7 @@
 ## Installing
 
+Find more information [on Github](https://github.com/smartdevicelink/sdl_ios/) and see our [releases](https://github.com/smartdevicelink/sdl_ios/releases) and [changelog](https://github.com/smartdevicelink/sdl_ios/blob/master/CHANGELOG.md). If you need assistance, contact us [on Slack](http://slack.smartdevicelink.org/).
+
 #### Cocoapods
 
 You can install this library using [Cocoapods](https://cocoapods.org/pods/SmartDeviceLink-iOS). You can get started with Cocoapods by [following their install guide](https://guides.cocoapods.org/using/getting-started.html#getting-started), and learn how to use Cocoapods to install dependencies [by following this guide](https://guides.cocoapods.org/using/using-cocoapods.html).
@@ -10,10 +12,6 @@ In your podfile, you want to add `pod 'SmartDeviceLink-iOS', '4.1.2'`. Then run 
 
 SDL iOS supports Carthage! Install using Carthage by following [this guide](https://github.com/Carthage/Carthage#adding-frameworks-to-an-application). Carthage supports iOS 8+.
 
-#### Dynamic Framework
-
-Tagged to our releases is a dynamic framework file that can be drag-and-dropped into the application. Dynamic frameworks are supported on iOS 8+. **WARNING: You cannot submit your app to the app store with the framework as is. You MUST strip the simulator part of the framework first. Use a script such as Carthage's to accomplish this**.
-
 ## Reference Documentation
 
 You can find the latest reference documentation on [Cocoadocs](http://cocoadocs.org/docsets/SmartDeviceLink-iOS). Install this documentation to [Dash](http://kapeli.com/dash) or Xcode using [Docs for Xcode](https://documancer.com/xcode/). On the [docs page](http://cocoadocs.org/docsets/SmartDeviceLink-iOS), click the 'share' button in the upper right.
@@ -23,11 +21,10 @@ You can find the latest reference documentation on [Cocoadocs](http://cocoadocs.
 If you see a bug, feel free to post an issue on the appropriate repository. Please see the [contribution guidelines](https://github.com/smartdevicelink/sdl_ios/blob/master/CONTRIBUTING.md) before proceeding. If you need general assistance, or have other questions, you can [sign up](http://slack.smartdevicelink.org) for the [SDL Slack](https://smartdevicelink.slack.com) and chat with other developers and the maintainers of the project.
 
 ## Running Tests
-To run tests, you will need to bootstrap the Carthage testing libraries. To do so, first [install Carthage](https://github.com/Carthage/Carthage#installing-carthage).
+To run unit tests, you will need to bootstrap the Carthage testing libraries. To do so, first [install Carthage](https://github.com/Carthage/Carthage#installing-carthage).
 
 Then, from the root project directory, run:
 ```bash
-cd SmartDeviceLink-iOS
 carthage bootstrap --platform ios
 cd ../
 ```
@@ -35,7 +32,7 @@ cd ../
 At this point, you can run tests from Xcode, or, if you wish to run the tests exactly as they will be run on the CI server, [install xctool](https://github.com/facebook/xctool#installation) and run:
 
 ```bash
-xctool -project SmartDeviceLink-iOS/SmartDeviceLink-iOS.xcodeproj -scheme SmartDeviceLink -sdk iphonesimulator ONLY_ACTIVE_ARCH=NO RUN_CLANG_STATIC_ANALYZER=NO test
+xctool -project SmartDeviceLink-iOS.xcodeproj -scheme SmartDeviceLink -sdk iphonesimulator ONLY_ACTIVE_ARCH=NO RUN_CLANG_STATIC_ANALYZER=NO test
 ```
 
 ## Getting Started
@@ -49,7 +46,7 @@ You may want to build the [sdl_core project](https://github.com/smartdevicelink/
 !!!
 
 ### Enabling Background Capabilities
-iOS 5 introduced the capability for an iOS application to maintain a connection to an external accessory while the application is in the background. This capability must be explicitly enabled for your application.
+iOS 5 introduced the capability for an iOS application to maintain a connection to an external accessory while the application is in the background. This capability must be explicitly enabled for your application, *and we require that you do so.*
 
 To enable the feature for your application, select your application's build target, go to Capabilities, enable Background Modes, and select the External accessory communication mode.
 
@@ -59,7 +56,7 @@ To enable the feature for your application, select your application's build targ
 
 !!! must
 
-Your application must support a set of smartdevicelink protocol strings in order to be connected to smartdevicelink enabled head units. Go to your application's .plist, look at the source, and add the following code under the top level `dict`. Note: This is not required if you're only testing by connected to a wifi enabled head unit, but is required for USB and Bluetooth enabled head units.
+Your application must support a set of SDL protocol strings in order to be connected to SDL enabled head units. Go to your application's .plist, look at the source, and add the following code under the top level `dict`. Note: This is not required if you're only testing by connected to a wifi enabled head unit, but is required for production enabled head units.
 
 !!!
 
