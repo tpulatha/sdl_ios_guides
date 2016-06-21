@@ -111,14 +111,14 @@ The console log shows a simplified output of sent and received requests.
 <img src="assets/Console.png" width=200px>
 
 #### Console Color Codes
-The console logs are color coded for quick identification.  
-1. White: Used for logs with no additional data.
-2. Blue: Used for requests sent to the SDL Core.
-3. Green: Used for responses from the SDL Core. There are three possible respose types:
+The console logs are color coded for quick identification. 
+1. White - Used for logs with no additional data.
+2. Blue - Used for requests sent to the SDL Core.
+3. Green - Used for responses from the SDL Core. There are three possible response types:
     - Successful: these response types are colored green.
     - Aborted, Timed-Out, or Warnings: these response types are colored yellow.
     - Miscellaneous: these response types are colored red.
-4. Yellow: Used for notifications sent from the SDL Core.
+4. Yellow - Used for notifications sent from the SDL Core.
 
 #### RPC JSON
 Tapping once on a RPC call in the console will reveal the JSON associated with that RPC call, if applicable.
