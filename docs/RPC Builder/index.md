@@ -65,8 +65,8 @@ There are three different ways to send an RPC argument.
 2. Send without data
     * To send an argument with an empty string, leave the field next to the argument name empty
 3. Don't send the argument
-    * To disable the argument from being included in the RPC, tap once on the argument's name. The argument will be grayed out and not included in the request. In the picture below *mainField1* will not be included in the RPC Request, but *mainField2* will be included with an empty string. 
-    <img src="assets/EnabledDisabled.png" width=200px>  
+    * To disable the argument from being included in the RPC, tap once on the argument's name. The argument will be grayed out and not included in the request. In the picture below *mainField1* will not be included in the RPC Request, but *mainField2* will be included with an empty string.  
+<img src="assets/EnabledDisabled.png" width=200px>  
 
 
 ### Modules
@@ -111,7 +111,7 @@ The console log shows a simplified output of sent and received requests.
 <img src="assets/Console.png" width=200px>
 
 #### Console Color Codes
-The console logs are color coded for quick identification. 
+The console logs are color coded for quick identification.
 1. White - Used for logs with no additional data.
 2. Blue - Used for requests sent to the SDL Core.
 3. Green - Used for responses from the SDL Core. There are three possible response types:
