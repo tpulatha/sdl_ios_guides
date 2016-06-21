@@ -112,6 +112,15 @@ The console log shows a simplified output of sent and received requests.
 
 #### Console Color Codes
 The console logs are color coded for quick identification.
+1. testing
+2. testing2
+3. testing3
+    - test1
+    - test2
+    - test3
+    - test4
+4. testing4
+
 1. White - Used for logs with no additional data.
 2. Blue - Used for requests sent to the SDL Core.
 3. Green - Used for responses from the SDL Core. There are three possible response types:
