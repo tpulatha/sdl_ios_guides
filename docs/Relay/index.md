@@ -9,8 +9,11 @@ Make sure that both the SDL iOS Relay app and the app being tested are connected
 ## Necessary Tools
 In order to use the Relay app, you must have the following tools  
     1. A [SDL Core](https://github.com/smartdevicelink/sdl_core)
+    
     2. An iOS device with the [SDL iOS Relay](https://github.com/smartdevicelink/relay_app_ios) app installed
+    
     3. A USB cable connecting the iOS device to the SDL Core
+    
     4. Xcode with the app being tested running in Xcode's iOS Simulator app
 
 ## Examples
