@@ -106,27 +106,26 @@ There are a few requirements for building Modules:
     - Allows for saving of audio data via AudioPassThru RPCs. Properties of this RPC can be modified to test the robustness of the RPC. This audio data may be retrieved via iTunes File Sharing.
 
 ### Console Log
-The console log shows a simple output of received responses or notifications.
+The console log shows a simplified output of sent and received requests.
 
 <img src="assets/Console.png" width=200px>
 
 #### Console Color Codes
 The console logs are color coded for quick identification.  
-1. **White**: Used for logs with no additional data.
-2. **Blue**: Used for requests sent to the SDL Core.
-3. **Green**: Used for responses from the SDL Core. There are three possible respose types:
-    - *Successful*: these response types are colored green.
-    - *Aborted, Timed-Out, or Warnings*: these response types are colored yellow.
-    - *Miscellaneous*: these response types are colored red.
-4. **Yellow**: Used for notifications sent from the SDL Core.
-
+1. White: Used for logs with no additional data.
+2. Blue: Used for requests sent to the SDL Core.
+3. Green: Used for responses from the SDL Core. There are three possible respose types:
+    - Successful: these response types are colored green.
+    - Aborted, Timed-Out, or Warnings: these response types are colored yellow.
+    - Miscellaneous: these response types are colored red.
+4. Yellow: Used for notifications sent from the SDL Core.
 
 #### RPC JSON
 Tapping once on a RPC call in the console will reveal the JSON associated with that RPC call, if applicable.
 
 <img src="assets/Console-RAI.png" width=200px>
 
-### A Special Note about Putfile
+### A Special Note About Putfile
 Putfile is the RPC responsible for sending binary data from our mobile libraries to the SDL Core. The RPC Builder app provides support for adding any type of file: either from the camera roll (for images) or iTunes shared storage for any other kind of files. Similar to adding custom RPC spec files, any file located within the `BulkData` directory will be present in local storage and be usable for upload.
 
 ## Need Help?
