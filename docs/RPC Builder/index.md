@@ -19,14 +19,14 @@ After the SDL iOS library has been installed, the RPC Builder app can be deploye
 ## RPC Builder Interface
 
 ### Settings Page
-<img src="assets/Settings.png" width=200px>
+<img src="assets/Settings.png" width=200px>  
 On the settings page, select a RPC spec file. The default *Mobile_API.xml* file will generate all possible RPCs available for the app. To use a custom RPC spec file, add a new file via iTunes file sharing to the `SpecXMLs` directory. The file can also be added via a remote URL.
 
 Also on the settings page, set the transport layer to TCP/IP or iAP.
 
 Once the spec file and transport layer have been set, click on *Next*. The next page is the Register App Interface (RAI) screen. This page contains information for registering the app the first time it connects with the SDL Core. Simply click on *Send* to use the default settings. If the properties on the RAI screen are modified, they will be cached for subsequent launches. 
 
-<img src="assets/RegisterAppInterface.png" width=200px>
+<img src="assets/RegisterAppInterface.png" width=200px>  
 <img src="assets/Connecting.png" width=200px>
 
 !!! IMPORTANT 
@@ -65,9 +65,9 @@ There are three different ways to send an RPC argument.
 2. Send without data
     * To send an argument with an empty string, leave the field next to the argument name empty
 3. Don't send the argument
-    * To disable the argument from being included in the RPC, tap once on the argument's name. The argument will be grayed out and not included in the request. (See picture below)  
+    * To disable the argument from being included in the RPC, tap once on the argument's name. The argument will be grayed out and not included in the request. In the picture below *mainField1* will not be included in the RPC Request, but *mainField2* will be included with an empty string. 
     <img src="assets/EnabledDisabled.png" width=200px>  
-> mainField1 will not be included in the RPC Request, but mainField2 will be included with an empty string.
+
 
 ### Modules
 The purpose of modules is to allow developers to create more advanced testing scenarios. A module can contain multiple RPCs. It can also define capabilities not provided in the RPC spec file.
@@ -111,14 +111,14 @@ The console log shows a simple output of received responses or notifications.
 <img src="assets/Console.png" width=200px>
 
 #### Console Color Codes
-The logs are color coded to quickly identify the types of communication.  
-    1. **White**: Used for logs with no additional data.
-    2.  **Blue**: Used for requests sent to the SDL Core.
-    3.  **Green**: Used for responses from the SDL Core. There are three possible respose types:
-        - *Successful*: these response types are colored green.
-        - *Aborted, Timed-Out, or Warnings*: these response types are colored yellow.
-        - *Miscellaneous*: these response types are colored red.
-    4. **Yellow**: Used for notifications sent from the SDL Core.
+The console logs are color coded for quick identification.  
+1. **White**: Used for logs with no additional data.
+2. **Blue**: Used for requests sent to the SDL Core.
+3. **Green**: Used for responses from the SDL Core. There are three possible respose types:
+    - *Successful*: these response types are colored green.
+    - *Aborted, Timed-Out, or Warnings*: these response types are colored yellow.
+    - *Miscellaneous*: these response types are colored red.
+4. **Yellow**: Used for notifications sent from the SDL Core.
 
 
 #### RPC JSON
@@ -130,7 +130,7 @@ Tapping once on a RPC call in the console will reveal the JSON associated with t
 Putfile is the RPC responsible for sending binary data from our mobile libraries to the SDL Core. The RPC Builder app provides support for adding any type of file: either from the camera roll (for images) or iTunes shared storage for any other kind of files. Similar to adding custom RPC spec files, any file located within the `BulkData` directory will be present in local storage and be usable for upload.
 
 ## Need Help?
-If you need general assistance, or have other questions, you can [sign up](http://slack.smartdevicelink.org/) for the [SDL Slack](https://smartdevicelink.slack.com/) and chat with other developers and the maintainers of the project.
+If you need general assistance, or have other questions, you can [sign up](http://sdlslack.herokuapp.com/) for the [SDL Slack](https://smartdevicelink.slack.com/) and chat with other developers and the maintainers of the project.
 
 ## Found a Bug?
 If you see a bug, feel free to [post an issue](https://github.com/smartdevicelink/rpc_builder_app_ios/issues/new).
