@@ -226,3 +226,105 @@ sdlManager?.sendRequest(deleteSubmenu, withResponseHandler: { (request, response
     }
 })
 ```
+### Custom Menu
+Custom menus are created by sending two different RPCs. First a `SDLCreateInteractionChoiceSet` RPC must be sent. This RPC sends a list of items that will show up in the menu. When the request has been registered successfully, then a `SDLPerformInteraction` RPC is sent. The `SDLPerformInteraction` RPC sends the formatting requirements, the voice-recognition commands, and a timeout command.
+
+#### Create a Set of Custom Menu Items
+Each menu item choice defined in `SDLChoice` should be assigned a unique id. The choice set in `SDLCreateInteractionChoiceSet` should also have its own unique id.
+```swift
+let request = SDLCreateInteractionChoiceSet()
+var choiceSet: [SDLChoice] = []
+
+let choice = SDLChoice()
+choice.choiceID = 9876
+choice.menuName = "menu title"
+choice.vrCommands = ["menu commands"]
+
+choiceSet.append(choice)
+request.choiceSet = NSMutableArray(array: choiceSet)
+request.interactionChoiceSetID = 1111
+sdlManager?.sendRequest(createRequest, withResponseHandler: { (request, response, error) in
+  if response?.resultCode == SDLResult.SUCCESS() {
+  		// The request was successful, now send the SDLPerformInteraction RPC
+  }
+})
+```
+
+#### Format the Set of Custom Menu Items
+Once the set of menu items has been sent to the SDL Core, send a `SDLPerformInteraction` RPC to get the items to show up on the HMI screen.
+```swift
+let request = SDLPerformInteraction()
+request.initialText = "text displayed when menu starts"
+request.interactionChoiceSetIDList = NSMutableArray(array: [1111])
+```
+
+##### Interaction Mode
+The interaction mode specifies the way the user is prompted to make a section and the way in which the user’s selection is recorded.
+
+| Interaction Mode  | Description |
+| ------------- | ------------- |
+| Manual only | interactions occur only through the display |
+| VR only | interactions occur only through text-to-speech and voice recognition |
+| Both | interactions can occur both manually or through vr |
+```swift
+request.interactionMode = SDLInteractionMode.MANUAL_ONLY()
+```
+
+##### Interaction Layout
+The list can be shown as a grid of buttons with images  or as a vertical list of choices.
+
+| Layout Mode  | Formatting Description |
+| ------------- | ------------- |
+| Icon only | a grid of buttons with images |
+| Icon with search | a grid of buttons with images along with a search field in the HMI |
+| List only | a vertical list  of text |
+| List with search | a vertical list of text with a search field in the HMI |
+| Keyboard | A keyboard shows up immediately in the HMI |
+```swift
+request.interactionLayout = SDLLayoutMode.LIST_ONLY()
+```
+
+##### Text-to-Speech (TTS)
+A text-to-speech chunk is a text phrase or prerecorded sound that the SDL will speak. The text parameter specifies the text to be spoken, or the name of the pre-recorded sound. Use the type parameter to define the type of information in the text parameter. The `SDLPerformInteraction` request can have a initial, timeout, and a help prompt.
+```swift
+let prompt = SDLTTSChunk()
+prompt.text = "Helpful text"
+prompt.type = SDLSpeechCapabilities.TEXT()
+request.initialPrompt = NSMutableArray(array: [prompt])
+```
+
+##### Timeout
+The timeout parameter defines the amount of time the menu will appear on the screen before the menu is dismissed automatically by the HMI.
+```swift
+request.timeout = 30000 // 30 seconds
+```
+
+##### Send the Request
+```swift
+sdlManager?.sendRequest(request, withResponseHandler: { (request, response, error) in
+
+    // Wait for user's selection or for timeout
+    if response?.resultCode == SDLResult.SUCCESS() {
+        if let response: SDLPerformInteractionResponse = response as? SDLPerformInteractionResponse {
+            let choiceId = response.choiceID
+            // The user selected an item in the custom menu                     
+        }
+    }
+
+    else if response?.resultCode == SDLResult.TIMED_OUT() {
+        // The custom menu timed out before the user could select an item
+    }
+})
+```
+
+#### Delete the Custom Menu
+If the information in the menu is dynamic, then the old interaction choice set needs to be deleted with a `SDLDeleteInteractionChoiceSet` RPC before the new information can be added to the menu. Use the interaction choice set id to delete the menu.
+```swift
+let deleteRequest = SDLDeleteInteractionChoiceSet()
+deleteRequest.interactionChoiceSetID = 1111
+sdlManager?.sendRequest(deleteRequest, withResponseHandler: { (request, response, error) in
+    if response?.resultCode == SDLResult.SUCCESS() {
+     	// The custom menu was deleted successfully
+    }
+})
+```
