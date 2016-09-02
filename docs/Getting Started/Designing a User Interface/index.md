@@ -226,6 +226,7 @@ sdlManager?.sendRequest(deleteSubmenu, withResponseHandler: { (request, response
     }
 })
 ```
+
 ### Custom Menu
 Custom menus are created by sending two different RPCs. First a `SDLCreateInteractionChoiceSet` RPC must be sent. This RPC sends a list of items that will show up in the menu. When the request has been registered successfully, then a `SDLPerformInteraction` RPC is sent. The `SDLPerformInteraction` RPC sends the formatting requirements, the voice-recognition commands, and a timeout command.
 
@@ -251,7 +252,7 @@ sdlManager?.sendRequest(createRequest, withResponseHandler: { (request, response
 ```
 
 #### Format the Set of Custom Menu Items
-Once the set of menu items has been sent to the SDL Core, send a `SDLPerformInteraction` RPC to get the items to show up on the HMI screen.
+Once the set of menu items has been sent to SDL Core, send a `SDLPerformInteraction` RPC to get the items to show up on the HMI screen.
 ```swift
 let request = SDLPerformInteraction()
 request.initialText = "text displayed when menu starts"
