@@ -41,6 +41,7 @@ The position of images on the screen is determined by the currently used templat
 
 !!! NOTE
 Some head units you may be connected to may not support images at all. Please consult the `graphicsSupported` property of the display capabilities in the `RegisterAppInterface` response.
+!!!
 
 1. ##### Image File Type
 Images can be formatted as PNG, JPEG, or BMP. Check the `displayCapability` properties to find out what image formats the head unit supports.
