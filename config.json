@@ -14,6 +14,12 @@
         },
         {
             "name": "Mobile Navigation"
+        },
+        {
+            "name": "Relay App"
+        },
+        {
+            "name": "RPC Builder App"
         }
     ]
 }
