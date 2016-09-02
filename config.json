@@ -7,7 +7,24 @@
     ],
     "navigation": [
         {
-            "name": "Getting Started"
+            "name": "Getting Started",
+            "navigation": [
+                {
+                    "name": "Installation"
+                },
+                {
+                    "name": "SDK Configuration"
+                },
+                {
+                    "name": "Integration Basics"
+                },
+                {
+                    "name": "Connecting to SDL"
+                },
+                {
+                    "name": "Designing a User Interface"
+                }
+            ]
         },
         {
             "name": "Software Architecture"
