@@ -5,13 +5,15 @@ We have provided three different ways to install the SDL SDK in your project: Co
 #### CocoaPods Installation
 1. Xcode should be closed for the following steps.
 2. Open the terminal app on your Mac.
-3. Make sure you have the latest version of [CocoaPods](https://cocoapods.org) installed. For more information on installing CocoaPods on your system please consult:  https://cocoapods.org.  
-        ```
-        sudo gem install cocoapods
-        ```
+3. Make sure you have the latest version of [CocoaPods](https://cocoapods.org) installed. For more information on installing CocoaPods on your system please consult:  https://cocoapods.org.
+
+ ```
+sudo gem install cocoapods
+```
 4. Navigate to the root directory of your app. Make sure your current folder contains the **.xcodeproj** file
-5. Create a new Podfile.  
-        ```
+5. Create a new Podfile.
+
+ ```
         pod init
         ```
 6. In the Podfile, add the following text. This tells CocoaPods to install the SDL for iOS framework. This will install the latest SDL SDK version up to minor version 4.3.0  
