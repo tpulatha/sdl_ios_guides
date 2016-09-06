@@ -38,5 +38,4 @@ We have provided three different ways to install the SDL SDK in your project: Co
   ```
 
 #### Carthage
-
 SDL iOS supports Carthage! Install using Carthage by following [this guide](https://github.com/Carthage/Carthage#adding-frameworks-to-an-application). Carthage supports iOS 8+.
