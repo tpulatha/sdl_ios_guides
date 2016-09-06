@@ -1,8 +1,8 @@
-## Connecting to SDL
-### How SDL Communicates
-SmartDeviceLink works by sending remote procedure calls (RPCs)  back and forth between a smartphone application and the SDL Core. These RPCs will allow you to build the user interface on the SDL Core, detect button presses, play audio, and get vehicle data, among other things. You will interact with the SDL library in order to have your app's functionality available on the remote system.
+## Integration Basics
+### How SDL Works
+SmartDeviceLink works by sending remote procedure calls (RPCs) back and forth between a smartphone application and the SDL Core. These RPCs allow you to build the user interface, detect button presses, play audio, and get vehicle data, among other things. You will interact with the SDL library in order to have your app's functionality available on the remote system.
 
-### Setting Up a Proxy Manager Class
+### Set Up a Proxy Manager Class
 You will need a class that manages the RPCs sent back and forth between your app and SDL Core. Since  there should be only one active connection to the SDL Core, you may wish to implement this proxy class using the singleton pattern.
 ```swift
 class ProxyManager: NSObject {
@@ -14,7 +14,7 @@ class ProxyManager: NSObject {
 }
 ```
 
-Your app should always start passively watching for a connection with a SDL Core as soon as the app launches. The easy way to do this is by instantiating the *Proxy Class* in the `didFinishLaunchingWithOptions()` method in your `AppDelegate` class.
+Your app should always start passively watching for a connection with a SDL Core as soon as the app launches. The easy way to do this is by instantiating the *Proxy Class* in the `didFinishLaunchingWithOptions()` method in your *AppDelegate* class.
 ```swift
 class AppDelegate: UIResponder, UIApplicationDelegate {
   func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
@@ -46,7 +46,7 @@ class ProxyManager: NSObject {
 }
 ```
 
-1. Create a Lifecycle Configuration   
+#### 1. Create a Lifecycle Configuration   
 In order to instantiate the `SDLManager` class, you must first configure an `SDLLifecycleConfiguration` instance with the application name and application id. During the development stage, a dummy app id is usually sufficient. For more information about obtaining an application id, please consult "SDK Configuration". You must also decide which network configuration to use to connect the app to the SDL Core. Optional but recommended configuration properties include short app name, app icon, and app type.  
   ##### Network Connection Type
   There are two different ways to connect your app to a SDL Core: with a TCP network connection or with an iAP network connection. Use TCP for debugging and use iAP for production level apps.
@@ -56,7 +56,8 @@ In order to instantiate the `SDLManager` class, you must first configure an `SDL
       let lifecycleConfiguration = SDLLifecycleConfiguration.defaultConfigurationWithAppName(
         "your app name",
         appId: "your app id")
-      ```
+      ```  
+
     * TCP
 
       ```swift
@@ -66,12 +67,15 @@ In order to instantiate the `SDLManager` class, you must first configure an `SDL
       ipAddress: “123.4.567.982”,
       port: 12345))
       ```  
+
     !!! NOTE
     If you are using an emulator, the IP address is your computer or virtual machine’s IP address, and the port number is usually 12345.
     !!!  
+
     !!! IMPORTANT
     If you are using a head unit or TDK, and are using the [relay app](https://github.com/smartdevicelink/relay_app_ios) for debugging, the IP address and port number should be set to the same IP address and port number as the app. This information appears in the relay app once the server is turned on in the relay app.
-    !!!
+    !!!  
+    
     ###### Short app name (optional)
     This is a shortened version of your app name that is substituted when the full app name will not be visible due to character count constraints
 
