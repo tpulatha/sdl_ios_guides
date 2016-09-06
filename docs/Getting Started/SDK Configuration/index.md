@@ -55,6 +55,6 @@ You can find the latest reference documentation on [CocoaDocs](http://cocoadocs.
 Install this documentation to [Dash](https://kapeli.com/dash) or to Xcode by using [Docs for Xcode](https://documancer.com/xcode). On the [SDL Docs page](http://cocoadocs.org/docsets/SmartDeviceLink-iOS/), click the **upload** icon located in the upper right hand corner of the screen and add the documentation to Dash or Xcode.
 
 ### 5. Getting an App Id
-An App Id is required for production level apps. The App Id gives your app special permissions to access vehicle data. If your app does not need to access vehicle data, a dummy App Id (i.e. just make up a fake id consisting of numbers) is sufficient during the development stage. However, you must get an App Id before releasing a production level app.
+An App Id is required for production level apps. The App Id gives your app special permissions to access vehicle data. If your app does not need to access vehicle data, a dummy App Id (i.e. create a fake id like "1234") is sufficient during the development stage. However, you must get an App Id before releasing a production level app.
 
 To obtain an App Id, sign up on [smartdevicelink.com](www.smartdevicelink.com).
