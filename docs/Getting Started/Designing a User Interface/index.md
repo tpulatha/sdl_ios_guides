@@ -6,6 +6,7 @@ The `RegisterAppInterface` response contains information about the display type,
 
 ### Templates
 Each car manufacturer supports a set of templates for the user interface. These templates determine the position and size of the text, images, and buttons on the screen. A list of supported templates is sent with RegisterAppInterface response.  
+
 To change a template at any time, send a `SDLSetDisplayLayout` RPC to the SDL Core. If you want to ensure that the new template is used, wait for a response from the SDL Core before sending any more user interface RPCs.
 ```swift
 let layout = SDLPredefinedLayout.GRAPHIC_WITH_TEXT() // Set template type here
@@ -43,9 +44,10 @@ The position of images on the screen is determined by the currently used templat
 Some head units you may be connected to may not support images at all. Please consult the `graphicsSupported` property of the display capabilities in the `RegisterAppInterface` response.
 !!!
 
-1. ##### Image File Type
+##### 1. Image File Type
 Images can be formatted as PNG, JPEG, or BMP. Check the `displayCapability` properties to find out what image formats the head unit supports.
-1. ##### Image Data
+
+##### 2. Image Data
 Images can be uploaded using a file url pointing to a file on disk, or by sending the image converted to `NSData`.
 ```swift
 let fileAsURL = SDLFile(fileURL: NSURL(string: "url"), name: "name for image", persistent: false)
@@ -53,12 +55,14 @@ let fileAsURL = SDLFile(fileURL: NSURL(string: "url"), name: "name for image", p
 ```swift
 let fileAsData = SDLFile(data: UIImageJPEGRepresentation(UIImage(named: "name for image"), 0), name: "name for image", fileExtension: "jpg", persistent: false)
 ```
-1. ##### Store Images
+
+##### 3. Store Images
 An image can be stored on the head unit only as long as the app is open or forever. Set the `persistent` parameter to false if the image should only be stored as long as the app is open. Set it to true if the image should stay on the head unit forever.
 ```swift
 let file = SDLFile(fileURL: NSURL(string: "url"), name: "unique name for image", persistent: false)
 ```
-1. ##### Upload an Image
+
+##### 4. Upload an Image
 The image name is a unique id for image. The image name can only consist of letters and numbers, otherwise the image might not be uploaded.
 ```swift
 let fileAsURL = SDLFile(fileURL: NSURL(string: "url"), name: "name for image", persistent: false)
@@ -71,14 +75,17 @@ sdlManager?.fileManager.uploadFile(file, completionHandler: { (successful, lengt
     }
 })
 ```
-1. ##### Check if an Image has Already Been Uploaded
+
+##### 5. Check if an Image has Already Been Uploaded
 Use the file manager to check if an image name has already been used to upload an image  to the head unit.
 ```swift
 let fileIsOnHeadUnit: Bool = sdlManager?.fileManager.remoteFileNames.contains(“name for image”)
 ```
-1. ##### Overwrite Stored Images
+
+##### 6. Overwrite Stored Images
 If an image being uploaded has the same name as an already uploaded image, the new image will be ignored. To override this setting, set the `SDLFile`’s `overwrite` property to true.
-1. ##### Delete Stored Images
+
+##### 7. Delete Stored Images
 Use the file manager’s delete request to delete an image associated with an image name.
 ```swift
 sdlManager.fileManager.deleteRemoteFileWithName("name for image", completionHandler: { (successful, length, error) in
@@ -264,9 +271,9 @@ The interaction mode specifies the way the user is prompted to make a section an
 
 | Interaction Mode  | Description |
 | ------------- | ------------- |
-| Manual only | interactions occur only through the display |
-| VR only | interactions occur only through text-to-speech and voice recognition |
-| Both | interactions can occur both manually or through vr |
+| Manual only | Interactions occur only through the display |
+| VR only | Interactions occur only through text-to-speech and voice recognition |
+| Both | Interactions can occur both manually or through VR |
 ```swift
 request.interactionMode = SDLInteractionMode.MANUAL_ONLY()
 ```
@@ -276,10 +283,10 @@ The list can be shown as a grid of buttons with images  or as a vertical list of
 
 | Layout Mode  | Formatting Description |
 | ------------- | ------------- |
-| Icon only | a grid of buttons with images |
-| Icon with search | a grid of buttons with images along with a search field in the HMI |
-| List only | a vertical list  of text |
-| List with search | a vertical list of text with a search field in the HMI |
+| Icon only | A grid of buttons with images |
+| Icon with search | A grid of buttons with images along with a search field in the HMI |
+| List only | A vertical list  of text |
+| List with search | A vertical list of text with a search field in the HMI |
 | Keyboard | A keyboard shows up immediately in the HMI |
 ```swift
 request.interactionLayout = SDLLayoutMode.LIST_ONLY()
