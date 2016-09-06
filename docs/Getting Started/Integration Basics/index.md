@@ -54,9 +54,9 @@ In order to instantiate the `SDLManager` class, you must first configure an `SDL
   1. iAP
 
      ```swift
-let lifecycleConfiguration = SDLLifecycleConfiguration.defaultConfigurationWithAppName(
-"your app name",
-appId: "your app id")
+     let lifecycleConfiguration = SDLLifecycleConfiguration.defaultConfigurationWithAppName(
+     "your app name",
+     appId: "your app id")
      ```  
 
   2. TCP
