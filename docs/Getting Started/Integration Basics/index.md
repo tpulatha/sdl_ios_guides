@@ -53,13 +53,15 @@ In order to instantiate the `SDLManager` class, you must first configure an `SDL
  There are two different ways to connect your app to a SDL Core: with a TCP network connection or with an iAP network connection. Use TCP for debugging and use iAP for production level apps.
 
  1. iAP
-    ```swift
+
+ ```swift
 let lifecycleConfiguration = SDLLifecycleConfiguration.defaultConfigurationWithAppName(
 "your app name",
 appId: "your app id")
-    ```
+```
 
  2. TCP
+
  ```swift
  let lifecycleConfiguration = SDLLifecycleConfiguration.debugConfigurationWithAppName(
  "your app name"
@@ -228,7 +230,7 @@ The *Proxy* class should conform to the `SDLManagerDelegate` protocol. This mean
   1. `managerDidDisconnect()` This function is called only once, when the proxy disconnects from the SDL Core. Do any cleanup you need to do in this function.
   2. `hmiLevel(oldLevel: SDLHMILevel!, didChangeToLevel newLevel: SDLHMILevel!)` This function is called when the HMI level changes for the app. The HMI level can be `FULL`, `LIMITED`, `BACKGROUND`, or `NONE`. It is important to note that any RPCs sent while the app is in `BACKGROUND` or `NONE` mode will be ignored by the SDL Core.  
 
-##### Different HMI Levels:**
+##### Different HMI Levels:
 * `FULL` - The app has full use of the SDL Core's HMI. The app may output via text-to-speech, display, or streaming audio and may gather input via voice recognition, touch-screen button presses, and hard-button presses
 * `LIMITED` - This HMI level is only defined for a media app using an HMI with an 8 inch touchscreen system. The application's `SDLShow` RPC text is displayed and it receives button presses from media-oriented buttons (SEEKRIGHT, SEEKLEFT, TUNEUP, TUNEDOWN, PRESET_0-9).
 * `BACKGROUND` - The app has been discovered by a SDL Core, but the app cannot send any requests or receive any notifications.
