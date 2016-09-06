@@ -53,14 +53,13 @@ In order to instantiate the `SDLManager` class, you must first configure an `SDL
  There are two different ways to connect your app to a SDL Core: with a TCP network connection or with an iAP network connection. Use TCP for debugging and use iAP for production level apps.
 
  1. iAP
- ```swift
- let lifecycleConfiguration = SDLLifecycleConfiguration.defaultConfigurationWithAppName(
- "your app name",
- appId: "your app id")
- ```
+    ```swift
+let lifecycleConfiguration = SDLLifecycleConfiguration.defaultConfigurationWithAppName(
+"your app name",
+appId: "your app id")
+    ```
 
  2. TCP
-
  ```swift
  let lifecycleConfiguration = SDLLifecycleConfiguration.debugConfigurationWithAppName(
  "your app name"
@@ -113,30 +112,33 @@ let configuration = SDLConfiguration(
 ##### Lock screen
  A lock screen is used to prevent the user from interacting with the app on the smartphone while they are driving. When the vehicle starts moving, the lock screen is activated. Similarly, when the vehicle stops moving, the lock screen is removed. You must implement the lock screen in your app for safety reasons. Any application without a lock screen will not get approval for release to the public.
  The SDL SDK takes care of the lock screen implementation for you, and even includes a default lock screen. You can choose to implement your own lock screen or you can use the default lock screen.
-    1. Use the default lock screen
+ 1. Use the default lock screen
 
-      ```swift
-      SDLLockScreenConfiguration.enabledConfiguration()
-      ```
-    2. Modify the default lock screen with your own icon and background color
+```swift
+SDLLockScreenConfiguration.enabledConfiguration()
+```
 
-      ```swift
-      SDLLockScreenConfiguration.enabledConfigurationWithAppIcon(
-      UIImage(named: "yourCustomImageName") ?? UIImage(),
-      backgroundColor: UIColor.redColor())
-      ```
-    3. Create a custom view controller for the lock screen
+ 2. Modify the default lock screen with your own icon and background color
 
-      ```swift
-      SDLLockScreenConfiguration.enabledConfigurationWithViewController(
-      UIViewController(nibName: "your view controller's nib name", bundle: NSBundle.mainBundle()))
-      ```
-    !!! IMPORTANT
-    If you used CocoaPods to install the SDL SDK, you must complete the following steps to add the default lock screen resources to your project.
-      1. Select your application's build target, go to **Build Phases**, **Copy Bundle Resources**.
-      2. Then in the Navigator window of Xcode, go to **Target’s Support Files**, **Pods-YourProjectName**, and drag and drop the **SmartDeviceLink.bundle** file into **Copy Bundle Resources**.
-      3. After the bundle is dropped into **Copy Bundle Resources** check “copy items if need” from the popup box and click “Finish.”
-    !!!
+```swift
+SDLLockScreenConfiguration.enabledConfigurationWithAppIcon(
+UIImage(named: "yourCustomImageName") ?? UIImage(),
+backgroundColor: UIColor.redColor())
+```
+
+ 3. Create a custom view controller for the lock screen
+
+```swift
+SDLLockScreenConfiguration.enabledConfigurationWithViewController(
+UIViewController(nibName: "your view controller's nib name", bundle: NSBundle.mainBundle()))
+```
+
+!!! IMPORTANT
+If you used CocoaPods to install the SDL SDK, you must complete the following steps to add the default lock screen resources to your project.
+ 1. Select your application's build target, go to **Build Phases**, **Copy Bundle Resources**.
+ 2. Then in the Navigator window of Xcode, go to **Target’s Support Files**, **Pods-YourProjectName**, and drag and drop the **SmartDeviceLink.bundle** file into **Copy Bundle Resources**.
+ 3. After the bundle is dropped into **Copy Bundle Resources** check “copy items if need” from the popup box and click “Finish.”
+!!!
 
 #### 3. Create a SDLManager
 Now you can use the `SDLConfiguration` instance to instantiate the `SDLManager`.
