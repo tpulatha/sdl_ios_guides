@@ -51,7 +51,7 @@ This is only required for USB and Bluetooth enabled head units. It is not necess
 
 ### 4. Access the Documentation
 You can find the latest reference documentation on [CocoaDocs](http://cocoadocs.org/docsets/SmartDeviceLink-iOS/).  
-**Download the Documentation**    
+##### Download the Documentation    
 Install this documentation to [Dash](https://kapeli.com/dash) or to Xcode by using [Docs for Xcode](https://documancer.com/xcode). On the [SDL Docs page](http://cocoadocs.org/docsets/SmartDeviceLink-iOS/), click the **upload** icon located in the upper right hand corner of the screen and add the documentation to Dash or Xcode.
 
 ### 5. Get an App Id
