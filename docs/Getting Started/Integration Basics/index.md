@@ -50,7 +50,9 @@ class ProxyManager: NSObject {
 In order to instantiate the `SDLManager` class, you must first configure an `SDLLifecycleConfiguration` instance with the application name and application id. During the development stage, a dummy app id is usually sufficient. For more information about obtaining an application id, please consult "SDK Configuration". You must also decide which network configuration to use to connect the app to the SDL Core. Optional but recommended configuration properties include short app name, app icon, and app type.  
   ##### Network Connection Type
   There are two different ways to connect your app to a SDL Core: with a TCP network connection or with an iAP network connection. Use TCP for debugging and use iAP for production level apps.
+
   1. iAP
+
      ```swift
 let lifecycleConfiguration = SDLLifecycleConfiguration.defaultConfigurationWithAppName(
 "your app name",
