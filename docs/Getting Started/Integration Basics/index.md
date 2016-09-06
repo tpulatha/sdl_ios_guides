@@ -60,7 +60,7 @@ In order to instantiate the `SDLManager` class, you must first configure an `SDL
     appId: "your app id")
     ```
 
-  2. TCP
+ 2. TCP
 
     ```swift
 let lifecycleConfiguration = SDLLifecycleConfiguration.debugConfigurationWithAppName(
@@ -78,29 +78,32 @@ If you are using an emulator, the IP address is your computer or virtual machine
 If you are using a head unit or TDK, and are using the [relay app](https://github.com/smartdevicelink/relay_app_ios) for debugging, the IP address and port number should be set to the same IP address and port number as the app. This information appears in the relay app once the server is turned on in the relay app.
 !!!  
 
-    ###### Short app name (optional)
-    This is a shortened version of your app name that is substituted when the full app name will not be visible due to character count constraints
+##### Short app name (optional)
+This is a shortened version of your app name that is substituted when the full app name will not be visible due to character count constraints
 
-      ```swift
-      lifecycleConfiguration.shortAppName = "a shortened name for you app"
-      ```
-    ###### App Icon (optional)
-    This is a custom icon for your application.
+  ```swift
+lifecycleConfiguration.shortAppName = "a shortened name for you app"
+  ```
 
-      ```swift
-      let appIcon = SDLArtwork.persistentArtworkWithImage(
-          UIImage(named: "your app name"),
-          name: "you app icon name",
-          asImageFormat: SDLArtworkImageFormat.JPG)  // Change to the correct image format
-      lifecycleConfiguration.appIcon = appIcon
-      ```
-    ###### App Type (optional)
-    The app type is used by car manufacturers to decide how to categorize your app. Each car manufacturer has different categorization system. For example, if you set your app type as media, your app will also show up in the audio tab as well as the apps tab of Ford’s SYNC3 head unit. The app type options are: default, communication, media (i.e. music/podcasts/radio), messaging, navigation, information, and social.
+##### App Icon (optional)
+This is a custom icon for your application.
 
-      ```swift
-      lifecycleConfiguration.appType = SDLAppHMIType.MEDIA()
-      ```
-2. Set the Configuration
+  ```swift
+let appIcon = SDLArtwork.persistentArtworkWithImage(
+    UIImage(named: "your app name"),
+    name: "you app icon name",
+    asImageFormat: SDLArtworkImageFormat.JPG)  // Change to the correct image format
+lifecycleConfiguration.appIcon = appIcon
+  ```
+
+##### App Type (optional)
+The app type is used by car manufacturers to decide how to categorize your app. Each car manufacturer has different categorization system. For example, if you set your app type as media, your app will also show up in the audio tab as well as the apps tab of Ford’s SYNC3 head unit. The app type options are: default, communication, media (i.e. music/podcasts/radio), messaging, navigation, information, and social.
+
+ ```swift
+lifecycleConfiguration.appType = SDLAppHMIType.MEDIA()
+ ```
+
+#### 2. Set the Configuration
 The `SDLConfiguration` class is used to set the lifecycle and lock screen configurations for the app. Use the lifecycle configuration settings above to instantiate a `SDLConfiguration` instance.
   ```swift
   let configuration = SDLConfiguration(
@@ -135,13 +138,14 @@ The `SDLConfiguration` class is used to set the lifecycle and lock screen config
       2. Then in the Navigator window of Xcode, go to **Target’s Support Files**, **Pods-YourProjectName**, and drag and drop the **SmartDeviceLink.bundle** file into **Copy Bundle Resources**.
       3. After the bundle is dropped into **Copy Bundle Resources** check “copy items if need” from the popup box and click “Finish.”
     !!!
-3. Create a SDLManager
+
+#### 3. Create a SDLManager
 Now you can use the `SDLConfiguration` instance to instantiate the `SDLManager`.
 
   ```swift
   sdlManager = SDLManager(configuration: configuration, delegate: self)
   ```
-4. Start the SDLManager
+#### 4. Start the SDLManager
 The manager should be started as soon as the class is instantiated, so you should configure and start the manager in the `ProxyManager` class’ initializer. Once the manager has been started, it will immediately begin passively watching for a connection with the remote system. The manager will continuously search for a connection with a SDL Core during the entire lifespan of the app. When the manager connects with a SDL Core, the `startWithReadyHandler` will be called.  
   !!! NOTE  
   In production, your app will be watching for connections using IAP, which will not use any additional battery power than normal.  
@@ -155,7 +159,7 @@ The manager should be started as soon as the class is instantiated, so you shoul
   })
   ```
 
-5. Example Implementation of a Proxy Class  
+#### 5. Example Implementation of a Proxy Class  
   The following code snippet has an example of setting up both a TCP and iAP connection.
 
   ```
