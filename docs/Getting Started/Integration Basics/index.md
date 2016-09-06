@@ -53,22 +53,21 @@ In order to instantiate the `SDLManager` class, you must first configure an `SDL
  There are two different ways to connect your app to a SDL Core: with a TCP network connection or with an iAP network connection. Use TCP for debugging and use iAP for production level apps.
 
  1. iAP
-
-    ```swift
-    let lifecycleConfiguration = SDLLifecycleConfiguration.defaultConfigurationWithAppName(
-    "your app name",
-    appId: "your app id")
-    ```
+ ```swift
+ let lifecycleConfiguration = SDLLifecycleConfiguration.defaultConfigurationWithAppName(
+ "your app name",
+ appId: "your app id")
+ ```
 
  2. TCP
 
-    ```swift
-let lifecycleConfiguration = SDLLifecycleConfiguration.debugConfigurationWithAppName(
-"your app name"
-appId: "your app id",
-ipAddress: “123.4.567.982”,
-port: 12345))
-    ```  
+ ```swift
+ let lifecycleConfiguration = SDLLifecycleConfiguration.debugConfigurationWithAppName(
+ "your app name"
+ appId: "your app id",
+ ipAddress: “123.4.567.982”,
+ port: 12345))
+ ```  
 
 !!! NOTE
 If you are using an emulator, the IP address is your computer or virtual machine’s IP address, and the port number is usually 12345.
@@ -81,39 +80,39 @@ If you are using a head unit or TDK, and are using the [relay app](https://githu
 ##### Short app name (optional)
 This is a shortened version of your app name that is substituted when the full app name will not be visible due to character count constraints
 
-  ```swift
+```swift
 lifecycleConfiguration.shortAppName = "a shortened name for you app"
-  ```
+```
 
 ##### App Icon (optional)
 This is a custom icon for your application.
 
-  ```swift
+```swift
 let appIcon = SDLArtwork.persistentArtworkWithImage(
-    UIImage(named: "your app name"),
-    name: "you app icon name",
-    asImageFormat: SDLArtworkImageFormat.JPG)  // Change to the correct image format
+UIImage(named: "your app name"),
+name: "you app icon name",
+asImageFormat: SDLArtworkImageFormat.JPG)  // Change to the correct image format
 lifecycleConfiguration.appIcon = appIcon
-  ```
+```
 
 ##### App Type (optional)
 The app type is used by car manufacturers to decide how to categorize your app. Each car manufacturer has different categorization system. For example, if you set your app type as media, your app will also show up in the audio tab as well as the apps tab of Ford’s SYNC3 head unit. The app type options are: default, communication, media (i.e. music/podcasts/radio), messaging, navigation, information, and social.
 
- ```swift
+```swift
 lifecycleConfiguration.appType = SDLAppHMIType.MEDIA()
- ```
+```
 
 #### 2. Set the Configuration
 The `SDLConfiguration` class is used to set the lifecycle and lock screen configurations for the app. Use the lifecycle configuration settings above to instantiate a `SDLConfiguration` instance.
-  ```swift
-  let configuration = SDLConfiguration(
-      lifecycle: lifecycleConfiguration,
-      lockScreen: SDLLockScreenConfiguration.enabledConfiguration())
-  ```
+```swift
+let configuration = SDLConfiguration(
+    lifecycle: lifecycleConfiguration,
+    lockScreen: SDLLockScreenConfiguration.enabledConfiguration())
+```
 
-  ##### Lock screen
-  A lock screen is used to prevent the user from interacting with the app on the smartphone while they are driving. When the vehicle starts moving, the lock screen is activated. Similarly, when the vehicle stops moving, the lock screen is removed. You must implement the lock screen in your app for safety reasons. Any application without a lock screen will not get approval for release to the public.
-  The SDL SDK takes care of the lock screen implementation for you, and even includes a default lock screen. You can choose to implement your own lock screen or you can use the default lock screen.
+##### Lock screen
+ A lock screen is used to prevent the user from interacting with the app on the smartphone while they are driving. When the vehicle starts moving, the lock screen is activated. Similarly, when the vehicle stops moving, the lock screen is removed. You must implement the lock screen in your app for safety reasons. Any application without a lock screen will not get approval for release to the public.
+ The SDL SDK takes care of the lock screen implementation for you, and even includes a default lock screen. You can choose to implement your own lock screen or you can use the default lock screen.
     1. Use the default lock screen
 
       ```swift
