@@ -56,7 +56,7 @@ In order to instantiate the `SDLManager` class, you must first configure an `SDL
 ##### Network Connection Type
   There are two different ways to connect your app to a SDL Core: with a TCP network connection or with an iAP network connection. Use TCP for debugging and use iAP for production level apps.
 
-**• iAP**
+###### • iAP
 
 ```swift
 let lifecycleConfiguration = SDLLifecycleConfiguration.defaultConfigurationWithAppName(
@@ -64,14 +64,14 @@ let lifecycleConfiguration = SDLLifecycleConfiguration.defaultConfigurationWithA
   appId: "your app id")
 ```
 
-**• TCP**
+###### • TCP
 
 ```swift
 let lifecycleConfiguration = SDLLifecycleConfiguration.debugConfigurationWithAppName(
-"your app name"
-appId: "your app id",
-ipAddress: “123.4.567.982”,
-port: 12345))
+  "your app name"
+  appId: "your app id",
+  ipAddress: “123.4.567.982”,
+  port: 12345))
 ```  
 
 !!! NOTE
@@ -119,13 +119,14 @@ let configuration = SDLConfiguration(
 ##### Lock screen
 A lock screen is used to prevent the user from interacting with the app on the smartphone while they are driving. When the vehicle starts moving, the lock screen is activated. Similarly, when the vehicle stops moving, the lock screen is removed. You must implement the lock screen in your app for safety reasons. Any application without a lock screen will not get approval for release to the public.
 The SDL SDK takes care of the lock screen implementation for you, and even includes a default lock screen. You can choose to implement your own lock screen or you can use the default lock screen.
-1. Use the default lock screen
+
+###### 1. Use the default lock screen
 
 ```swift
 SDLLockScreenConfiguration.enabledConfiguration()
 ```
 
-2. Modify the default lock screen with your own icon and background color
+###### 2. Modify the default lock screen with your own icon and background color
 
 ```swift
 SDLLockScreenConfiguration.enabledConfigurationWithAppIcon(
@@ -133,7 +134,7 @@ UIImage(named: "yourCustomImageName") ?? UIImage(),
 backgroundColor: UIColor.redColor())
 ```
 
-3. Create a custom view controller for the lock screen
+###### 3. Create a custom view controller for the lock screen
 
 ```swift
 SDLLockScreenConfiguration.enabledConfigurationWithViewController(
@@ -234,8 +235,10 @@ class ProxyManager: NSObject {
 
 ### Implement the SDL Manager Delegate
 The *Proxy* class should conform to the `SDLManagerDelegate` protocol. This means that the *Proxy* class must implement the following required functions:
+
 1. `managerDidDisconnect()` This function is called only once, when the proxy disconnects from the SDL Core. Do any cleanup you need to do in this function.
 2. `hmiLevel(oldLevel: SDLHMILevel!, didChangeToLevel newLevel: SDLHMILevel!)` This function is called when the HMI level changes for the app. The HMI level can be `FULL`, `LIMITED`, `BACKGROUND`, or `NONE`. It is important to note that any RPCs sent while the app is in `BACKGROUND` or `NONE` mode will be ignored by the SDL Core.  
+
 ##### Different HMI Levels:
 * `FULL` - The app has full use of the SDL Core's HMI. The app may output via text-to-speech, display, or streaming audio and may gather input via voice recognition, touch-screen button presses, and hard-button presses
 * `LIMITED` - This HMI level is only defined for a media app using an HMI with an 8 inch touchscreen system. The application's `SDLShow` RPC text is displayed and it receives button presses from media-oriented buttons (SEEKRIGHT, SEEKLEFT, TUNEUP, TUNEDOWN, PRESET_0-9).
