@@ -114,25 +114,22 @@ let configuration = SDLConfiguration(
  The SDL SDK takes care of the lock screen implementation for you, and even includes a default lock screen. You can choose to implement your own lock screen or you can use the default lock screen.
 
  1. Use the default lock screen
-
- ```swift
+    ```swift
 SDLLockScreenConfiguration.enabledConfiguration()
-  ```
+    ```
 
  2. Modify the default lock screen with your own icon and background color
-
- ```swift
+    ```swift
 SDLLockScreenConfiguration.enabledConfigurationWithAppIcon(
 UIImage(named: "yourCustomImageName") ?? UIImage(),
 backgroundColor: UIColor.redColor())
-  ```
+    ```
 
  3. Create a custom view controller for the lock screen
-
- ```swift
+    ```swift
 SDLLockScreenConfiguration.enabledConfigurationWithViewController(
 UIViewController(nibName: "your view controller's nib name", bundle: NSBundle.mainBundle()))
- ```
+    ```
 
 !!! IMPORTANT
 If you used CocoaPods to install the SDL SDK, you must complete the following steps to add the default lock screen resources to your project.
@@ -144,90 +141,95 @@ If you used CocoaPods to install the SDL SDK, you must complete the following st
 #### 3. Create a SDLManager
 Now you can use the `SDLConfiguration` instance to instantiate the `SDLManager`.
 
-  ```swift
-  sdlManager = SDLManager(configuration: configuration, delegate: self)
-  ```
+```swift
+sdlManager = SDLManager(configuration: configuration, delegate: self)
+```
+
 #### 4. Start the SDLManager
-The manager should be started as soon as the class is instantiated, so you should configure and start the manager in the `ProxyManager` class’ initializer. Once the manager has been started, it will immediately begin passively watching for a connection with the remote system. The manager will continuously search for a connection with a SDL Core during the entire lifespan of the app. When the manager connects with a SDL Core, the `startWithReadyHandler` will be called.  
-  !!! NOTE  
-  In production, your app will be watching for connections using IAP, which will not use any additional battery power than normal.  
-  !!!  
-  If the connection is successful, you can start sending RPCs to the SDL Core. However, if the SDL Core HMI is not ready to accept RPCs, your requests will be ignored. If you want to make sure that the SDL Core will not ignore your RPCs, use the `SDLManagerDelegate` methods in the next step.
-  ```swift
-  sdlManager?.startWithReadyHandler({ (success, error) in
-      if success {
-        // Your app has successfully connected with the SDL Core.
-      }
-  })
-  ```
+The manager should be started as soon as the class is instantiated, so you should configure and start the manager in the `ProxyManager` class’ initializer. Once the manager has been started, it will immediately begin passively watching for a connection with the remote system. The manager will continuously search for a connection with a SDL Core during the entire lifespan of the app. When the manager connects with a SDL Core, the `startWithReadyHandler` will be called.
+
+!!! NOTE  
+In production, your app will be watching for connections using IAP, which will not use any additional battery power than normal.  
+!!!
+
+If the connection is successful, you can start sending RPCs to the SDL Core. However, if the SDL Core HMI is not ready to accept RPCs, your requests will be ignored. If you want to make sure that the SDL Core will not ignore your RPCs, use the `SDLManagerDelegate` methods in the next step.
+
+```swift
+sdlManager?.startWithReadyHandler({ (success, error) in
+    if success {
+      // Your app has successfully connected with the SDL Core.
+    }
+})
+```
 
 #### 5. Example Implementation of a Proxy Class  
-  The following code snippet has an example of setting up both a TCP and iAP connection.
+The following code snippet has an example of setting up both a TCP and iAP connection.
 
-  ```
-  class ProxyManager: NSObject {
-      var sdlManager: SDLManager?
-      static let sharedInstance = ProxyManager()
+```
+class ProxyManager: NSObject {
+    var sdlManager: SDLManager?
+    static let sharedInstance = ProxyManager()
 
-      private override init( ) {
-        super.init()
-        self.startTCP()	// or use self.startIAP()
-      }
+    private override init( ) {
+      super.init()
+      self.startTCP()	// or use self.startIAP()
+    }
 
-      private func startIAP() {
-        let lifecycleConfiguration = self.dynamicType.setLifecycleConfigurationPropertiesOnConfiguration(
-          SDLLifecycleConfiguration.defaultConfigurationWithAppName(“MyAppName”, appId: “MyAppId”))
-          startSDLManager(lifecycleConfiguration)
-        }
-
-      private func startTCP() {
-        let ipAddress = “192.168.1.000”	// Set to your own IP address and port number
-        let port = “2776”
-        let lifecycleConfiguration: SDLLifecycleConfiguration =    
-          self.dynamicType.setLifecycleConfigurationPropertiesOnConfiguration(
-            SDLLifecycleConfiguration.debugConfigurationWithAppName(
-              “MyAppName",
-              appId: “MyAppId",
-              ipAddress: ipAddress,
-              port: port))
+    private func startIAP() {
+      let lifecycleConfiguration = self.dynamicType.setLifecycleConfigurationPropertiesOnConfiguration(
+        SDLLifecycleConfiguration.defaultConfigurationWithAppName(“MyAppName”, appId: “MyAppId”))
         startSDLManager(lifecycleConfiguration)
       }
 
-      class func setLifecycleConfigurationPropertiesOnConfiguration(configuration: SDLLifecycleConfiguration) -> SDLLifecycleConfiguration {
-        // App icon image
-        let appImage = UIImage(named: "default")
-        let appIconArt: SDLArtwork = SDLArtwork.persistentArtworkWithImage(appImage,
-          name: "MyAppIconName",
-          asImageFormat: SDLArtworkImageFormat.JPG)
+    private func startTCP() {
+      let ipAddress = “192.168.1.000”	// Set to your own IP address and port number
+      let port = “2776”
+      let lifecycleConfiguration: SDLLifecycleConfiguration =    
+        self.dynamicType.setLifecycleConfigurationPropertiesOnConfiguration(
+          SDLLifecycleConfiguration.debugConfigurationWithAppName(
+            “MyAppName",
+            appId: “MyAppId",
+            ipAddress: ipAddress,
+            port: port))
+      startSDLManager(lifecycleConfiguration)
+    }
 
-        configuration.shortAppName = "ShortNameForApp"
-        configuration.appIcon = appIconArt
-        configuration.appType = SDLAppHMIType.MEDIA()
+    class func setLifecycleConfigurationPropertiesOnConfiguration(configuration: SDLLifecycleConfiguration) -> SDLLifecycleConfiguration {
+      // App icon image
+      let appImage = UIImage(named: "default")
+      let appIconArt: SDLArtwork = SDLArtwork.persistentArtworkWithImage(appImage,
+        name: "MyAppIconName",
+        asImageFormat: SDLArtworkImageFormat.JPG)
 
-        return configuration
-      }
+      configuration.shortAppName = "ShortNameForApp"
+      configuration.appIcon = appIconArt
+      configuration.appType = SDLAppHMIType.MEDIA()
 
-      private func startSDLManager(lifecycleConfiguration: SDLLifecycleConfiguration) {
-        let configuration: SDLConfiguration = SDLConfiguration(lifecycle: lifecycleConfiguration,
-          lockScreen: SDLLockScreenConfiguration.enabledConfiguration())
-        sdlManager = SDLManager(configuration: configuration, delegate: self)
+      return configuration
+    }
 
-        // Start watching for a connection with a SDL Core
-        sdlManager?.startWithReadyHandler({ (success, error) in
-          if success {
-            // Your app has successfully connected with the SDL Core
-          }
-        })
-      }
-  }
-  ```
+    private func startSDLManager(lifecycleConfiguration: SDLLifecycleConfiguration) {
+      let configuration: SDLConfiguration = SDLConfiguration(lifecycle: lifecycleConfiguration,
+        lockScreen: SDLLockScreenConfiguration.enabledConfiguration())
+      sdlManager = SDLManager(configuration: configuration, delegate: self)
+
+      // Start watching for a connection with a SDL Core
+      sdlManager?.startWithReadyHandler({ (success, error) in
+        if success {
+          // Your app has successfully connected with the SDL Core
+        }
+      })
+    }
+}
+```
 
 ### Implement the SDL Manager Delegate
 The *Proxy* class should conform to the `SDLManagerDelegate` protocol. This means that the *Proxy* class must implement the following required functions:
   1. `managerDidDisconnect()` This function is called only once, when the proxy disconnects from the SDL Core. Do any cleanup you need to do in this function.
   2. `hmiLevel(oldLevel: SDLHMILevel!, didChangeToLevel newLevel: SDLHMILevel!)` This function is called when the HMI level changes for the app. The HMI level can be `FULL`, `LIMITED`, `BACKGROUND`, or `NONE`. It is important to note that any RPCs sent while the app is in `BACKGROUND` or `NONE` mode will be ignored by the SDL Core.  
-    **Different HMI Levels:**
-   * `FULL` - The app has full use of the SDL Core's HMI. The app may output via text-to-speech, display, or streaming audio and may gather input via voice recognition, touch-screen button presses, and hard-button presses
-   * `LIMITED` - This HMI level is only defined for a media app using an HMI with an 8 inch touchscreen system. The application's `SDLShow` RPC text is displayed and it receives button presses from media-oriented buttons (SEEKRIGHT, SEEKLEFT, TUNEUP, TUNEDOWN, PRESET_0-9).
-   * `BACKGROUND` - The app has been discovered by a SDL Core, but the app cannot send any requests or receive any notifications.
-   * `NONE` - This means that there is no existing HMI or that user has exited the application by saying "exit yourAppName" or selecting "exit" from the HMI menu. When this happens, the application still has an active interface registration with SDL and all SDL resources the application has created (e.g. choice sets, subscriptions, etc.) still exist, however the application cannot send any RPCs to SYNC, except `UnregisterAppInterface`.
+
+##### Different HMI Levels:**
+* `FULL` - The app has full use of the SDL Core's HMI. The app may output via text-to-speech, display, or streaming audio and may gather input via voice recognition, touch-screen button presses, and hard-button presses
+* `LIMITED` - This HMI level is only defined for a media app using an HMI with an 8 inch touchscreen system. The application's `SDLShow` RPC text is displayed and it receives button presses from media-oriented buttons (SEEKRIGHT, SEEKLEFT, TUNEUP, TUNEDOWN, PRESET_0-9).
+* `BACKGROUND` - The app has been discovered by a SDL Core, but the app cannot send any requests or receive any notifications.
+* `NONE` - This means that there is no existing HMI or that user has exited the application by saying "exit yourAppName" or selecting "exit" from the HMI menu. When this happens, the application still has an active interface registration with SDL and all SDL resources the application has created (e.g. choice sets, subscriptions, etc.) still exist, however the application cannot send any RPCs to SYNC, except `UnregisterAppInterface`.
