@@ -48,26 +48,27 @@ class ProxyManager: NSObject {
 
 #### 1. Create a Lifecycle Configuration   
 In order to instantiate the `SDLManager` class, you must first configure an `SDLLifecycleConfiguration` instance with the application name and application id. During the development stage, a dummy app id is usually sufficient. For more information about obtaining an application id, please consult "SDK Configuration". You must also decide which network configuration to use to connect the app to the SDL Core. Optional but recommended configuration properties include short app name, app icon, and app type.  
-  ##### Network Connection Type
-  There are two different ways to connect your app to a SDL Core: with a TCP network connection or with an iAP network connection. Use TCP for debugging and use iAP for production level apps.
 
-  1. iAP
+##### Network Connection Type
+ There are two different ways to connect your app to a SDL Core: with a TCP network connection or with an iAP network connection. Use TCP for debugging and use iAP for production level apps.
 
-     ```swift
-     let lifecycleConfiguration = SDLLifecycleConfiguration.defaultConfigurationWithAppName(
-     "your app name",
-     appId: "your app id")
-     ```  
+ 1. iAP
+
+    ```swift
+    let lifecycleConfiguration = SDLLifecycleConfiguration.defaultConfigurationWithAppName(
+    "your app name",
+    appId: "your app id")
+    ```
 
   2. TCP
 
-     ```swift
+    ```swift
 let lifecycleConfiguration = SDLLifecycleConfiguration.debugConfigurationWithAppName(
 "your app name"
 appId: "your app id",
 ipAddress: “123.4.567.982”,
 port: 12345))
-     ```  
+    ```  
 
 !!! NOTE
 If you are using an emulator, the IP address is your computer or virtual machine’s IP address, and the port number is usually 12345.
