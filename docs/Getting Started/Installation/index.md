@@ -10,7 +10,6 @@ We have provided three different ways to install the SDL SDK in your project: Co
   ```
 sudo gem install cocoapods
   ```
-  
 4. Navigate to the root directory of your app. Make sure your current folder contains the **.xcodeproj** file
 5. Create a new Podfile.
 
