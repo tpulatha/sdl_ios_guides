@@ -5,6 +5,7 @@ If you are connecting to the SDL Core emulator, make sure you are implementing a
 
 !!! IMPORTANT
 Known issues:
+
 * When app is in the background mode, the app will be unable to communicate with SDL Core. This will work on IAP connections.
 * Audio will not play on the SDL Core. Only IAP connections are currently able to play audio.
 !!!
