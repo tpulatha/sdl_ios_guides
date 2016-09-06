@@ -51,12 +51,12 @@ class ProxyManager: NSObject {
 ```
 
 #### 1. Create a Lifecycle Configuration   
-In order to instantiate the `SDLManager` class, you must first configure an `SDLLifecycleConfiguration` instance with the application name and application id. During the development stage, a dummy app id is usually sufficient. For more information about obtaining an application id, please consult "SDK Configuration". You must also decide which network configuration to use to connect the app to the SDL Core. Optional but recommended configuration properties include short app name, app icon, and app type.
+In order to instantiate the `SDLManager` class, you must first configure an `SDLLifecycleConfiguration` instance with the application name and application id. During the development stage, a dummy app id is usually sufficient. For more information about obtaining an application id, please consult the "SDK Configuration" section. You must also decide which network configuration to use to connect the app to the SDL Core. Optional but recommended configuration properties include short app name, app icon, and app type.
 
 ##### Network Connection Type
   There are two different ways to connect your app to a SDL Core: with a TCP network connection or with an iAP network connection. Use TCP for debugging and use iAP for production level apps.
 
-###### • iAP
+###### iAP
 
 ```swift
 let lifecycleConfiguration = SDLLifecycleConfiguration.defaultConfigurationWithAppName(
@@ -64,7 +64,7 @@ let lifecycleConfiguration = SDLLifecycleConfiguration.defaultConfigurationWithA
   appId: "your app id")
 ```
 
-###### • TCP
+###### TCP
 
 ```swift
 let lifecycleConfiguration = SDLLifecycleConfiguration.debugConfigurationWithAppName(
@@ -117,16 +117,17 @@ let configuration = SDLConfiguration(
 ```
 
 ##### Lock screen
-A lock screen is used to prevent the user from interacting with the app on the smartphone while they are driving. When the vehicle starts moving, the lock screen is activated. Similarly, when the vehicle stops moving, the lock screen is removed. You must implement the lock screen in your app for safety reasons. Any application without a lock screen will not get approval for release to the public.
+A lock screen is used to prevent the user from interacting with the app on the smartphone while they are driving. When the vehicle starts moving, the lock screen is activated. Similarly, when the vehicle stops moving, the lock screen is removed. You must implement the lock screen in your app for safety reasons. Any application without a lock screen will not get approval for release to the public.  
+
 The SDL SDK takes care of the lock screen implementation for you, and even includes a default lock screen. You can choose to implement your own lock screen or you can use the default lock screen.
 
-###### 1. Use the default lock screen
+###### Use the default lock screen
 
 ```swift
 SDLLockScreenConfiguration.enabledConfiguration()
 ```
 
-###### 2. Modify the default lock screen with your own icon and background color
+###### Modify the default lock screen with your own icon and background color
 
 ```swift
 SDLLockScreenConfiguration.enabledConfigurationWithAppIcon(
@@ -134,7 +135,7 @@ UIImage(named: "yourCustomImageName") ?? UIImage(),
 backgroundColor: UIColor.redColor())
 ```
 
-###### 3. Create a custom view controller for the lock screen
+###### Create a custom view controller for the lock screen
 
 ```swift
 SDLLockScreenConfiguration.enabledConfigurationWithViewController(
@@ -159,7 +160,7 @@ sdlManager = SDLManager(configuration: configuration, delegate: self)
 The manager should be started as soon as the class is instantiated, so you should configure and start the manager in the `ProxyManager` class’ initializer. Once the manager has been started, it will immediately begin passively watching for a connection with the remote system. The manager will continuously search for a connection with a SDL Core during the entire lifespan of the app. When the manager connects with a SDL Core, the `startWithReadyHandler` will be called.
 
 !!! NOTE  
-In production, your app will be watching for connections using IAP, which will not use any additional battery power than normal.  
+In production, your app will be watching for connections using iAP, which will not use any additional battery power than normal.  
 !!!  
 
 If the connection is successful, you can start sending RPCs to the SDL Core. However, if the SDL Core HMI is not ready to accept RPCs, your requests will be ignored. If you want to make sure that the SDL Core will not ignore your RPCs, use the `SDLManagerDelegate` methods in the next step.
