@@ -112,26 +112,27 @@ let configuration = SDLConfiguration(
 ##### Lock screen
  A lock screen is used to prevent the user from interacting with the app on the smartphone while they are driving. When the vehicle starts moving, the lock screen is activated. Similarly, when the vehicle stops moving, the lock screen is removed. You must implement the lock screen in your app for safety reasons. Any application without a lock screen will not get approval for release to the public.
  The SDL SDK takes care of the lock screen implementation for you, and even includes a default lock screen. You can choose to implement your own lock screen or you can use the default lock screen.
+
  1. Use the default lock screen
 
-```swift
+ ```swift
 SDLLockScreenConfiguration.enabledConfiguration()
-```
+  ```
 
  2. Modify the default lock screen with your own icon and background color
 
-```swift
+ ```swift
 SDLLockScreenConfiguration.enabledConfigurationWithAppIcon(
 UIImage(named: "yourCustomImageName") ?? UIImage(),
 backgroundColor: UIColor.redColor())
-```
+  ```
 
  3. Create a custom view controller for the lock screen
 
-```swift
+ ```swift
 SDLLockScreenConfiguration.enabledConfigurationWithViewController(
 UIViewController(nibName: "your view controller's nib name", bundle: NSBundle.mainBundle()))
-```
+ ```
 
 !!! IMPORTANT
 If you used CocoaPods to install the SDL SDK, you must complete the following steps to add the default lock screen resources to your project.
