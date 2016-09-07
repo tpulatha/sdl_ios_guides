@@ -27,6 +27,12 @@
             ]
         },
         {
+            "name": "Relay"
+        },
+        {
+            "name": "RPC Builder"
+        },
+        {
             "name": "Software Architecture"
         },
         {
