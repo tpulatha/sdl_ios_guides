@@ -26,6 +26,7 @@ Also on the settings page, set the transport layer to TCP/IP or iAP.
 
 Once the spec file and transport layer have been set, click on *Next*. The next page is the Register App Interface (RAI) screen. This page contains information for registering the app the first time it connects with the SDL Core. Simply click on *Send* to use the default settings. If the properties on the RAI screen are modified, they will be cached for subsequent launches.
 
+![RegisterAppInterface](./assets/RegisterAppInterface.png)
 <img src="/assets/RegisterAppInterface.png" width=200px>  
 <img src="assets/Connecting.png" width=200px>
 
