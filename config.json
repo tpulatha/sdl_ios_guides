@@ -32,5 +32,11 @@
         {
             "name": "Mobile Navigation"
         }
+        {
+        	"name": "Relay"
+        }
+        {
+        	"name": "RPC Builder"
+        }
     ]
 }
