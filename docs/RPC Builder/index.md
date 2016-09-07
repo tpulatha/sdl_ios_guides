@@ -19,17 +19,15 @@ After the SDL iOS library has been installed, the RPC Builder app can be deploye
 ## RPC Builder Interface
 
 ### Settings Page
-![Settings](./assets/Settings.png | width = 200)
-<img src="assets/Settings.png" width=200px>  
+![Settings](./assets/Settings.png | width=200)
 On the settings page, select a RPC spec file. The default *Mobile_API.xml* file will generate all possible RPCs available for the app. To use a custom RPC spec file, add a new file via iTunes file sharing to the `SpecXMLs` directory. The file can also be added via a remote URL.
 
 Also on the settings page, set the transport layer to TCP/IP or iAP.
 
 Once the spec file and transport layer have been set, click on *Next*. The next page is the Register App Interface (RAI) screen. This page contains information for registering the app the first time it connects with the SDL Core. Simply click on *Send* to use the default settings. If the properties on the RAI screen are modified, they will be cached for subsequent launches.
 
-![RegisterAppInterface](./assets/RegisterAppInterface.png)
-<img src="/assets/RegisterAppInterface.png" width=200px>  
-<img src="assets/Connecting.png" width=200px>
+![RegisterAppInterface](./assets/RegisterAppInterface.png | width=200)
+![Connecting](./assets/Connecting.png | width=200)
 
 !!! IMPORTANT
 Once *Send* is pressed, the app will not continue until a successful connection is achieved and RAI response is received.
@@ -37,21 +35,22 @@ Once *Send* is pressed, the app will not continue until a successful connection 
 
 ### Main RPCs Table
 
-<img src="assets/RPCs.png" width=200px>
+![RPCs](./assets/RPCs.png | width=200)
 
 The main RPC table is create at runtime by the app from the spec XML file. If there is additional information provided about the RPC call, an information button will appear next to the RPC name in the table. Click on the information button to learn more about the RPC call.
 
-<img src="assets/AddCommand.png" width=200px>
+![AddCommand](./assets/AddCommand.png | width=200)
 
 ### Send A RPC
 To send an RPC to the SDL Core select the RPC from the table, fill out the RPC parameters and click *Send*.
 
+![RPCs](./assets/RPCs.png | width=200)
 <img src="assets/RPCs.png" width=200px>
 
 #### Parameter Information
 After selecting an RPC from the table, a view will appear with all possible parameters for this RPC. To find out more information about an argument, tap and hold the argument name to reveal the information.
 
-<img src="assets/MainField.png" width=200px>
+![MainField](./assets/MainField.png | width=200)
 
 #### Required Parameters
 Required data will have a red asterisk next to the argument name.
@@ -74,7 +73,7 @@ There are three different ways to send an RPC argument.
 ### Modules
 The purpose of modules is to allow developers to create more advanced testing scenarios. A module can contain multiple RPCs. It can also define capabilities not provided in the RPC spec file.
 
-<img src="assets/Modules.png" width=200px>
+![Modules](./assets/Modules.png | width=200)
 
 #### Building New Modules
 There are a few requirements for building Modules:
@@ -110,7 +109,7 @@ There are a few requirements for building Modules:
 ### Console Log
 The console log shows a simplified output of sent and received requests.
 
-<img src="assets/Console.png" width=200px>
+![Console](./assets/Console.png | width=200)
 
 #### Console Color Codes
 The console logs are color coded for quick identification.  
@@ -126,7 +125,7 @@ The console logs are color coded for quick identification.
 #### RPC JSON
 Tapping once on a RPC call in the console will reveal the JSON associated with that RPC call, if applicable.
 
-<img src="assets/Console-RAI.png" width=200px>
+![Console-RAI](./assets/Console-RAI.png | width=200)
 
 ### A Special Note About Putfile
 Putfile is the RPC responsible for sending binary data from our mobile libraries to the SDL Core. The RPC Builder app provides support for adding any type of file: either from the camera roll (for images) or iTunes shared storage for any other kind of files. Similar to adding custom RPC spec files, any file located within the `BulkData` directory will be present in local storage and be usable for upload.
