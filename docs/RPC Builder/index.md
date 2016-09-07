@@ -4,7 +4,7 @@
 The SmartDeviceLink (SDL) RPC Builder app is a free iOS app designed to help developers understand the SDL interface and how remote procedure calls (RPCs) work. Use the app to send and receive RPCs with a SDL Core without writing any code.
 
 !!! NOTE
-In order for the RPC Builder app to work correctly, all commands must be executed in proper sequence. For example, a *performInteraction* call will only be successful if sent after a *createInteractionChoiceSet* call. To find more information about how to properly set up a sequence of commands, please reference the [SDL App Developer Documentation](https://smartdevicelink.com/docs/iOS/master/).
+In order for the RPC Builder app to work correctly, all commands must be executed in proper sequence. For example, when building a custom menu, a *performInteraction* call will only be successful if sent after a *createInteractionChoiceSet* call. To find more information about how to properly set up a sequence of commands, please reference the [SDL App Developer Documentation](https://smartdevicelink.com/docs/iOS/master/).
 !!!
 
 ## Getting Started
@@ -45,7 +45,6 @@ The main RPC table is create at runtime by the app from the spec XML file. If th
 To send an RPC to the SDL Core select the RPC from the table, fill out the RPC parameters and click *Send*.
 
 ![RPCs](./assets/RPCs.png | width=200)
-<img src="assets/RPCs.png" width=200px>
 
 #### Parameter Information
 After selecting an RPC from the table, a view will appear with all possible parameters for this RPC. To find out more information about an argument, tap and hold the argument name to reveal the information.
@@ -67,8 +66,7 @@ There are three different ways to send an RPC argument.
     * To send an argument with an empty string, leave the field next to the argument name empty
 3. Don't send the argument
     * To disable the argument from being included in the RPC, tap once on the argument's name. The argument will be grayed out and not included in the request. In the picture below *mainField1* will not be included in the RPC Request, but *mainField2* will be included with an empty string.  
-<img src="assets/EnabledDisabled.png" width=200px>  
-
+![EnabledDisabled](./assets/EnabledDisabled.png | width=200)
 
 ### Modules
 The purpose of modules is to allow developers to create more advanced testing scenarios. A module can contain multiple RPCs. It can also define capabilities not provided in the RPC spec file.
