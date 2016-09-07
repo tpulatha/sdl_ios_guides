@@ -76,7 +76,7 @@ sdlManager?.fileManager.uploadFile(file, completionHandler: { (successful, lengt
 })
 ```
 
-##### 5. Check if an Image has Already Been Uploaded
+##### 5. Check if an Image Has Already Been Uploaded
 Use the file manager to check if an image name has already been used to upload an image  to the head unit.
 ```swift
 let fileIsOnHeadUnit: Bool = sdlManager?.fileManager.remoteFileNames.contains(“name for image”)

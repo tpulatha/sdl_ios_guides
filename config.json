@@ -10,7 +10,7 @@
             "name": "Getting Started",
             "navigation": [
                 {
-                    "name": "Installation"
+                    "name": "SDK Installation"
                 },
                 {
                     "name": "SDK Configuration"
@@ -19,10 +19,10 @@
                     "name": "Integration Basics"
                 },
                 {
-                    "name": "Connecting to SDL"
+                    "name": "Connecting to SDL Core"
                 },
                 {
-                    "name": "Designing a User Interface"
+                    "name": "Designing the User Interface"
                 }
             ]
         },
