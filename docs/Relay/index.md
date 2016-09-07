@@ -53,9 +53,12 @@ This example shows you how to connect a custom app with the Relay app.
     ```
 3. Start the app being tested on Xcode's simulator.
 4. Once the app is running on the simulator, the status of **SDL** in the Relay app should change to *Connected*.
-![TCPConnected](./assets/TCPConnected.png | width=200) 
+![TCPConnected](./assets/TCPConnected.png | width=200)
 *Application is correctly connected to Relay, and messages can now be sent and received.*  
 5. The app is now connected to Relay, and messages can be sent and received. Debug logs will appear in Xcode's debug area.
+!!! NOTE  
+The relay app should always be connected to the SDL Core before starting your app, otherwise the setup will not work 
+!!!
 
 ## Need Help?
 If you need general assistance, or have other questions, you can [sign up](http://sdlslack.herokuapp.com) for the [SDL Slack](https://smartdevicelink.slack.com/) and chat with other developers and the maintainers of the project.
