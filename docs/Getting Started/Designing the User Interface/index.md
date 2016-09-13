@@ -9,11 +9,11 @@ Each car manufacturer supports a set of templates for the user interface. These 
 
 To change a template at any time, send a `SDLSetDisplayLayout` RPC to the SDL Core. If you want to ensure that the new template is used, wait for a response from the SDL Core before sending any more user interface RPCs.
 ```swift
-let layout = SDLPredefinedLayout.GRAPHIC_WITH_TEXT() // Set template type here
+let layout = .GRAPHIC_WITH_TEXT() // Set template type here
 let display = SDLSetDisplayLayout()
-display.displayLayout = display.value
+display.displayLayout = layout.value
 sdlManager?.sendRequest(display, withResponseHandler: { (request, response, error) in
-    if response?.resultCode == SDLResult.SUCCESS() {
+    if response?.resultCode == .SUCCESS() {
       // The template has been set successfully
     }
 })
@@ -31,7 +31,7 @@ show.mainField2 = "line 2 of text"
 show.mainField3 = "line 3 of text"
 show.mainField4 = "line 4 of text"
 sdlManager?.sendRequest(show, withResponseHandler: { (request, response, error) in
-    if response?.resultCode == SDLResult.SUCCESS() {
+    if response?.resultCode == .SUCCESS() {
         // The text has been set successfully
     }
 })
@@ -50,22 +50,22 @@ Images can be formatted as PNG, JPEG, or BMP. Check the `displayCapability` prop
 ##### 2. Image Data
 Images can be uploaded using a file url pointing to a file on disk, or by sending the image converted to `NSData`.
 ```swift
-let fileAsURL = SDLFile(fileURL: NSURL(string: "url"), name: "name for image", persistent: false)
+let fileAsURL = SDLFile(fileURL: NSURL(string: "<#File URL#>"), name: "<#Save As Name#>", persistent: false)
 ```
 ```swift
-let fileAsData = SDLFile(data: UIImageJPEGRepresentation(UIImage(named: "name for image"), 0), name: "name for image", fileExtension: "jpg", persistent: false)
+let fileAsData = SDLFile(data: UIImageJPEGRepresentation(UIImage(named: "<#Image Name#>"), 0), name: "<#Save As Name#>", fileExtension: "<#Image Extension (png or jpg)#>", persistent: false)
 ```
 
 ##### 3. Store Images
 An image can be stored on the head unit only as long as the app is open or forever. Set the `persistent` parameter to false if the image should only be stored as long as the app is open. Set it to true if the image should stay on the head unit forever.
 ```swift
-let file = SDLFile(fileURL: NSURL(string: "url"), name: "unique name for image", persistent: false)
+let file = SDLFile(fileURL: NSURL(string: "<#File URL#>"), name: "<#Save As Name#>", persistent: false)
 ```
 
 ##### 4. Upload an Image
 The image name is a unique id for image. The image name can only consist of letters and numbers, otherwise the image might not be uploaded.
 ```swift
-let fileAsURL = SDLFile(fileURL: NSURL(string: "url"), name: "name for image", persistent: false)
+let fileAsURL = SDLFile(fileURL: NSURL(string: "<#File URL#>"), name: "<#Save As Name#>", persistent: false)
 sdlManager?.fileManager.uploadFile(file, completionHandler: { (successful, length, error) in
     if successful {
         //  Image has been uploaded successfully
@@ -79,7 +79,7 @@ sdlManager?.fileManager.uploadFile(file, completionHandler: { (successful, lengt
 ##### 5. Check if an Image Has Already Been Uploaded
 Use the file manager to check if an image name has already been used to upload an image  to the head unit.
 ```swift
-let fileIsOnHeadUnit: Bool = sdlManager?.fileManager.remoteFileNames.contains(“name for image”)
+let fileIsOnHeadUnit: Bool = sdlManager?.fileManager.remoteFileNames.contains(“<#File Name#>”)
 ```
 
 ##### 6. Overwrite Stored Images
@@ -88,7 +88,7 @@ If an image being uploaded has the same name as an already uploaded image, the n
 ##### 7. Delete Stored Images
 Use the file manager’s delete request to delete an image associated with an image name.
 ```swift
-sdlManager.fileManager.deleteRemoteFileWithName("name for image", completionHandler: { (successful, length, error) in
+sdlManager.fileManager.deleteRemoveFileWithName("<#File Name to Delete#>", completionHandler: { (successful, length, error) in
     if successful {
         // Image was deleted successfully
     }
@@ -111,10 +111,10 @@ let softButton = SDLSoftButton()
 // Button handler - This is called when user presses the button
 softButton.handler = { (notification) in
     if let notification: SDLOnButtonEvent = notification as? SDLOnButtonEvent {
-        if notification.buttonEventMode == SDLButtonEventMode.BUTTONDOWN() {
+        if notification.buttonEventMode == .BUTTONDOWN() {
             // The user has pressed down on the button
         }
-        if notification.buttonEventMode == SDLButtonEventMode.BUTTONUP() {
+        if notification.buttonEventMode == .BUTTONUP() {
             // The user has release the button
         }
     }
@@ -128,7 +128,7 @@ softButton.text = "title for button"
 
 // Button image
 let image: SDLImage = SDLImage()
-image.imageType = SDLImageType.DYNAMIC()
+image.imageType = .DYNAMIC()
 image.value = "button identifier that was sent with SDLPutfile"
 softButton.image = image
 
@@ -173,11 +173,11 @@ let menuItem = SDLAddCommand()
 
 // Create the menu parameters
 let menuParameters = SDLMenuParams()
-menuParameters.menuName = "menu item name"
-menuParameters.position = 0
+menuParameters.menuName = "<#Menu Item Name#>"
+menuParameters.position = <#Position ID#>
 // The parent id is 0 if adding to the root menu
 // If adding to a submenu, the parent id is the submenu's id
-menuParameters.parentID = 0
+menuParameters.parentID = <#Parent ID#>
 
 // Set the menu parameters
 menuItem.menuParams = menuParameters
@@ -185,15 +185,15 @@ menuItem.menuParams = menuParameters
 // Called when menu item is selected
 menuItem.handler = { (notification) in
     if let notification: SDLOnCommand = notification as? SDLOnCommand {
-        if notification.triggerSource == SDLTriggerSource.MENU() {
+        if notification.triggerSource == .MENU() {
             // Menu item was selected
         }
     }
 }
 
 // Voice recognition commands
-menuItem.vrCommands = ["voice recognition command"]
-menuItem.cmdID = 1234   // Give it a unique id
+menuItem.vrCommands = ["<#Voice Recognition Command#>"]
+menuItem.cmdID = <#Unique Command ID#>
 sdlManager?.sendRequest(menuItem)
 ```
 
@@ -201,10 +201,10 @@ sdlManager?.sendRequest(menuItem)
 To create a submenu, first send a `SDLAddSubMenu` RPC. When a response is received from the SDL Core, check if the submenu was added successfully. If it was, send an `SDLAddCommand` RPC for each item in the submenu.
 ```swift
 let submenu = SDLAddSubMenu()
-submenu.menuName = menuName
-submenu.menuID = 5678
+submenu.menuName = "<#Menu Name#>"
+submenu.menuID = <#Unique Menu ID#>
 sdlManager?.sendRequest(submenu, withResponseHandler: { (request, response, error) in
-    if response?.resultCode == SDLResult.SUCCESS() {
+    if response?.resultCode == .SUCCESS() {
         // The submenu was created successfully, start adding the submenu items
     }
 })
@@ -214,9 +214,9 @@ sdlManager?.sendRequest(submenu, withResponseHandler: { (request, response, erro
 Use the cmdID of the menu item to tell the SDL Core which item to delete using the `SDLDeleteCommand` RPC.
 ```swift
 let deleteMenuItem = SDLDeleteCommand()
-deleteMenuItem.cmdID = 1234
+deleteMenuItem.cmdID = <#Menu ID To Delete#>
 sdlManager?.sendRequest(deleteMenuItem, withResponseHandler: { (request, response, error) in
-    if response?.resultCode == SDLResult.SUCCESS() {
+    if response?.resultCode == .SUCCESS() {
         // The menu item was successfully deleted
     }
 })
@@ -226,9 +226,9 @@ sdlManager?.sendRequest(deleteMenuItem, withResponseHandler: { (request, respons
 Use the menuID to tell the SDLCore which item to delete using the `SDLDeleteSubMenu` RPC.
 ```swift
 let deleteSubmenu = SDLDeleteSubMenu()
-deleteSubmenu.menuID = 5678
+deleteSubmenu.menuID = <#SubMenu ID To Delete#>
 sdlManager?.sendRequest(deleteSubmenu, withResponseHandler: { (request, response, error) in
-    if response?.resultCode == SDLResult.SUCCESS() {
+    if response?.resultCode == .SUCCESS() {
         // The sub menu was successfully deleted
     }
 })
@@ -244,15 +244,15 @@ let request = SDLCreateInteractionChoiceSet()
 var choiceSet: [SDLChoice] = []
 
 let choice = SDLChoice()
-choice.choiceID = 9876
-choice.menuName = "menu title"
-choice.vrCommands = ["menu commands"]
+choice.choiceID = <#Unique Choice ID#>
+choice.menuName = "<#Choice Menu Name#>"
+choice.vrCommands = ["<#Choice VR Command#>"]
 
 choiceSet.append(choice)
 request.choiceSet = NSMutableArray(array: choiceSet)
-request.interactionChoiceSetID = 1111
+request.interactionChoiceSetID = <#Unique Interaction Choice Set ID#>
 sdlManager?.sendRequest(createRequest, withResponseHandler: { (request, response, error) in
-  if response?.resultCode == SDLResult.SUCCESS() {
+  if response?.resultCode == .SUCCESS() {
   		// The request was successful, now send the SDLPerformInteraction RPC
   }
 })
@@ -262,8 +262,8 @@ sdlManager?.sendRequest(createRequest, withResponseHandler: { (request, response
 Once the set of menu items has been sent to SDL Core, send a `SDLPerformInteraction` RPC to get the items to show up on the HMI screen.
 ```swift
 let request = SDLPerformInteraction()
-request.initialText = "text displayed when menu starts"
-request.interactionChoiceSetIDList = NSMutableArray(array: [1111])
+request.initialText = "<#Text Displayed When Presented#>"
+request.interactionChoiceSetIDList = NSMutableArray(array: [<#Interaction Choice Set ID#>])
 ```
 
 ##### Interaction Mode
@@ -275,7 +275,7 @@ The interaction mode specifies the way the user is prompted to make a section an
 | VR only | Interactions occur only through text-to-speech and voice recognition |
 | Both | Interactions can occur both manually or through VR |
 ```swift
-request.interactionMode = SDLInteractionMode.MANUAL_ONLY()
+request.interactionMode = .MANUAL_ONLY()
 ```
 
 ##### Interaction Layout
@@ -289,22 +289,22 @@ The list can be shown as a grid of buttons with images  or as a vertical list of
 | List with search | A vertical list of text with a search field in the HMI |
 | Keyboard | A keyboard shows up immediately in the HMI |
 ```swift
-request.interactionLayout = SDLLayoutMode.LIST_ONLY()
+request.interactionLayout = .LIST_ONLY()
 ```
 
 ##### Text-to-Speech (TTS)
 A text-to-speech chunk is a text phrase or prerecorded sound that the SDL will speak. The text parameter specifies the text to be spoken, or the name of the pre-recorded sound. Use the type parameter to define the type of information in the text parameter. The `SDLPerformInteraction` request can have a initial, timeout, and a help prompt.
 ```swift
 let prompt = SDLTTSChunk()
-prompt.text = "Helpful text"
-prompt.type = SDLSpeechCapabilities.TEXT()
+prompt.text = "<#Text to Speak#>"
+prompt.type = .TEXT()
 request.initialPrompt = NSMutableArray(array: [prompt])
 ```
 
 ##### Timeout
 The timeout parameter defines the amount of time the menu will appear on the screen before the menu is dismissed automatically by the HMI.
 ```swift
-request.timeout = 30000 // 30 seconds
+request.timeout = <#Time in milliseconds (seconds * 1000)#>
 ```
 
 ##### Send the Request
@@ -312,14 +312,14 @@ request.timeout = 30000 // 30 seconds
 sdlManager?.sendRequest(request, withResponseHandler: { (request, response, error) in
 
     // Wait for user's selection or for timeout
-    if response?.resultCode == SDLResult.SUCCESS() {
+    if response?.resultCode == .SUCCESS() {
         if let response: SDLPerformInteractionResponse = response as? SDLPerformInteractionResponse {
             let choiceId = response.choiceID
             // The user selected an item in the custom menu                     
         }
     }
 
-    else if response?.resultCode == SDLResult.TIMED_OUT() {
+    else if response?.resultCode == .TIMED_OUT() {
         // The custom menu timed out before the user could select an item
     }
 })
@@ -329,9 +329,9 @@ sdlManager?.sendRequest(request, withResponseHandler: { (request, response, erro
 If the information in the menu is dynamic, then the old interaction choice set needs to be deleted with a `SDLDeleteInteractionChoiceSet` RPC before the new information can be added to the menu. Use the interaction choice set id to delete the menu.
 ```swift
 let deleteRequest = SDLDeleteInteractionChoiceSet()
-deleteRequest.interactionChoiceSetID = 1111
+deleteRequest.interactionChoiceSetID = <#Unique Interaction Choice Set ID#>
 sdlManager?.sendRequest(deleteRequest, withResponseHandler: { (request, response, error) in
-    if response?.resultCode == SDLResult.SUCCESS() {
+    if response?.resultCode == .SUCCESS() {
      	// The custom menu was deleted successfully
     }
 })
