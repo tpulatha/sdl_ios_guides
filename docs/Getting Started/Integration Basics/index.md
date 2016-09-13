@@ -60,18 +60,18 @@ In order to instantiate the `SDLManager` class, you must first configure an `SDL
 
 ```swift
 let lifecycleConfiguration = SDLLifecycleConfiguration.defaultConfigurationWithAppName(
-  "your app name",
-  appId: "your app id")
+  "<#App Name#>",
+  appId: "<#App ID#>")
 ```
 
 ###### TCP
 
 ```swift
 let lifecycleConfiguration = SDLLifecycleConfiguration.debugConfigurationWithAppName(
-  "your app name"
-  appId: "your app id",
-  ipAddress: “123.4.567.982”,
-  port: 12345))
+  "<#App Name#>",
+  appId: "<#App ID#>",
+  ipAddress: “<#IP Address#>”,
+  port: <#Port#>))
 ```  
 
 !!! NOTE
@@ -99,8 +99,8 @@ Persistent files are used when the image ought to remain on the remote system be
 
 ```swift
 let appIcon = SDLArtwork.persistentArtworkWithImage(
-    UIImage(named: "your app name"),
-    name: "your app icon name",
+    UIImage(named: "<#App Icon Image Name#>"),
+    name: "<#Save as Name#>",
     asImageFormat: .JPG)  // Change to the correct image format
 lifecycleConfiguration.appIcon = appIcon
 ```
@@ -109,7 +109,7 @@ lifecycleConfiguration.appIcon = appIcon
 The app type is used by car manufacturers to decide how to categorize your app. Each car manufacturer has different categorization system. For example, if you set your app type as media, your app will also show up in the audio tab as well as the apps tab of Ford’s SYNC3 head unit. The app type options are: default, communication, media (i.e. music/podcasts/radio), messaging, navigation, information, and social.
 
 ```swift
-lifecycleConfiguration.appType = SDLAppHMIType.MEDIA()
+lifecycleConfiguration.appType = .MEDIA()
 ```
 
 #### 2. Set the Configuration
@@ -136,7 +136,7 @@ SDLLockScreenConfiguration.enabledConfiguration()
 
 ```swift
 SDLLockScreenConfiguration.enabledConfigurationWithAppIcon(
-UIImage(named: "yourCustomImageName") ?? UIImage(),
+UIImage(named: "<#Image Name#>") ?? UIImage(),
 backgroundColor: UIColor.redColor())
 ```
 
@@ -144,7 +144,7 @@ backgroundColor: UIColor.redColor())
 
 ```swift
 SDLLockScreenConfiguration.enabledConfigurationWithViewController(
-UIViewController(nibName: "your view controller's nib name", bundle: NSBundle.mainBundle()))
+UIViewController(nibName: "<#Custom View Controller Nib Name#>", bundle: NSBundle.mainBundle()))
 ```
 
 !!! IMPORTANT
@@ -188,38 +188,36 @@ class ProxyManager: NSObject {
 
     private override init( ) {
       super.init()
-      self.startTCP()	// or use self.startIAP()
+      startTCP()	// or use startIAP()
     }
 
     private func startIAP() {
       let lifecycleConfiguration = self.dynamicType.setLifecycleConfigurationPropertiesOnConfiguration(
-        SDLLifecycleConfiguration.defaultConfigurationWithAppName(“MyAppName”, appId: “MyAppId”))
+        SDLLifecycleConfiguration.defaultConfigurationWithAppName("<#App Name#>”, appId: “<#App ID#>"))
         startSDLManager(lifecycleConfiguration)
       }
 
     private func startTCP() {
-      let ipAddress = “192.168.1.000”	// Set to your own IP address and port number
-      let port = “2776”
       let lifecycleConfiguration: SDLLifecycleConfiguration =    
         self.dynamicType.setLifecycleConfigurationPropertiesOnConfiguration(
           SDLLifecycleConfiguration.debugConfigurationWithAppName(
-            “MyAppName",
-            appId: “MyAppId",
-            ipAddress: ipAddress,
-            port: port))
+            "<#App Name#>”,
+            appId: “<#App ID#>",
+            ipAddress: "<#IP Address#>",
+            port: <#Port#>))
       startSDLManager(lifecycleConfiguration)
     }
 
     class func setLifecycleConfigurationPropertiesOnConfiguration(configuration: SDLLifecycleConfiguration) -> SDLLifecycleConfiguration {
       // App icon image
-      let appImage = UIImage(named: "default")
+      let appImage = UIImage(named: "<#App Icon Image Name#>")
       let appIconArt: SDLArtwork = SDLArtwork.persistentArtworkWithImage(appImage,
-        name: "MyAppIconName",
+        name: "<#Save as Name#>",
         asImageFormat: .JPG)
 
-      configuration.shortAppName = "ShortNameForApp"
+      configuration.shortAppName = "<#Short Name for App#>"
       configuration.appIcon = appIconArt
-      configuration.appType = SDLAppHMIType.MEDIA()
+      configuration.appType = .MEDIA()
 
       return configuration
     }
