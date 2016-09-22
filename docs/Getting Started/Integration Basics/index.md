@@ -92,11 +92,16 @@ lifecycleConfiguration.shortAppName = "a shortened name for you app"
 ##### App Icon (optional)
 This is a custom icon for your application.
 
+!!! NOTE
+We recommend using SDLArtwork when building an image.
+Persistent files are used when the image ought to remain on the remote system between ignition cycles. This is commonly used for menu artwork and app icons
+!!!
+
 ```swift
 let appIcon = SDLArtwork.persistentArtworkWithImage(
     UIImage(named: "your app name"),
-    name: "you app icon name",
-    asImageFormat: SDLArtworkImageFormat.JPG)  // Change to the correct image format
+    name: "your app icon name",
+    asImageFormat: .JPG)  // Change to the correct image format
 lifecycleConfiguration.appIcon = appIcon
 ```
 
@@ -210,7 +215,7 @@ class ProxyManager: NSObject {
       let appImage = UIImage(named: "default")
       let appIconArt: SDLArtwork = SDLArtwork.persistentArtworkWithImage(appImage,
         name: "MyAppIconName",
-        asImageFormat: SDLArtworkImageFormat.JPG)
+        asImageFormat: .JPG)
 
       configuration.shortAppName = "ShortNameForApp"
       configuration.appIcon = appIconArt
