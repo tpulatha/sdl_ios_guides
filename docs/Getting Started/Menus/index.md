@@ -69,9 +69,9 @@ sdlManager?.sendRequest(deleteSubmenu, withResponseHandler: { (request, response
         // The sub menu was successfully deleted
     }
 })
-```
+```  
 
-### Custom Menu
+### Custom Menus
 Custom menus are created by sending two different RPCs. First a `SDLCreateInteractionChoiceSet` RPC must be sent. This RPC sends a list of items that will show up in the menu. When the request has been registered successfully, then a `SDLPerformInteraction` RPC is sent. The `SDLPerformInteraction` RPC sends the formatting requirements, the voice-recognition commands, and a timeout command.
 
 #### Create a Set of Custom Menu Items
