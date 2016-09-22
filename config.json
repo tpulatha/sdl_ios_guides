@@ -29,6 +29,12 @@
                 },
                 {
                     "name": "Menus"
+                }, 
+                {
+                    "name": "Alerts"
+                },
+                {
+                    "name": "Get Vehicle Data"
                 }
             ]
         },
