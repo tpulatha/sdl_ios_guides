@@ -1,7 +1,9 @@
 ## Installation
-In order for your app to communicate with a SmartDeviceLink (SDL) Core, the SDL software development kit (SDK) must be installed in your app. The following steps will guide you through adding the SDL SDK to your workspace and configuring the environment.
+In order to build your app on a SmartDeviceLink (SDL) Core, the SDL software development kit (SDK) must be installed in your app. The following steps will guide you through adding the SDL SDK to your workspace and configuring the environment.
+
 ### Install SDL SDK
 We have provided three different ways to install the SDL SDK in your project: CocoaPods, Carthage, or manually.
+
 #### CocoaPods Installation
 1. Xcode should be closed for the following steps.
 2. Open the terminal app on your Mac.
@@ -11,18 +13,18 @@ We have provided three different ways to install the SDL SDK in your project: Co
         ```
 
 4. Navigate to the root directory of your app. Make sure your current folder contains the **.xcodeproj** file
-5. Create a new Podfile.
+5. Create a new **Podfile**.
         ```
         pod init
         ```
 
-6. In the Podfile, add the following text. This tells CocoaPods to install the SDL for iOS framework. This will install the latest SDL SDK version up to minor version 4.3.0  
+6. In the **Podfile**, add the following text. This tells CocoaPods to install SDL SDK for iOS.
         ```
         target ‘YourAppName’ do
           pod ‘SmartDeviceLink-iOS’ ‘~> 4.3.0’
         end
         ```
-7. Install SDK for iOS:  
+7. Install SDL SDK for iOS:  
         ```
         pod install
         ```
