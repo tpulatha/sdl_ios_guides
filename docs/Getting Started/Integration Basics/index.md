@@ -1,6 +1,6 @@
 ## Integration Basics
 ### How SDL Works
-SmartDeviceLink works by sending remote procedure calls (RPCs) back and forth between a smartphone application and the SDL Core. These RPCs allow you to build the user interface, detect button presses, play audio, and get vehicle data, among other things. You will interact with the SDL library in order to have your app's functionality available on the remote system.
+SmartDeviceLink works by sending remote procedure calls (RPCs) back and forth between a smartphone application and the SDL Core. These RPCs allow you to build the user interface, detect button presses, play audio, and get vehicle data, among other things. You will use the SDL library to build your app on the SDL Core.
 
 ### Set Up a Proxy Manager Class
 You will need a class that manages the RPCs sent back and forth between your app and SDL Core. Since  there should be only one active connection to the SDL Core, you may wish to implement this proxy class using the singleton pattern.
@@ -51,13 +51,12 @@ class ProxyManager: NSObject {
 ```
 
 #### 1. Create a Lifecycle Configuration   
-In order to instantiate the `SDLManager` class, you must first configure an `SDLLifecycleConfiguration` instance with the application name and application id. During the development stage, a dummy app id is usually sufficient. For more information about obtaining an application id, please consult the "SDK Configuration" section. You must also decide which network configuration to use to connect the app to the SDL Core. Optional but recommended configuration properties include short app name, app icon, and app type.
+In order to instantiate the `SDLManager` class, you must first configure an `SDLLifecycleConfiguration` instance with the application name and application id. During the development stage, a dummy app id is usually sufficient. For more information about obtaining an application id, please consult the *SDK Configuration* section of this guide. You must also decide which network configuration to use to connect the app to the SDL Core. Optional, but recommended, configuration properties include short app name, app icon, and app type.
 
 ##### Network Connection Type
-  There are two different ways to connect your app to a SDL Core: with a TCP network connection or with an iAP network connection. Use TCP for debugging and use iAP for production level apps.
+  There are two different ways to connect your app to a SDL Core: with a TCP network connection or with an iAP network connection. Use TCP for debugging and use iAP for production level apps.  
 
 ###### iAP
-
 ```swift
 let lifecycleConfiguration = SDLLifecycleConfiguration.defaultConfigurationWithAppName(
   "your app name",
@@ -65,7 +64,6 @@ let lifecycleConfiguration = SDLLifecycleConfiguration.defaultConfigurationWithA
 ```
 
 ###### TCP
-
 ```swift
 let lifecycleConfiguration = SDLLifecycleConfiguration.debugConfigurationWithAppName(
   "your app name"
@@ -92,11 +90,6 @@ lifecycleConfiguration.shortAppName = "a shortened name for you app"
 ##### App Icon (optional)
 This is a custom icon for your application.
 
-!!! NOTE
-We recommend using SDLArtwork when building an image.
-Persistent files are used when the image ought to remain on the remote system between ignition cycles. This is commonly used for menu artwork and app icons
-!!!
-
 ```swift
 let appIcon = SDLArtwork.persistentArtworkWithImage(
     UIImage(named: "your app name"),
@@ -104,6 +97,11 @@ let appIcon = SDLArtwork.persistentArtworkWithImage(
     asImageFormat: .JPG)  // Change to the correct image format
 lifecycleConfiguration.appIcon = appIcon
 ```
+
+!!! NOTE
+We recommend using SDLArtwork when building an image.
+Persistent files are used when the image ought to remain on the remote system between ignition cycles. This is commonly used for menu artwork and app icons
+!!!
 
 ##### App Type (optional)
 The app type is used by car manufacturers to decide how to categorize your app. Each car manufacturer has different categorization system. For example, if you set your app type as media, your app will also show up in the audio tab as well as the apps tab of Ford’s SYNC3 head unit. The app type options are: default, communication, media (i.e. music/podcasts/radio), messaging, navigation, information, and social.
@@ -124,16 +122,14 @@ let configuration = SDLConfiguration(
 ##### Lock screen
 A lock screen is used to prevent the user from interacting with the app on the smartphone while they are driving. When the vehicle starts moving, the lock screen is activated. Similarly, when the vehicle stops moving, the lock screen is removed. You must implement the lock screen in your app for safety reasons. Any application without a lock screen will not get approval for release to the public.  
 
-The SDL SDK takes care of the lock screen implementation for you, and even includes a default lock screen. You can choose to implement your own lock screen or you can use the default lock screen.
+The SDL SDK takes care of the lock screen implementation for you, and even includes a default lock screen. You can choose to implement your own lock screen or you can use the default lock screen.  
 
 ###### Use the default lock screen
-
 ```swift
 SDLLockScreenConfiguration.enabledConfiguration()
 ```
 
 ###### Modify the default lock screen with your own icon and background color
-
 ```swift
 SDLLockScreenConfiguration.enabledConfigurationWithAppIcon(
 UIImage(named: "yourCustomImageName") ?? UIImage(),
@@ -141,7 +137,6 @@ backgroundColor: UIColor.redColor())
 ```
 
 ###### Create a custom view controller for the lock screen
-
 ```swift
 SDLLockScreenConfiguration.enabledConfigurationWithViewController(
 UIViewController(nibName: "your view controller's nib name", bundle: NSBundle.mainBundle()))
@@ -249,4 +244,4 @@ The *Proxy* class should conform to the `SDLManagerDelegate` protocol. This mean
 * `FULL` - The app has full use of the SDL Core's HMI. The app may output via text-to-speech, display, or streaming audio and may gather input via voice recognition, touch-screen button presses, and hard-button presses
 * `LIMITED` - This HMI level is only defined for a media app using an HMI with an 8 inch touchscreen system. The application's `SDLShow` RPC text is displayed and it receives button presses from media-oriented buttons (SEEKRIGHT, SEEKLEFT, TUNEUP, TUNEDOWN, PRESET_0-9).
 * `BACKGROUND` - The app has been discovered by a SDL Core, but the app cannot send any requests or receive any notifications.
-* `NONE` - This means that there is no existing HMI or that user has exited the application by saying "exit yourAppName" or selecting "exit" from the HMI menu. When this happens, the application still has an active interface registration with SDL and all SDL resources the application has created (e.g. choice sets, subscriptions, etc.) still exist, however the application cannot send any RPCs to SYNC, except `UnregisterAppInterface`.
+* `NONE` - This either means that there is no existing HMI or that user has exited the application by saying "exit yourAppName" or selecting "exit" from the HMI menu. When this happens, the application still has an active interface registration with SDL and all SDL resources the application has created (e.g. choice sets, subscriptions, etc.) still exist, however the application cannot send any RPCs to SYNC, except `UnregisterAppInterface`.
