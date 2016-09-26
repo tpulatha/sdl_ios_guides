@@ -6,9 +6,9 @@ SmartDeviceLink works by sending remote procedure calls (RPCs) back and forth be
 You will need a class that manages the RPCs sent back and forth between your app and SDL Core. Since  there should be only one active connection to the SDL Core, you may wish to implement this proxy class using the singleton pattern.
 
 ```swift
-class ProxyManager: NSObject {
+class Proxy: NSObject {
   // Singleton
-  static let sharedInstance = ProxyManager()
+  static let sharedInstance = Proxy()
   private override init() {
       super.init()
     }
@@ -20,30 +20,30 @@ Your app should always start passively watching for a connection with a SDL Core
 ```swift
 class AppDelegate: UIResponder, UIApplicationDelegate {
   func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-    // Initialize the Proxy Manager class
-    ProxyManager.sharedInstance
+    // Initialize the Proxy class
+    Proxy.sharedInstance
     return true
   }
 }
 ```
 
 ### Import the SDL Library
-At the top of the *ProxyManager* class, import the SDL for iOS library.
+At the top of the *Proxy* class, import the SDL for iOS library.
 
 ```swift
 import SmartDeviceLink_iOS
 ```
 
-### Implement the Proxy Manager
+### Implement the SDL Manager
 The `SDLManager` is a helper class that will handle setting up the initial connection with the SDL Core. It will also help you upload images and send RPCs.
 
 ```swift
-class ProxyManager: NSObject {
+class Proxy: NSObject {
   // The Manager
   var sdlManager: SDLManager?
 
   // Singleton
-  static let sharedInstance = ProxyManager()
+  static let sharedInstance = Proxy()
   private override init() {
     super.init()
   }
@@ -79,6 +79,7 @@ If you are using an emulator, the IP address is your computer or virtual machine
 !!! IMPORTANT
 If you are using a head unit or TDK, and are using the [relay app](https://github.com/smartdevicelink/relay_app_ios) for debugging, the IP address and port number should be set to the same IP address and port number as the app. This information appears in the relay app once the server is turned on in the relay app.
 !!!
+
 
 ##### Short app name (optional)
 This is a shortened version of your app name that is substituted when the full app name will not be visible due to character count constraints
@@ -156,7 +157,7 @@ sdlManager = SDLManager(configuration: configuration, delegate: self)
 ```
 
 #### 4. Start the SDLManager
-The manager should be started as soon as the class is instantiated, so you should configure and start the manager in the `ProxyManager` class’ initializer. Once the manager has been started, it will immediately begin passively watching for a connection with the remote system. The manager will continuously search for a connection with a SDL Core during the entire lifespan of the app. When the manager connects with a SDL Core, the `startWithReadyHandler` will be called.
+The manager should be started as soon as the class is instantiated, so you should configure and start the manager in the `Proxy` class’ initializer. Once the manager has been started, it will immediately begin passively watching for a connection with the remote system. The manager will continuously search for a connection with a SDL Core during the entire lifespan of the app. When the manager connects with a SDL Core, the `startWithReadyHandler` will be called.
 
 !!! NOTE  
 In production, your app will be watching for connections using iAP, which will not use any additional battery power than normal.  
@@ -176,9 +177,9 @@ sdlManager?.startWithReadyHandler({ (success, error) in
 The following code snippet has an example of setting up both a TCP and iAP connection.
 
 ```swift
-class ProxyManager: NSObject {
+class Proxy: NSObject {
     var sdlManager: SDLManager?
-    static let sharedInstance = ProxyManager()
+    static let sharedInstance = Proxy()
 
     private override init( ) {
       super.init()
@@ -239,7 +240,7 @@ The *Proxy* class should conform to the `SDLManagerDelegate` protocol. This mean
 1. `managerDidDisconnect()` This function is called only once, when the proxy disconnects from the SDL Core. Do any cleanup you need to do in this function.
 2. `hmiLevel(oldLevel: SDLHMILevel!, didChangeToLevel newLevel: SDLHMILevel!)` This function is called when the HMI level changes for the app. The HMI level can be `FULL`, `LIMITED`, `BACKGROUND`, or `NONE`. It is important to note that any RPCs sent while the app is in `BACKGROUND` or `NONE` mode will be ignored by the SDL Core.  
 
-##### Different HMI Levels:
+##### The Different HMI Levels:
 * `FULL` - The app has full use of the SDL Core's HMI. The app may output via text-to-speech, display, or streaming audio and may gather input via voice recognition, touch-screen button presses, and hard-button presses
 * `LIMITED` - This HMI level is only defined for a media app using an HMI with an 8 inch touchscreen system. The application's `SDLShow` RPC text is displayed and it receives button presses from media-oriented buttons (SEEKRIGHT, SEEKLEFT, TUNEUP, TUNEDOWN, PRESET_0-9).
 * `BACKGROUND` - The app has been discovered by a SDL Core, but the app cannot send any requests or receive any notifications.
