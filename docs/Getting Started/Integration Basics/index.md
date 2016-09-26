@@ -54,7 +54,7 @@ class ProxyManager: NSObject {
 In order to instantiate the `SDLManager` class, you must first configure an `SDLLifecycleConfiguration` instance with the application name and application id. During the development stage, a dummy app id is usually sufficient. For more information about obtaining an application id, please consult the *SDK Configuration* section of this guide. You must also decide which network configuration to use to connect the app to the SDL Core. Optional, but recommended, configuration properties include short app name, app icon, and app type.
 
 ##### Network Connection Type
-  There are two different ways to connect your app to a SDL Core: with a TCP network connection or with an iAP network connection. Use TCP for debugging and use iAP for production level apps.  
+There are two different ways to connect your app to a SDL Core: with a TCP network connection or with an iAP network connection. Use TCP for debugging and use iAP for production level apps.  
 
 ###### iAP
 ```swift
@@ -121,8 +121,7 @@ let configuration = SDLConfiguration(
 
 ##### Lock screen
 A lock screen is used to prevent the user from interacting with the app on the smartphone while they are driving. When the vehicle starts moving, the lock screen is activated. Similarly, when the vehicle stops moving, the lock screen is removed. You must implement the lock screen in your app for safety reasons. Any application without a lock screen will not get approval for release to the public.  
-
-The SDL SDK takes care of the lock screen implementation for you, and even includes a default lock screen. You can choose to implement your own lock screen or you can use the default lock screen.  
+The SDL SDK takes care of the lock screen implementation for you, and even includes a default lock screen. You can choose between implementing your own lock screen or to using the default lock screen.  
 
 ###### Use the default lock screen
 ```swift
