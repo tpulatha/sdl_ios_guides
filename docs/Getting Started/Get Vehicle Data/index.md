@@ -2,7 +2,7 @@
 
 Use the SDLGetVehicleData RPC call to get vehicle data. The HMI level must be FULL, LIMITED, or BACKGROUND in order to get data.
 
-Each vehicle manufacturer decides which data it will expose. Please check the `RegisterAppInterface` RPC to find out which data you will have access to in your head unit.
+Each vehicle manufacturer decides which data it will expose. Please check the `SDLRPCResponse` RPC to find out which data you will have access to in your head unit.
 
 !!! IMPORTANT
 To access vehicle data on a head unit or a TDK, you must have a valid app id. Please check the *SDKConfiguration* section for more information on obtaining an app id.
