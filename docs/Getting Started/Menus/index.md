@@ -1,6 +1,14 @@
 ## Menus
+You have two different options when creating menus. One is to simply add items to the default menu available in every template. The other is to create a custom menu that pops up when needed.
+
 ### Default Menu
-Every template has a default menu button. The position of this button varies between templates, and can not be removed from the template. Items can be added to the menu button at the root level or to a submenu. It is important to note that a submenu can only be one level deep.
+Every template has a default menu button. The position of this button varies between templates, and can not be removed from the template. The default menu is initially empty except for an "Exit Your App Name" button. Items can be added to the menu at the root level or to a submenu. It is important to note that a submenu can only be one level deep.
+
+#### Menu Structure
+![Menu Structure](assets/MenuStructure.png)
+
+#### Menu Appearance
+![Menu Appearance](assets/MenuAppearance.png)
 
 #### Add Menu Items
 The `SDLAddCommand` RPC can be used to add items to the root menu or to a submenu. Each `SDLAddCommand` RPC must be sent with a unique id, a voice-recognition command, and a set of menu parameters. The menu parameters include the menu name, the position of the item in the menu, and the id of the menu item’s parent. If the menu item is being added to the root menu, then the parent id is 0. If it is being added to a submenu, then the parent id is the submenu’s id.
@@ -72,7 +80,9 @@ sdlManager?.sendRequest(deleteSubmenu, withResponseHandler: { (request, response
 ```  
 
 ### Custom Menus
-Custom menus are created by sending two different RPCs. First a `SDLCreateInteractionChoiceSet` RPC must be sent. This RPC sends a list of items that will show up in the menu. When the request has been registered successfully, then a `SDLPerformInteraction` RPC is sent. The `SDLPerformInteraction` RPC sends the formatting requirements, the voice-recognition commands, and a timeout command.
+Custom menus, called **perform interactions**, are one level deep, however, you can create submenus by triggering another perform interaction when the user selects a row in a menu. Perform interactions can be set up to recognize speech, so a user can select an item in the menu by speaking their preference rather than physically selecting the item.
+
+ Perform interactions are created by sending two different RPCs. First a `SDLCreateInteractionChoiceSet` RPC must be sent. This RPC sends a list of items that will show up in the menu. When the request has been registered successfully, then a `SDLPerformInteraction` RPC is sent. The `SDLPerformInteraction` RPC sends the formatting requirements, the voice-recognition commands, and a timeout command.
 
 #### Create a Set of Custom Menu Items
 Each menu item choice defined in `SDLChoice` should be assigned a unique id. The choice set in `SDLCreateInteractionChoiceSet` should also have its own unique id.
@@ -114,9 +124,17 @@ The interaction mode specifies the way the user is prompted to make a section an
 ```swift
 request.interactionMode = SDLInteractionMode.MANUAL_ONLY()
 ```
+###### VR Only Interaction Mode
+![VR Perform Interaction](assets/PerformInteractionVROnly.png)
+
+###### Manual Only Interaction Mode
+![Manual Perform Interaction](assets/PerformInteractionManualOnly.png)
+
+###### Both VR and Manual Interaction Modes
+When the interaction mode is set to `Both`, the VR menu will appear first. When the user touches the screen, the VR menu will be dismissed, and they can select an item from the manual menu.
 
 ##### Interaction Layout
-The list can be shown as a grid of buttons with images  or as a vertical list of choices.
+The items in the perform interaction can be shown as a grid of buttons (with optional images) or as a list of choices.
 
 | Layout Mode  | Formatting Description |
 | ------------- | ------------- |
@@ -129,8 +147,17 @@ The list can be shown as a grid of buttons with images  or as a vertical list of
 request.interactionLayout = SDLLayoutMode.LIST_ONLY()
 ```
 
+###### Icon Only Interaction Layout
+![Icon Only Interaction Layout](assets/PerformInteractionIconOnly.png)
+
+###### List Only Interaction Layout
+![List Only Interaction Layout](assets/PerformInteractionListOnly.png)
+
+###### List with Search Interaction Layout
+![List with Search Interaction Layout](assets/PerformInteractionListwithSearch.png)
+
 ##### Text-to-Speech (TTS)
-A text-to-speech chunk is a text phrase or prerecorded sound that the SDL will speak. The text parameter specifies the text to be spoken, or the name of the pre-recorded sound. Use the type parameter to define the type of information in the text parameter. The `SDLPerformInteraction` request can have a initial, timeout, and a help prompt.
+A text-to-speech chunk is a text phrase or prerecorded sound that will be spoken by the head unit. The text parameter specifies the text to be spoken or the name of the pre-recorded sound. Use the type parameter to define the type of information in the text parameter. The `SDLPerformInteraction` request can have a initial, timeout, and a help prompt.
 ```swift
 let prompt = SDLTTSChunk()
 prompt.text = "Helpful text"

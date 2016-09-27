@@ -1,5 +1,5 @@
-## Text, Buttons, and Images
-All text,  images, and buttons on the HMI screen must be sent as part of a `SDLShow` RPC. Subscribe buttons are sent as part of a `SDLSubscribeButton` RPC.
+## Text, Images, and Buttons
+All text, images, and buttons on the HMI screen must be sent as part of a `SDLShow` RPC. Subscribe buttons are sent as part of a `SDLSubscribeButton` RPC.
 
 #### Text
 A maximum of four lines of text can be set in `SDLShow` RPC, however, some templates may only support 1, 2, or 3 lines of text. If all four lines of text are set in the `SDLShow` RPC, but the template only supports three lines of text, then the fourth line will simply be ignored.
@@ -20,17 +20,17 @@ sdlManager?.sendRequest(show, withResponseHandler: { (request, response, error) 
 The position and size of images on the screen is determined by the currently set template. All images must first be uploaded the SDL Core using the `SDLManager`’s file manager before being used in a `SDLShow` RPC. Once the image has been successfully uploaded, the app will be notified by the SDL Core.
 
 !!! NOTE
-Some head units you may be connected to may not support images at all. Please consult the `graphicsSupported` property of the display capabilities in the `RegisterAppInterface` response.
+Some head units you may be connected to may not support images at all. Please consult the `graphicsSupported` property in the `display capabilities` property of the `RegisterAppInterface` response.
 !!!
 
 ##### 1. Image File Type
-Images can be formatted as PNG, JPEG, or BMP. Check the `displayCapability` properties to find out what image formats the head unit supports.
+Images may be formatted as PNG, JPEG, or BMP. Check the `displayCapability` properties to find out what image formats the head unit supports.
 
 ##### 2. Upload an Image
-Use the SDLArtwork class to easily upload images to the head unit. The image name is a unique id for image.
+Use the SDLArtwork class to easily upload images to the head unit. The image name is a unique id for the image.
 
 !!! NOTE
-The image name can only consist of letters and numbers, otherwise the image may not be uploaded.
+The image name can only consist of letters (a-Z) and numbers (0-9), otherwise the SDL Core may fail to find the uploaded image (even if it was uploaded successfully).
 !!!
 
 ```swift
@@ -103,7 +103,7 @@ sdlImage.value = artwork.name
 
 let show: SDLShow = SDLShow()
 show.graphic = sdlImage
-self.sdlManager?.send(show)
+sdlManager?.send(show)
 ```
 
 ##### 8. Upload Image Example
@@ -121,7 +121,7 @@ func uploadAnImageExample() {
             // You can now show the image on the head unit
             let show: SDLShow = SDLShow()
             show.graphic = sdlImage
-            self.sdlManager?.send(show)
+            sdlManager?.send(show)
         }
     }
 }
@@ -195,7 +195,7 @@ softButton.image = image
 show.softButtons = [softButton]
 
 // Send the request
-self.sdlManager?.sendRequest(show, withResponseHandler: { (request, response, error) in
+sdlManager?.sendRequest(show, withResponseHandler: { (request, response, error) in
     if response?.resultCode == SDLResult.SUCCESS() {
         // The button was created successfully
     }
