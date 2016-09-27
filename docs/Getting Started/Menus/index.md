@@ -2,13 +2,11 @@
 You have two different options when creating menus. One is to simply add items to the default menu available in every template. The other is to create a custom menu that pops up when needed.
 
 ### Default Menu
+![Menu Appearance](assets/MenuAppearance.png)  
 Every template has a default menu button. The position of this button varies between templates, and can not be removed from the template. The default menu is initially empty except for an "Exit Your App Name" button. Items can be added to the menu at the root level or to a submenu. It is important to note that a submenu can only be one level deep.
 
 #### Menu Structure
 ![Menu Structure](assets/MenuStructure.png)
-
-#### Menu Appearance
-![Menu Appearance](assets/MenuAppearance.png)
 
 #### Add Menu Items
 The `SDLAddCommand` RPC can be used to add items to the root menu or to a submenu. Each `SDLAddCommand` RPC must be sent with a unique id, a voice-recognition command, and a set of menu parameters. The menu parameters include the menu name, the position of the item in the menu, and the id of the menu item’s parent. If the menu item is being added to the root menu, then the parent id is 0. If it is being added to a submenu, then the parent id is the submenu’s id.
