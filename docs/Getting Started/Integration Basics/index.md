@@ -243,5 +243,5 @@ The *Proxy* class should conform to the `SDLManagerDelegate` protocol. This mean
 ##### The Different HMI Levels:
 * `FULL` - The app has full use of the SDL Core's HMI. The app may output via text-to-speech, display, or streaming audio and may gather input via voice recognition, touch-screen button presses, and hard-button presses
 * `LIMITED` - This HMI level is only defined for a media app using an HMI with an 8 inch touchscreen system. The application's `SDLShow` RPC text is displayed and it receives button presses from media-oriented buttons (SEEKRIGHT, SEEKLEFT, TUNEUP, TUNEDOWN, PRESET_0-9).
-* `BACKGROUND` - The app has been discovered by a SDL Core, but the app cannot send any requests or receive any notifications.
+* `BACKGROUND` - The app has been discovered by a SDL Core, but the app cannot send any requests or receive any notifications.  
 * `NONE` - This either means that there is no existing HMI or that user has exited the application by saying "exit yourAppName" or selecting "exit" from the HMI menu. When this happens, the application still has an active interface registration with SDL and all SDL resources the application has created (e.g. choice sets, subscriptions, etc.) still exist, however the application cannot send any RPCs to SYNC, except `UnregisterAppInterface`.

@@ -1,7 +1,7 @@
 ## Connecting to a SDL Core
 
 ### Connect with an Emulator
-To connect to a SDL Core emulator, make sure to implement a TCP connection. The emulator and app should be on the same network (i.e. remember to set the correct IP address and port number in the `SDLLifecycleConfiguration`). The IP will most likely be the IP address of the operating system running the SDL Core emulator. The port will most likely be `12345`.
+To connect to a SDL Core emulator, make sure timplement a TCP connection. The emulator and app should be on the same network (i.e. remember to set the correct IP address and port number in the `SDLLifecycleConfiguration`). The IP will most likely be the IP address of the operating system running the SDL Core emulator. The port will most likely be `12345`.
 
 !!! IMPORTANT
 Known issues:
