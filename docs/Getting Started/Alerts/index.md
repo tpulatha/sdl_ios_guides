@@ -7,15 +7,13 @@ The alert will persist on the screen until the timeout has elapsed, or the user 
 
 ### Alert UI
 Depending the platform, an alert can have up to three lines of text, a progress indicator (e.g. a spinning wheel or hourglass), and up to four soft buttons.
-
-### Alert TTS
-The alert can also be formatted to speak a prompt when the alert appears on the screen. Do this by setting the `ttsChunks` parameter. To play the alert tone before the text-to-speech is spoken, set `playTone` to `true`.
-
-### Alert UI
 ##### SDLAlert without soft buttons
 ![SDLAlert without soft buttons](assets/SDLAlertWithNoSoftButtons.png "SDLAlert without soft buttons")
 ##### SDLAlert with soft buttons
 ![SDLAlert with soft buttons](assets/SDLAlertWithSoftButtons.png "SDLAlert with soft buttons")
+
+### Alert TTS
+The alert can also be formatted to speak a prompt when the alert appears on the screen. Do this by setting the `ttsChunks` parameter. To play the alert tone before the text-to-speech is spoken, set `playTone` to `true`.
 
 ### Example
 ```swift
