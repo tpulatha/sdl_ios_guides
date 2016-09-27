@@ -9,7 +9,7 @@ To access vehicle data on a head unit or a TDK, you must have a valid app id. Pl
 !!!
 
 | Vehicle Data | Parameter Name  |  Description |
-| ------------- | ------------- |
+| ------------- | ------------- | ------------- |
 | GPS | gps | Longitude and latitude, current time in UTC, degree of precision, altitude, heading, speed, satellite data vs dead reckoning, and supported dimensions of the GPS |
 | Speed | speed | Speed in KPH |
 | RPM | rpm | The number of revolutions per minute of the engine |
