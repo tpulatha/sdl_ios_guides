@@ -123,14 +123,11 @@ The interaction mode specifies the way the user is prompted to make a section an
 ```swift
 request.interactionMode = SDLInteractionMode.MANUAL_ONLY()
 ```
-###### VR Only Interaction Mode
+###### VR Interaction Mode
 ![VR Perform Interaction](assets/PerformInteractionVROnly.png)
 
-###### Manual Only Interaction Mode
+###### Manual Interaction Mode
 ![Manual Perform Interaction](assets/PerformInteractionManualOnly.png)
-
-###### Both VR and Manual Interaction Modes
-When the interaction mode is set to `Both`, the VR menu will appear first. When the user touches the screen, the VR menu will be dismissed, and they can select an item from the manual menu.
 
 ##### Interaction Layout
 The items in the perform interaction can be shown as a grid of buttons (with optional images) or as a list of choices.
