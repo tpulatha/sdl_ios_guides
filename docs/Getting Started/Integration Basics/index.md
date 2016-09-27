@@ -122,7 +122,7 @@ let configuration = SDLConfiguration(
 
 ##### Lock screen
 A lock screen is used to prevent the user from interacting with the app on the smartphone while they are driving. When the vehicle starts moving, the lock screen is activated. Similarly, when the vehicle stops moving, the lock screen is removed. You must implement the lock screen in your app for safety reasons. Any application without a lock screen will not get approval for release to the public.  
-The SDL SDK takes care of the lock screen implementation for you, and even includes a default lock screen. You can choose between implementing your own lock screen or to using the default lock screen.  
+The SDL SDK takes care of the lock screen implementation for you, and even includes the resources for a default lock screen. If you do not want to use the default lock screen, you can implement your own custom lock screen.  
 
 ###### Use the default lock screen
 ```swift
@@ -132,7 +132,7 @@ SDLLockScreenConfiguration.enabledConfiguration()
 ###### Modify the default lock screen with your own icon and background color
 ```swift
 SDLLockScreenConfiguration.enabledConfigurationWithAppIcon(
-UIImage(named: "yourCustomImageName") ?? UIImage(),
+UIImage(named: "yourCustomImageName"),
 backgroundColor: UIColor.redColor())
 ```
 
@@ -157,13 +157,13 @@ sdlManager = SDLManager(configuration: configuration, delegate: self)
 ```
 
 #### 4. Start the SDLManager
-The manager should be started as soon as the class is instantiated, so you should configure and start the manager in the `Proxy` class’ initializer. Once the manager has been started, it will immediately begin passively watching for a connection with the remote system. The manager will continuously search for a connection with a SDL Core during the entire lifespan of the app. When the manager connects with a SDL Core, the `startWithReadyHandler` will be called.
+The manager should be started as soon as the class is instantiated, so you should configure and start the manager in the `Proxy` class’ initializer. Once the manager has been initialized, it will immediately start watching for a connection with the remote system. The manager will passively search for a connection with a SDL Core during the entire lifespan of the app. If the manager detects a connection with a SDL Core, the `startWithReadyHandler` will be called.
 
 !!! NOTE  
 In production, your app will be watching for connections using iAP, which will not use any additional battery power than normal.  
 !!!  
 
-If the connection is successful, you can start sending RPCs to the SDL Core. However, if the SDL Core HMI is not ready to accept RPCs, your requests will be ignored. If you want to make sure that the SDL Core will not ignore your RPCs, use the `SDLManagerDelegate` methods in the next step.
+If the connection is successful, you can start sending RPCs to the SDL Core. However, some RPCs can only be sent when the HMI is in the FULL or LIMITED state. If the SDL Core's HMI is not ready to accept these RPCs, your requests will be ignored. If you want to make sure that the SDL Core will not ignore your RPCs, use the `SDLManagerDelegate` methods in the next section.
 
 ```swift
 sdlManager?.startWithReadyHandler({ (success, error) in
@@ -183,11 +183,11 @@ class Proxy: NSObject {
 
     private override init( ) {
       super.init()
-      self.startTCP()	// or use self.startIAP()
+      startTCP()	// or use startIAP()
     }
 
     private func startIAP() {
-      let lifecycleConfiguration = self.dynamicType.setLifecycleConfigurationPropertiesOnConfiguration(
+      let lifecycleConfiguration = dynamicType.setLifecycleConfigurationPropertiesOnConfiguration(
         SDLLifecycleConfiguration.defaultConfigurationWithAppName(“MyAppName”, appId: “MyAppId”))
         startSDLManager(lifecycleConfiguration)
       }
@@ -196,7 +196,7 @@ class Proxy: NSObject {
       let ipAddress = “192.168.1.000”	// Set to your own IP address and port number
       let port = “2776”
       let lifecycleConfiguration: SDLLifecycleConfiguration =    
-        self.dynamicType.setLifecycleConfigurationPropertiesOnConfiguration(
+        dynamicType.setLifecycleConfigurationPropertiesOnConfiguration(
           SDLLifecycleConfiguration.debugConfigurationWithAppName(
             “MyAppName",
             appId: “MyAppId",
@@ -238,7 +238,7 @@ class Proxy: NSObject {
 The *Proxy* class should conform to the `SDLManagerDelegate` protocol. This means that the *Proxy* class must implement the following required functions:
 
 1. `managerDidDisconnect()` This function is called only once, when the proxy disconnects from the SDL Core. Do any cleanup you need to do in this function.
-2. `hmiLevel(oldLevel: SDLHMILevel!, didChangeToLevel newLevel: SDLHMILevel!)` This function is called when the HMI level changes for the app. The HMI level can be `FULL`, `LIMITED`, `BACKGROUND`, or `NONE`. It is important to note that any RPCs sent while the app is in `BACKGROUND` or `NONE` mode will be ignored by the SDL Core.  
+2. `hmiLevel(oldLevel: SDLHMILevel!, didChangeToLevel newLevel: SDLHMILevel!)` This function is called when the HMI level changes for the app. The HMI level can be `FULL`, `LIMITED`, `BACKGROUND`, or `NONE`. It is important to note that most RPCs sent while the HMI is in `BACKGROUND` or `NONE` mode will be ignored by the SDL Core.  
 
 ##### The Different HMI Levels:
 * `FULL` - The app has full use of the SDL Core's HMI. The app may output via text-to-speech, display, or streaming audio and may gather input via voice recognition, touch-screen button presses, and hard-button presses
