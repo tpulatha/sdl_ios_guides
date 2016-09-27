@@ -1,7 +1,7 @@
-## Menus
+# Menus
 You have two different options when creating menus. One is to simply add items to the default menu available in every template. The other is to create a custom menu that pops up when needed.
 
-### Default Menu
+## Default Menu
 ![Menu Appearance](assets/MenuAppearance.png)  
 Every template has a default menu button. The position of this button varies between templates, and can not be removed from the template. The default menu is initially empty except for an "Exit Your App Name" button. Items can be added to the menu at the root level or to a submenu. It is important to note that a submenu can only be one level deep.
 
@@ -77,7 +77,7 @@ sdlManager?.sendRequest(deleteSubmenu, withResponseHandler: { (request, response
 })
 ```  
 
-### Custom Menus
+## Custom Menus
 ![Perform Interaction Layout](assets/PerformInteractionListOnly.png)
 Custom menus, called **perform interactions**, are one level deep, however, you can create submenus by triggering another perform interaction when the user selects a row in a menu. Perform interactions can be set up to recognize speech, so a user can select an item in the menu by speaking their preference rather than physically selecting the item.
 
