@@ -5,9 +5,6 @@ You have two different options when creating menus. One is to simply add items t
 ![Menu Appearance](assets/MenuAppearance.png)  
 Every template has a default menu button. The position of this button varies between templates, and can not be removed from the template. The default menu is initially empty except for an "Exit Your App Name" button. Items can be added to the menu at the root level or to a submenu. It is important to note that a submenu can only be one level deep.
 
-#### Menu Structure
-![Menu Structure](assets/MenuStructure.png)
-
 #### Add Menu Items
 The `SDLAddCommand` RPC can be used to add items to the root menu or to a submenu. Each `SDLAddCommand` RPC must be sent with a unique id, a voice-recognition command, and a set of menu parameters. The menu parameters include the menu name, the position of the item in the menu, and the id of the menu item’s parent. If the menu item is being added to the root menu, then the parent id is 0. If it is being added to a submenu, then the parent id is the submenu’s id.
 
@@ -53,6 +50,9 @@ sdlManager?.sendRequest(submenu, withResponseHandler: { (request, response, erro
 })
 ```
 
+#### Menu Structure
+![Menu Structure](assets/MenuStructure.png)
+
 #### Delete Menu Items
 Use the cmdID of the menu item to tell the SDL Core which item to delete using the `SDLDeleteCommand` RPC.
 ```swift
@@ -78,6 +78,7 @@ sdlManager?.sendRequest(deleteSubmenu, withResponseHandler: { (request, response
 ```  
 
 ### Custom Menus
+![Perform Interaction Layout](assets/PerformInteractionListOnly.png)
 Custom menus, called **perform interactions**, are one level deep, however, you can create submenus by triggering another perform interaction when the user selects a row in a menu. Perform interactions can be set up to recognize speech, so a user can select an item in the menu by speaking their preference rather than physically selecting the item.
 
  Perform interactions are created by sending two different RPCs. First a `SDLCreateInteractionChoiceSet` RPC must be sent. This RPC sends a list of items that will show up in the menu. When the request has been registered successfully, then a `SDLPerformInteraction` RPC is sent. The `SDLPerformInteraction` RPC sends the formatting requirements, the voice-recognition commands, and a timeout command.
