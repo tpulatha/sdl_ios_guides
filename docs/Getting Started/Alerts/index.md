@@ -11,7 +11,7 @@ Depending the platform, an alert can have up to three lines of text, a progress 
 ### Alert TTS
 The alert can also be formatted to speak a prompt when the alert appears on the screen. Do this by setting the `ttsChunks` parameter. To play the alert tone before the text-to-speech is spoken, set `playTone` to `true`.
 
-### Alert Templates
+### Alert UI
 ##### SDLAlert without soft buttons
 ![SDLAlert without soft buttons](assets/SDLAlertWithNoSoftButtons.png "SDLAlert without soft buttons")
 ##### SDLAlert with soft buttons
