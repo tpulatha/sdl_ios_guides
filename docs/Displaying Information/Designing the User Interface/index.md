@@ -30,16 +30,26 @@ The `RegisterAppInterface` response contains information about the display type,
 Each car manufacturer supports a set of templates for the user interface. These templates determine the position and size of the text, images, and buttons on the screen. A list of supported templates is sent with `RegisterAppInterface` response.  
 
 To change a template at any time, send a `SDLSetDisplayLayout` RPC to the SDL Core. If you want to ensure that the new template is used, wait for a response from the SDL Core before sending any more user interface RPCs.
+**Swift**
 ```swift
-let layout = SDLPredefinedLayout.GRAPHIC_WITH_TEXT() // Set template type here
-let display = SDLSetDisplayLayout()
-display.displayLayout = display.value
-sdlManager?.sendRequest(display, withResponseHandler: { (request, response, error) in
-    if response?.resultCode == SDLResult.SUCCESS() {
+let display = SDLSetDisplayLayout(predefinedLayout: .graphic_WITH_TEXT())!
+manager?.send(display) { (request, response, error) in
+    if response?.resultCode == .success() {
+        // The template has been set successfully
+    }
+}
+```
+
+**Objective-C**
+```objc
+SDLSetDisplayLayout* display = [[SDLSetDisplayLayout alloc] initWithPredefinedLayout:SDLPredefinedLayout.GRAPHIC_WITH_TEXT];
+[self.manager sendRequest:display withResponseHandler:^(SDLRPCRequest *request, SDLRPCResponse *response, NSError *error) {
+    if ([response.resultCode isEqualToEnum:SDLResult.SUCCESS]) {
       // The template has been set successfully
     }
-})
+}];
 ```
+
 #### Available Templates
 There are fifteen standard templates to choose from, however some head units may only support a subset of these templates. Please check the `RegisterAppInterface` response for the supported templates. The following examples show how templates will appear on the generic head unit.
 
