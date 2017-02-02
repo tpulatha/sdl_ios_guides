@@ -1,6 +1,6 @@
 {
     "Authors": [
-        "Alex Muller", "Timur Pulathaneli", "Eric Schurter", "Justin Dickow"
+        "Alexander Muller", "Timur Pulathaneli", "Joel Fischer"
     ],
     "languages": [
         "en"
@@ -20,32 +20,60 @@
                 },
                 {
                     "name": "Connecting to a SDL Core"
-                },
-                {
-                    "name": "Designing the User Interface"
-                },
-                {
-                    "name": "Text Images and Buttons"
-                },
-                {
-                    "name": "Menus"
-                }, 
-                {
-                    "name": "Alerts"
-                },
-                {
-                    "name": "Get Vehicle Data"
                 }
             ]
         },
         {
-            "name": "Relay"
+            "name": "Displaying Information"
         },
         {
-            "name": "RPC Builder"
+            "name": "Uploading Graphics"
         },
         {
-            "name": "Mobile Navigation"
+            "name": "Knowing the In-Car UI Status"
+        },
+        {
+            "name": "Adding the LockScreen"
+        },
+        {
+            "name": "Getting Vehicle Data"
+        },
+        {
+            "name": "Getting In-Car Audio"
+        },
+        {
+            "name": "Setting the Navigation Destination"
+        },
+        {
+            "name": "Calling a Phone Number"
+        },
+        {
+            "name": "Mobile Navigation",
+            "navigation" : [
+                {
+                    "name": "Introduction"
+                },
+                {
+                    "name": "Video Streaming"
+                },
+                {
+                    "name": "Audio Streaming"
+                },
+                {
+                    "name": "Touch Inputs"
+                }
+            ]
+        },
+        {
+            "name": "Developer Tools",
+            "navigation" : [
+                {
+                    "name": "Relay"
+                },
+                {
+                    "name": "RPC Builder"
+                }
+            ]
         }
     ]
 }
