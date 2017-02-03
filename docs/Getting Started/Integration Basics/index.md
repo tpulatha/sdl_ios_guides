@@ -154,10 +154,10 @@ NS_ASSUME_NONNULL_END
 ```swift
 class ProxyManager: NSObject {
   // Manager
-  private var sdlManager: SDLManager?
-
+  fileprivate let sdlManager: SDLManager
+    
   // Singleton
-  public static let shared = ProxyManager()
+  static let sharedManager = ProxyManager()
 
   private override init() {
     super.init()
@@ -426,7 +426,10 @@ class ProxyManager: NSObject {
     private let appName = "<#App Name#>"
     private let appId = "<#App Id#>"
     
+    // Manager
     fileprivate let sdlManager: SDLManager
+    
+    // Singleton
     static let sharedManager = ProxyManager()
     
     private override init( ) {
