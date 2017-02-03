@@ -9,22 +9,36 @@
         {
             "name": "Getting Started",
             "navigation": [
-                {
-                    "name": "Installation"
-                },
-                {
-                    "name": "SDK Configuration"
-                },
-                {
-                    "name": "Integration Basics"
-                },
-                {
-                    "name": "Connecting to a SDL Core"
-                }
+              {
+                  "name": "Installation"
+              },
+              {
+                  "name": "SDK Configuration"
+              },
+              {
+                  "name": "Integration Basics"
+              },
+              {
+                  "name": "Connecting to a SDL Core"
+              }
             ]
         },
         {
-            "name": "Displaying Information"
+            "name": "Displaying Information",
+            "navigation": [
+                {
+                    "name": "Designing the User Interface"
+                },
+                {
+                    "name": "Text Images and Buttons"
+                },
+                {
+                    "name": "Menus"
+                },
+                {
+                    "name": "Alerts"
+                },
+            ]
         },
         {
             "name": "Uploading Graphics"
@@ -50,18 +64,21 @@
         {
             "name": "Mobile Navigation",
             "navigation" : [
-                {
-                    "name": "Introduction"
-                },
-                {
-                    "name": "Video Streaming"
-                },
-                {
-                    "name": "Audio Streaming"
-                },
-                {
-                    "name": "Touch Inputs"
-                }
+              {
+                  "name": "Video Streaming"
+              },
+              {
+                  "name": "Audio Streaming"
+              },
+              {
+                  "name": "Touch Input"
+              },
+              {
+                  "name": "Keyboard Input"
+              },
+              {
+                  "name": "Displaying Turn By Turn Advices"
+              }
             ]
         },
         {
