@@ -1,5 +1,5 @@
 ## Knowing the In-Car UI Status
-Once your app is connected to Core, most of the interaction you will be doing requires knowledge of the current In-Car UI, or HMI, Status. For a refresher on how to get your app integrated with SDL, and to connect to Core, head to [Getting Started > Integration Basics](). The HMI Status informs you of where the user is within the head unit in a general sense. 
+Once your app is connected to Core, most of the interaction you will be doing requires knowledge of the current In-Car UI, or HMI, Status. For a refresher on how to get your app integrated with SDL, and to connect to Core, head to [Getting Started > Integration Basics](Getting Started/Integration Basics). The HMI Status informs you of where the user is within the head unit in a general sense. 
 
 Refer to the table below of all possible HMI States:
 
@@ -55,41 +55,41 @@ ALERT 				   | An alert that you have sent is currently visible (Other apps will
 ### Monitoring Audio Streaming State and System Context
 Monitoring these two properties is quite easy using the provided `SDLDidChangeHMIStatusNotification` notification.
 
-1. Observe notification:
+**First**, observe the notification:
 
-    #### Objective-C
-    ```objc
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(hmiStatusChanged:) name:SDLDidChangeHMIStatusNotification object:nil];
-    ```
+#### Objective-C
+```objc
+[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(hmiStatusChanged:) name:SDLDidChangeHMIStatusNotification object:nil];
+```
 
-    #### Swift
-    ```swift
-    NotificationCenter.default.addObserver(self, selector: #selector(hmiStatusChanged(_:)), name: .SDLDidChangeHMIStatus, object: nil)
-    ```
+#### Swift
+```swift
+NotificationCenter.default.addObserver(self, selector: #selector(hmiStatusChanged(_:)), name: .SDLDidChangeHMIStatus, object: nil)
+```
 
-2. Handle notification:
+**Next**, handle the notification:
 
-    #### Objective-C
-    ```objc
-    - (void)hmiStatusChanged:(SDLRPCNotificationNotification *)notification {
-        if (![notification.notification isKindOfClass:SDLOnHMIStatus.class]) {
-            return;
-        }
-        
-        SDLOnHMIStatus *onHMIStatus = (SDLOnHMIStatus *)notification.notification;
-        SDLAudioStreamingState *audioStreamingState = onHMIStatus.audioStreamingState;
-        SDLSystemContext *systemContext = onHMIStatus.systemContext;
+#### Objective-C
+```objc
+- (void)hmiStatusChanged:(SDLRPCNotificationNotification *)notification {
+    if (![notification.notification isKindOfClass:SDLOnHMIStatus.class]) {
+        return;
     }
-    ```
+    
+    SDLOnHMIStatus *onHMIStatus = (SDLOnHMIStatus *)notification.notification;
+    SDLAudioStreamingState *audioStreamingState = onHMIStatus.audioStreamingState;
+    SDLSystemContext *systemContext = onHMIStatus.systemContext;
+}
+```
 
-    #### Swift
-    ```
-    func hmiStatusChanged(_ notification: SDLRPCNotificationNotification) {
-        guard let onHMIStatus = notification.notification as? SDLOnHMIStatus else {
-            return
-        }
-        
-        let audioStreamingState = onHMIStatus.audioStreamingState
-        let systemContext = onHMIStatus.systemContext
+#### Swift
+```swift
+func hmiStatusChanged(_ notification: SDLRPCNotificationNotification) {
+    guard let onHMIStatus = notification.notification as? SDLOnHMIStatus else {
+        return
     }
-    ```
+    
+    let audioStreamingState = onHMIStatus.audioStreamingState
+    let systemContext = onHMIStatus.systemContext
+}
+```
