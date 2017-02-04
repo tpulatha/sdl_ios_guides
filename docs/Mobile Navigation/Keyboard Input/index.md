@@ -9,7 +9,7 @@ performInteraction.interactionChoiceSetIDList = []
 performInteraction.timeout = 100000
 performInteraction.interactionMode = .manual_ONLY()
 performInteraction.interactionLayout = .keyboard()
-manager.send(performInteraction) { (request, response, error) in
+sdlManager.send(performInteraction) { (request, response, error) in
     if response?.resultCode.isEqual(to: SDLResult.success()) == false {
         print("Error sending perform interaction.")
         return
@@ -32,7 +32,7 @@ performInteraction.interactionChoiceSetIDList = [@[] mutableCopy];
 performInteraction.timeout = @(100000);
 performInteraction.interactionMode = SDLInteractionMode.MANUAL_ONLY;
 performInteraction.interactionLayout = SDLLayoutMode.KEYBOARD;
-[self.manager sendRequest:performInteraction withResponseHandler:^(SDLRPCRequest *request, SDLRPCResponse *response, NSError *error) {
+[self.sdlManager sendRequest:performInteraction withResponseHandler:^(SDLRPCRequest *request, SDLRPCResponse *response, NSError *error) {
     if (![response.resultCode isEqualToEnum:SDLResult.SUCCESS]) {
         NSLog(@"Error sending perform interaction.");
         return;

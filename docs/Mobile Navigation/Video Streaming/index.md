@@ -43,7 +43,7 @@ func hmiLevel(_ oldLevel: SDLHMILevel, didChangeTo newLevel: SDLHMILevel) {
 }
 
 private func stopVideoSession() {
-    guard let streamManager = self.manager.streamManager, streamManager.videoSessionConnected else {
+    guard let streamManager = self.sdlManager.streamManager, streamManager.videoSessionConnected else {
       return
     }
 
@@ -51,7 +51,7 @@ private func stopVideoSession() {
 }
 
 private func startVideoSession() {
-    guard let streamManager = self.manager.streamManager,
+    guard let streamManager = self.sdlManager.streamManager,
         streamManager.videoSessionConnected,
         UIApplication.shared.applicationState != .active else {
         return
@@ -84,18 +84,18 @@ private func startVideoSession() {
 }
 
 - (void)stopVideoSession {
-    if (!self.manager.streamManager.videoSessionConnected) {
+    if (!self.sdlManager.streamManager.videoSessionConnected) {
         return;
     }
-    [self.manager.streamManager stopVideoSession];
+    [self.sdlManager.streamManager stopVideoSession];
 }
 
 - (void)startVideoSession {
-    if (!self.manager.streamManager.videoSessionConnected
+    if (!self.sdlManager.streamManager.videoSessionConnected
         || [UIApplication sharedApplication].applicationState != UIApplicationStateActive) {
         return;
     }
-    [self.manager.streamManager startVideoSessionWithTLS:SDLEncryptionFlagAuthenticateAndEncrypt startBlock:^(BOOL success, BOOL encryption, NSError * _Nullable error) {
+    [self.sdlManager.streamManager startVideoSessionWithTLS:SDLEncryptionFlagAuthenticateAndEncrypt startBlock:^(BOOL success, BOOL encryption, NSError * _Nullable error) {
         if (!success) {
             if (error) {
                 NSLog(@"Error starting video session. %@", error.localizedDescription);
@@ -124,7 +124,7 @@ Sending video data to the head unit must be provided to `SDLStreamingMediaManage
 ```objective-c
 CVPixelBufferRef imageBuffer = <#Acquire Image Buffer#>;
 
-if ([self.manager.streamManager sendVideoData:imageBuffer] == NO) {
+if ([self.sdlManager.streamManager sendVideoData:imageBuffer] == NO) {
   NSLog(@"Could not send Video Data");
 }
 ```
@@ -133,7 +133,7 @@ if ([self.manager.streamManager sendVideoData:imageBuffer] == NO) {
 ```swift
 let imageBuffer = <#Acquire Image Buffer#>;
 
-guard let streamManager = self.manager.streamManager, streamManager.videoSessionConnected else {
+guard let streamManager = self.sdlManager.streamManager, streamManager.videoSessionConnected else {
   return
 }
 

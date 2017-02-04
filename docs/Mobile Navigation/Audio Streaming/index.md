@@ -33,7 +33,7 @@ func hmiLevel(_ oldLevel: SDLHMILevel, didChangeTo newLevel: SDLHMILevel) {
 }
 
 private func stopAudioSession() {
-    guard let streamManager = self.manager.streamManager, streamManager.audioSessionConnected else {
+    guard let streamManager = self.sdlManager.streamManager, streamManager.audioSessionConnected else {
       return
     }
 
@@ -41,9 +41,8 @@ private func stopAudioSession() {
 }
 
 private func startAudioSession() {
-    guard let streamManager = self.manager.streamManager,
-        streamManager.audioSessionConnected,
-        UIApplication.shared.applicationState != .active else {
+    guard let streamManager = self.sdlManager.streamManager,
+        streamManager.audioSessionConnected else {
         return
     }
 
@@ -75,18 +74,17 @@ private func startAudioSession() {
 }
 
 - (void)stopAudioSession {
-    if (!self.manager.streamManager.audioSessionConnected) {
+    if (!self.sdlManager.streamManager.audioSessionConnected) {
         return;
     }
-    [self.manager.streamManager stopAudioSession];
+    [self.sdlManager.streamManager stopAudioSession];
 }
 
 - (void)startAudioSession {
-    if (!self.manager.streamManager.audioSessionConnected
-        || [UIApplication sharedApplication].applicationState != UIApplicationStateActive) {
+    if (!self.sdlManager.streamManager.audioSessionConnected) {
         return;
     }
-    [self.manager.streamManager startAudioSessionWithTLS:SDLEncryptionFlagAuthenticateAndEncrypt startBlock:^(BOOL success, BOOL encryption, NSError * _Nullable error) {
+    [self.sdlManager.streamManager startAudioSessionWithTLS:SDLEncryptionFlagAuthenticateAndEncrypt startBlock:^(BOOL success, BOOL encryption, NSError * _Nullable error) {
         if (!success) {
             if (error) {
                 NSLog(@"Error starting video session. %@", error.localizedDescription);
@@ -110,7 +108,7 @@ Once the audio stream is connected, data may be easily passed to the Head Unit. 
 
 NSData* audioData = <#Acquire Audio Data#>;
 
-if ([self.manager.streamManager sendAudioData:imageBuffer] == NO) {
+if ([self.sdlManager.streamManager sendAudioData:imageBuffer] == NO) {
   NSLog(@"Could not send Audio Data");
 }
 ```
@@ -119,7 +117,7 @@ if ([self.manager.streamManager sendAudioData:imageBuffer] == NO) {
 ```swift
 let audioData = <#Acquire Audio Data#>;
 
-guard let streamManager = self.manager.streamManager, streamManager.audioSessionConnected else {
+guard let streamManager = self.sdlManager.streamManager, streamManager.audioSessionConnected else {
   return
 }
 
