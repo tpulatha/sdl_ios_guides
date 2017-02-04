@@ -7,10 +7,12 @@ The alert will persist on the screen until the timeout has elapsed, or the user 
 
 ### Alert UI
 Depending the platform, an alert can have up to three lines of text, a progress indicator (e.g. a spinning wheel or hourglass), and up to four soft buttons.
-##### SDLAlert without soft buttons
-![SDLAlert without soft buttons](assets/SDLAlertWithNoSoftButtons.png "SDLAlert without soft buttons")
-##### SDLAlert with soft buttons
-![SDLAlert with soft buttons](assets/SDLAlertWithSoftButtons.png "SDLAlert with soft buttons")
+#### SDLAlert without soft buttons
+##### Ford HMI
+![Ford Alert without Soft Buttons](assets/Ford_AlertWithNoSoftButtons.png)
+#### SDLAlert with soft buttons
+##### Ford HMI
+![Ford Alert with Soft Buttons](assets/Ford_AlertWithSoftButtons.png)
 
 ### Alert TTS
 The alert can also be formatted to speak a prompt when the alert appears on the screen. Do this by setting the `ttsChunks` parameter. To play the alert tone before the text-to-speech is spoken, set `playTone` to `true`.
@@ -48,7 +50,7 @@ okButton.handler = { (notification) in
 alert.softButtons = [okButton]
 
 // Send the alert
-manager?.send(alert) { (request, response, error) in
+sdlManager.send(alert) { (request, response, error) in
     if response?.resultCode == .success() {
         // alert was dismissed successfully
     }
@@ -90,7 +92,7 @@ okButton.handler = ^(SDLRPCNotification *notification) {
 alert.softButtons = [NSMutableArray arrayWithObject:okButton];
 
 // Send the alert
-[self.manager sendRequest:alert withResponseHandler:^(SDLRPCRequest *request, SDLRPCResponse *response, NSError *error) {
+[self.sdlManager sendRequest:alert withResponseHandler:^(SDLRPCRequest *request, SDLRPCResponse *response, NSError *error) {
     if ([response.resultCode isEqualToEnum:SDLResult.SUCCESS]) {
       // alert was dismissed successfully
     }
