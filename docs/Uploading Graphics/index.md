@@ -146,7 +146,7 @@ let bytesAvailable = sdlManager.fileManager.bytesAvailable
 ```
 
 ### Check if an Image Has Already Been Uploaded
-Although the file manager will return with an error if you attempt to upload an image of the same name that already exists, you may still be able to find out the currently uploaded imaages via `SDLFileManager`'s `remoteFileNames` property.
+Although the file manager will return with an error if you attempt to upload an image of the same name that already exists, you may still be able to find out the currently uploaded images via `SDLFileManager`'s `remoteFileNames` property.
 
 #### Objective-C
 ```objc
