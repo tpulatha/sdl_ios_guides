@@ -18,46 +18,7 @@ Depending the platform, an alert can have up to three lines of text, a progress 
 The alert can also be formatted to speak a prompt when the alert appears on the screen. Do this by setting the `ttsChunks` parameter. To play the alert tone before the text-to-speech is spoken, set `playTone` to `true`.
 
 ### Example
-**Swift**
-```swift
-let alert = SDLAlert(alertText1: "<#Line 1#>", alertText2: "<#Line 2#>", alertText3: "<#Line 3#>")!
-
-// Maximum time alert appears before being dismissed
-// Timeouts are must be between 3-10 seconds
-// Timeouts may not work when soft buttons are also used in the alert
-alert.duration = 5000
-
-// A progress indicator (e.g. spinning wheel or hourglass)
-// Not all head units support the progress indicator
-alert.progressIndicator = true
-
-// Text-to-speech
-alert.ttsChunks = SDLTTSChunk.textChunks(from: "<#Text to speak#>")
-
-// Special tone played before the tts is spoken
-alert.playTone = true
-
-// Soft buttons
-let okButton = SDLSoftButton()!
-okButton.text = "OK"
-okButton.type = .text()
-okButton.softButtonID = <#Soft Button Id#>
-okButton.handler = { (notification) in
-    guard let notification = notification as? SDLOnButtonPress else { return }
-    guard let id = notification.customButtonID else { return }
-    // create a custom action for the selected button
-}
-alert.softButtons = [okButton]
-
-// Send the alert
-sdlManager.send(alert) { (request, response, error) in
-    if response?.resultCode == .success() {
-        // alert was dismissed successfully
-    }
-}
-```
-
-**Objective-C**
+#### Objective-C
 ```objc
 SDLAlert *alert = [[SDLAlert alloc] initWithAlertText1:@"<#Line 1#>" alertText2:@"<#Line 2#>" alertText3:@"<#Line 3#>"];
 
@@ -98,3 +59,43 @@ alert.softButtons = [NSMutableArray arrayWithObject:okButton];
     }
 }];
 ```
+
+#### Swift
+```swift
+let alert = SDLAlert(alertText1: "<#Line 1#>", alertText2: "<#Line 2#>", alertText3: "<#Line 3#>")!
+
+// Maximum time alert appears before being dismissed
+// Timeouts are must be between 3-10 seconds
+// Timeouts may not work when soft buttons are also used in the alert
+alert.duration = 5000
+
+// A progress indicator (e.g. spinning wheel or hourglass)
+// Not all head units support the progress indicator
+alert.progressIndicator = true
+
+// Text-to-speech
+alert.ttsChunks = SDLTTSChunk.textChunks(from: "<#Text to speak#>")
+
+// Special tone played before the tts is spoken
+alert.playTone = true
+
+// Soft buttons
+let okButton = SDLSoftButton()!
+okButton.text = "OK"
+okButton.type = .text()
+okButton.softButtonID = <#Soft Button Id#>
+okButton.handler = { (notification) in
+    guard let notification = notification as? SDLOnButtonPress else { return }
+    guard let id = notification.customButtonID else { return }
+    // create a custom action for the selected button
+}
+alert.softButtons = [okButton]
+
+// Send the alert
+sdlManager.send(alert) { (request, response, error) in
+    if response?.resultCode == .success() {
+        // alert was dismissed successfully
+    }
+}
+```
+

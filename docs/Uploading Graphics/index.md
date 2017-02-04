@@ -96,12 +96,88 @@ sdlManager.fileManager.uploadFile(artwork) { (success, bytesAvailable, error) in
 }
 ```
 
+### Image File Name
+The image name can only consist of letters (a-Z) and numbers (0-9), otherwise the SDL Core may fail to find the uploaded image (even if it was uploaded successfully).
+
+### Image File Type
+Images may be formatted as PNG, JPEG, or BMP. Check the `displayCapability` properties to find out what image formats the head unit supports.
+
 ### File Persistance
 `SDLFile`, and it's subclass `SDLArtwork`, support uploading persistant images, i.e. images that do not become deleted when your application disconnects. Persistance should be used for images relating to your UI, and not for dynamic aspects, such as Album Artwork.
+
+#### Objective-C
+```objc
+artwork.persistent = YES;
+```
+
+#### Swift
+```swift
+artwork.persistent = true
+```
 
 !!! note
 Be aware that persistance will not work if space on the head unit is limited. `SDLFileManager` will always handle uploading images if they are non-existant. 
 !!!
+
+### Overwrite Stored Images
+If an image being uploaded has the same name as an already uploaded image, the new image will be ignored. To override this setting, set the `SDLArtwork`’s `overwrite` property to true.
+
+#### Objective-C
+```objc
+artwork.overwrite = YES;
+```
+
+#### Swift
+```swift
+artwork.overwrite = true
+```
+
+### Check the Amount of File Storage
+To find the amount of file storage left on the head unit, use the `SDLFileManager`’s `bytesAvailable` property.
+
+#### Objective-C
+```objc
+NSUInteger bytesAvailable = self.sdlManager.fileManager.bytesAvailable;
+```
+
+#### Swift
+```swift
+let bytesAvailable = sdlManager.fileManager.bytesAvailable
+```
+
+### Check if an Image Has Already Been Uploaded
+Although the file manager will return with an error if you attempt to upload an image of the same name that already exists, you may still be able to find out the currently uploaded imaages via `SDLFileManager`'s `remoteFileNames` property.
+
+#### Objective-C
+```objc
+BOOL isFileOnHeadUnit = [self.sdlManager.fileManager.remoteFileNames containsObject:@"<#Name Uploaded As#>"];
+```
+
+#### Swift
+```swift
+let isFileOnHeadUnit = sdlManager.fileManager.remoteFileNames.contains("<#Name Uploaded As#>")
+```
+
+### Delete Stored Images
+Use the file manager’s delete request to delete an image associated with an image name.
+
+#### Objective-C
+```objc
+[self.sdlManager.fileManager deleteRemoteFileWithName:@"<#Save As Name#>" completionHandler:^(BOOL success, NSUInteger bytesAvailable, NSError *error) {
+    if (success) {
+        // Image was deleted successfully
+    }
+}];
+```
+
+#### Swift
+```swift
+sdlManager.fileManager.deleteRemoteFileWithName("<#Save As Name#>") { (success, bytesAvailable, error) in
+    if success {
+        // Image was deleted successfully
+    }
+}
+```
 
 ### Image Sizes
 If an image is uploaded that is larger than the supported size, that image will be scaled down to accomodate. All image sizes are available from the `SDLManager`'s `registerResponse` property once in the completion handler for `startWithReadyHandler`.

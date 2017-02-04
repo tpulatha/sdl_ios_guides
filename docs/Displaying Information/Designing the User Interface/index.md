@@ -30,60 +30,76 @@ The `RegisterAppInterface` response contains information about the display type,
 Each car manufacturer supports a set of templates for the user interface. These templates determine the position and size of the text, images, and buttons on the screen. A list of supported templates is sent with `RegisterAppInterface` response.  
 
 To change a template at any time, send a `SDLSetDisplayLayout` RPC to the SDL Core. If you want to ensure that the new template is used, wait for a response from the SDL Core before sending any more user interface RPCs.
-**Swift**
-```swift
-let display = SDLSetDisplayLayout(predefinedLayout: .graphic_WITH_TEXT())!
-manager?.send(display) { (request, response, error) in
-    if response?.resultCode == .success() {
-        // The template has been set successfully
-    }
-}
-```
 
-**Objective-C**
+#### Objective-C
 ```objc
 SDLSetDisplayLayout* display = [[SDLSetDisplayLayout alloc] initWithPredefinedLayout:SDLPredefinedLayout.GRAPHIC_WITH_TEXT];
-[self.manager sendRequest:display withResponseHandler:^(SDLRPCRequest *request, SDLRPCResponse *response, NSError *error) {
+[self.sdlManager sendRequest:display withResponseHandler:^(SDLRPCRequest *request, SDLRPCResponse *response, NSError *error) {
     if ([response.resultCode isEqualToEnum:SDLResult.SUCCESS]) {
       // The template has been set successfully
     }
 }];
 ```
 
-#### Available Templates
+#### Swift
+```swift
+let display = SDLSetDisplayLayout(predefinedLayout: .graphic_WITH_TEXT())!
+sdlManager.send(display) { (request, response, error) in
+    if response?.resultCode == .success() {
+        // The template has been set successfully
+    }
+}
+```
+
+### Available Templates
 There are fifteen standard templates to choose from, however some head units may only support a subset of these templates. Please check the `RegisterAppInterface` response for the supported templates. The following examples show how templates will appear on the generic head unit.
 
-##### 1. MEDIA - with and without progress bar
+#### 1. MEDIA - with and without progress bar
+##### Ford HMI
 ![MEDIA - with progress bar](assets/MediaWithProgressBar.png)
 
 ![MEDIA - without progress bar](assets/MediaWithoutProgressBar.png)
-##### 2. NON-MEDIA - with and without soft buttons
+#### 2. NON-MEDIA - with and without soft buttons
+##### Ford HMI
 ![NON-MEDIA - with soft buttons](assets/NonMediaWithSoftButtons.png)
 
 ![NON-MEDIA - without soft buttons](assets/NonMediaWithoutSoftButtons.png)
-##### 3. GRAPHIC_WITH_TEXT
+#### 3. GRAPHIC_WITH_TEXT
+##### Ford HMI
 ![GRAPHIC_WITH_TEXT](assets/GraphicWithText.png)
-##### 4. TEXT_WITH_GRAPHIC
+#### 4. TEXT_WITH_GRAPHIC
+##### Ford HMI
 ![TEXT_WITH_GRAPHIC](assets/TextWithGraphic.png)
-##### 5. TILES_ONLY
+#### 5. TILES_ONLY
+##### Ford HMI
 ![TILES_ONLY](assets/TilesOnly.png)
-##### 6. GRAPHIC_WITH_TILES
+#### 6. GRAPHIC_WITH_TILES
+##### Ford HMI
 ![GRAPHIC_WITH_TILES](assets/GraphicWithTiles.png)
-##### 7. TILES_WITH_GRAPHIC
+#### 7. TILES_WITH_GRAPHIC
+##### Ford HMI
 ![TILES_WITH_GRAPHIC](assets/TilesWithGraphic.png)
-##### 8. GRAPHIC_WITH_TEXT_AND_SOFTBUTTONS
+#### 8. GRAPHIC_WITH_TEXT_AND_SOFTBUTTONS
+##### Ford HMI
 ![GRAPHIC_WITH_TEXT_AND_SOFTBUTTONS](assets/GraphicWithTextAndSoftButtons.png)
-##### 9. TEXT_AND_SOFTBUTTONS_WITH_GRAPHIC
+#### 9. TEXT_AND_SOFTBUTTONS_WITH_GRAPHIC
+##### Ford HMI
 ![TEXT_AND_SOFTBUTTONS_WITH_GRAPHIC](assets/TextAndSoftButtonsWithGraphic.png)
-##### 10. GRAPHIC_WITH_TEXTBUTTONS
+#### 10. GRAPHIC_WITH_TEXTBUTTONS
+##### Ford HMI
 ![GRAPHIC_WITH_TEXTBUTTONS](assets/GraphicWithTextButtons.png)
-##### 11. DOUBLE_GRAPHIC_SOFTBUTTONS
+#### 11. DOUBLE_GRAPHIC_SOFTBUTTONS
+##### Ford HMI
 ![DOUBLE_GRAPHIC_SOFTBUTTONS](assets/DoubleGraphicSoftButtons.png)
-##### 12. TEXTBUTTONS_WITH_GRAPHIC
+#### 12. TEXTBUTTONS_WITH_GRAPHIC
+##### Ford HMI
 ![TEXTBUTTONS_WITH_GRAPHIC](assets/TextButtonsWithGraphic.png)
-##### 13. TEXTBUTTONS_ONLY
+#### 13. TEXTBUTTONS_ONLY
+##### Ford HMI
 ![TEXTBUTTONS_ONLY](assets/TextButtonsOnly.png)
-##### 14. LARGE_GRAPHIC_WITH_SOFTBUTTONS
+#### 14. LARGE_GRAPHIC_WITH_SOFTBUTTONS
+##### Ford HMI
 ![LARGE_GRAPHIC_WITH_SOFTBUTTONS](assets/LargeGraphicWithSoftButtons.png)
-##### 15. LARGE_GRAPHIC_ONLY
+#### 15. LARGE_GRAPHIC_ONLY
+##### Ford HMI
 ![LARGE_GRAPHIC_ONLY](assets/LargeGraphicOnly.png)
