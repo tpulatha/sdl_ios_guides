@@ -10,7 +10,7 @@ To see where the `SDLLockScreenConfiguration` is used, refer to the [Getting Sta
 ### Using the Provided LockScreen
 Using the provided lockscreen is simple. Using the lockscreen this way will still provide support for automatically loading an automaker's logo, if supported, however will just use the SDL Logo alongside it instead of your own app icon.
 
-[Generic LockScreen](/assets/GenericLockScreen.png)
+![Generic LockScreen](/assets/GenericLockScreen.png)
 
 To do this, instantiate a new `SDLLockScreenConfiguration`:
 
@@ -27,7 +27,7 @@ let lockScreenConfiguration = SDLLockScreenConfiguration.enabled()
 ### Customizing the Provided LockScreen
 If you would like to use the provided lockscreen, however would like to add your own appearance to it, we provide that as well. `SDLLockScreenConfiguration` allows you to customize the background color as well as your app's icon. If the app icon is not included, we will use the SDL logo.
 
-[Custom LockScreen](/assets/CustomLockScreen.png)
+![Custom LockScreen](/assets/CustomLockScreen.png)
 
 #### Objective-C
 ```objc
