@@ -12,7 +12,7 @@ When developing an application using SmartDeviceLink, two things must always be 
 Being able to know if graphics are supported is a very important feature of your application, as this avoids you uploading unneccessary images to the head unit. In order to see if graphics are supported, take a look at `SDLManager`'s `registerResponse` property once in the completion handler for `startWithReadyHandler`.
 
 !!! note 
-	If you need to know how to create and setup `SDLManager`, please see [Getting Started > Integration Basics]().
+If you need to know how to create and setup `SDLManager`, please see [Getting Started > Integration Basics](Getting Started/Integration Basics).
 !!!
 
 #### Objective-C
@@ -53,6 +53,11 @@ As of SDL 4.3, we have taken the liberty to make uploading files easier for you.
 #### Objective-C
 ```objc
 UIImage* image = [UIImage imageNamed:@"<#Image Name#>"];
+if (!image) {
+    NSLog(@"Error reading from Assets");
+    return;    
+}
+
 SDLArtwork* artwork = [SDLArtwork artworkWithImage:image name:@"<#Name to Upload As#>" asImageFormat:SDLArtworkImageFormatJPG /* or SDLArtworkImageFormatPNG */];
 
 [self.sdlManager.fileManager uploadFile:artwork completionHandler:^(BOOL success, NSUInteger bytesAvailable, NSError * _Nullable error) {
@@ -71,7 +76,7 @@ SDLArtwork* artwork = [SDLArtwork artworkWithImage:image name:@"<#Name to Upload
 
 #### Swift
 ```swift
-guard let image = UIImage(named: "<#AppIcon Name#>") else {
+guard let image = UIImage(named: "<#Image Name#>") else {
 	print("Error reading from Assets")
 	return
 }
@@ -92,9 +97,9 @@ sdlManager.fileManager.uploadFile(artwork) { (success, bytesAvailable, error) in
 ```
 
 ### File Persistance
-`SDLFile` and subsequently `SDLArtwork` support uploading persistant images, i.e. images that do not become deleted when your application disconnects. Persistance should be used for images relating to your UI, and not for dynamic aspects, such as Album Artwork.
+`SDLFile`, and it's subclass `SDLArtwork`, support uploading persistant images, i.e. images that do not become deleted when your application disconnects. Persistance should be used for images relating to your UI, and not for dynamic aspects, such as Album Artwork.
 
-!!!note
+!!! note
 Be aware that persistance will not work if space on the head unit is limited. `SDLFileManager` will always handle uploading images if they are non-existant. 
 !!!
 
