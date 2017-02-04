@@ -2,7 +2,7 @@
 Setting a Navigation Destination allows you to send a GPS location that you would like to prompt that user to navigate to using their embedded navigation. When using the `SendLocation` RPC, you will not receive a callback when issuing a SendLocation as to how the user interacted with this location, only if it was successfully sent to Core and received.
 
 !!! note
-	This currently is only supported for Embedded Navigation. This does not work with Mobile Navigation Apps at this time.
+This currently is only supported for Embedded Navigation. This does not work with Mobile Navigation Apps at this time.
 !!!
 
 !!! note
@@ -20,7 +20,7 @@ SendLocation has 3 possible results that you should expect:
 `SendLocation` is a newer RPC, so there is a possibility that not all head units will support it, especially if you are connected to a head unit that does not have an embedded navigation. In order to see if SendLocation is available, take a look at `SDLManager`'s `registerResponse` property once in the completion handler for `startWithReadyHandler`.
 
 !!! note 
-	If you need to know how to create and setup `SDLManager`, please see [Getting Started > Integration Basics]().
+If you need to know how to create and setup `SDLManager`, please see [Getting Started > Integration Basics](Getting Started/Integration Basics).
 !!!
 
 #### Objective-C
