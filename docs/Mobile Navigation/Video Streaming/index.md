@@ -24,9 +24,7 @@ FULL        | Foreground        | Yes                   | No
 FULL        | Resigning Active  | No                    | No
 
 !!! note
-
 For occurences of "Can Open Video Stream" and "Should Close Video Stream" both being **Yes**, this means that the stream should be closed, and then opened (restarted).
-
 !!!
 
 ### Starting the Stream

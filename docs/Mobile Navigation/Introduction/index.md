@@ -12,17 +12,11 @@ In order to use SDL's Mobile Navigation feature, the app must have a minimum req
 
 ### Connecting an app
 
-The basic connection is the similar for all apps. Please follow the basic instructions in the "Preparation" section of the [mobile weather tutorial](https://github.com/smartdevicelink/sdl_mobileweather_tutorial_ios/wiki/Section%201%20Preparation).
+The basic connection is the similar for all apps. Please follow [Getting Started > Integration Basics](Getting Started/Integration Basics) for more information.
 
 The first difference for a navigation app is the `appHMIType` of Navigation that has to be set in the `SDLLifecycleConfiguration`. Navigation apps are also non-media apps.
 
 The second difference is a property called `securityManagers` that needs to be set in the `SDLLifecycleConfiguration` if connecting to a version of Core that requires secure video & audio streaming. This property requires an array of classes of Security Managers, which will conform to the `SDLSecurityType` protocol. These security libraries are provided by the OEMs themselves, and will only work for that OEM. There is not a general catch-all security library.
-
-!!! note
-
-For more information relating to app registration, please reference the "App Registration" section of the [mobile weather tutorial](https://github.com/smartdevicelink/sdl_mobileweather_tutorial_ios/wiki/Section%201%20Preparation#app-registration).
-
-!!!
 
 #### Objective-C
 ```objc

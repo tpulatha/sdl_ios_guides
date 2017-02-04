@@ -37,9 +37,7 @@ optional public func touchManager(_ manager: SDLTouchManager, pinchDidEndAtCente
 ```
 
 !!! note
-
-  * Points that are provided via these callbacks are in the head unit's coordinate space.
-
+Points that are provided via these callbacks are in the head unit's coordinate space.
 !!!
 
 ### 2. Self Implementation of `onTouchEvent`
