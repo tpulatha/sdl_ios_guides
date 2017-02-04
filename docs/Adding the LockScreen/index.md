@@ -5,12 +5,12 @@ A benefit to using the provided Lock Screen, is that we also handle support for 
 
 If you would not like to use any of the following code, you may use the `SDLLockScreenConfiguration` class function `disabledConfiguration`, and manage the entire lifecycle of the lockscreen yourself. 
 
-To see where the `SDLLockScreenConfiguration` is used, refer to the [Getting Started > Integration Basics]().
+To see where the `SDLLockScreenConfiguration` is used, refer to the [Getting Started > Integration Basics](Getting Started/Integration Basics).
 
 ### Using the Provided LockScreen
 Using the provided lockscreen is simple. Using the lockscreen this way will still provide support for automatically loading an automaker's logo, if supported, however will just use the SDL Logo alongside it instead of your own app icon.
 
-<img src="./assets/GenericLockScreen.png" width="200px">
+[Generic LockScreen](/assets/GenericLockScreen.png)
 
 To do this, instantiate a new `SDLLockScreenConfiguration`:
 
@@ -27,7 +27,7 @@ let lockScreenConfiguration = SDLLockScreenConfiguration.enabled()
 ### Customizing the Provided LockScreen
 If you would like to use the provided lockscreen, however would like to add your own appearance to it, we provide that as well. `SDLLockScreenConfiguration` allows you to customize the background color as well as your app's icon. If the app icon is not included, we will use the SDL logo.
 
-<img src="./assets/CustomLockScreen.png" width="200px">
+[Custom LockScreen](/assets/CustomLockScreen.png)
 
 #### Objective-C
 ```objc
@@ -96,7 +96,7 @@ sdlManager.start { (success, error) in
 ### Retrieving LockScreen URL
 A newer feature that some OEMs may adapt is the ability for the head unit to provide `SDLManager` a URL for a logo to display on the Lock Screen. If you are creating your own lockscreen, it is a best practice to utilize this feature. This notifcation comes through after we have downloaded the icon for you, and sent it in the `SDLDidReceiveLockScreenIcon` notification.
 
-Register for Lock Screen Icon Notification:
+**First**, register for the `SDLDidReceiveLockScreenIcon` Notification:
 
 #### Objective-C
 ```objc
@@ -108,7 +108,7 @@ Register for Lock Screen Icon Notification:
 NotificationCenter.default.addObserver(self, selector: #selector(lockScreenIconReceived(_:)), name: SDLDidReceiveLockScreenIcon, object: nil)
 ```
 
-Acting on the Notification:
+**Then**, act on the notification:
 
 #### Objective-C
 ```objc
