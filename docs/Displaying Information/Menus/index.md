@@ -73,7 +73,7 @@ sdlManager.send(menuItem) { (request, response, error) in
 #### Add a Submenu
 To create a submenu, first send a `SDLAddSubMenu` RPC. When a response is received from the SDL Core, check if the submenu was added successfully. If it was, send an `SDLAddCommand` RPC for each item in the submenu.
 
-#### Objective-C**
+#### Objective-C
 ```objc
 SDLAddSubMenu* subMenu = [[SDLAddSubMenu alloc] initWithId:<#Unique Id#> menuName:@"<#SubMenu Item Name#>"];
 
