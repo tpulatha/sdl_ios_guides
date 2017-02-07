@@ -12,7 +12,7 @@ Your application must support a set of SDL protocol strings in order to be conne
 This is only required for USB and Bluetooth enabled head units. It is not necessary during development using SDL Core.
 !!!  
 
-```
+```xml
 <key>UISupportedExternalAccessoryProtocols</key>
 <array>
 <string>com.smartdevicelink.prot29</string>
@@ -57,4 +57,4 @@ Install this documentation to [Dash](https://kapeli.com/dash) or to Xcode by usi
 ### 5. Get an App Id
 An app id is required for production level apps. The app id gives your app special permissions to access vehicle data. If your app does not need to access vehicle data, a dummy app id (i.e. create a fake id like "1234") is sufficient during the development stage. However, you must get an app id before releasing the app to the public.
 
-To obtain an app id, sign up at [smartdevicelink.com](www.smartdevicelink.com).
+To obtain an app id, sign up at [smartdevicelink.com](http://www.smartdevicelink.com).

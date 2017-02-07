@@ -1,6 +1,6 @@
 {
     "Authors": [
-        "Alex Muller", "Timur Pulathaneli", "Eric Schurter", "Justin Dickow"
+        "Alexander Muller", "Timur Pulathaneli", "Joel Fischer"
     ],
     "languages": [
         "en"
@@ -9,18 +9,23 @@
         {
             "name": "Getting Started",
             "navigation": [
-                {
-                    "name": "Installation"
-                },
-                {
-                    "name": "SDK Configuration"
-                },
-                {
-                    "name": "Integration Basics"
-                },
-                {
-                    "name": "Connecting to a SDL Core"
-                },
+              {
+                  "name": "Installation"
+              },
+              {
+                  "name": "SDK Configuration"
+              },
+              {
+                  "name": "Integration Basics"
+              },
+              {
+                  "name": "Connecting to a SDL Core"
+              }
+            ]
+        },
+        {
+            "name": "Displaying Information",
+            "navigation": [
                 {
                     "name": "Designing the User Interface"
                 },
@@ -29,23 +34,66 @@
                 },
                 {
                     "name": "Menus"
-                }, 
-                {
-                    "name": "Alerts"
                 },
                 {
-                    "name": "Get Vehicle Data"
+                    "name": "Alerts"
                 }
             ]
         },
         {
-            "name": "Relay"
+            "name": "Uploading Files and Graphics"
         },
         {
-            "name": "RPC Builder"
+            "name": "Knowing the In-Car UI Status"
         },
         {
-            "name": "Mobile Navigation"
+            "name": "Adding the Lock Screen"
+        },
+        {
+            "name": "Getting Vehicle Data"
+        },
+        {
+            "name": "Getting In-Car Audio"
+        },
+        {
+            "name": "Setting the Navigation Destination"
+        },
+        {
+            "name": "Calling a Phone Number"
+        },
+        {
+            "name": "Mobile Navigation",
+            "navigation" : [
+              {
+                  "name": "Introduction"
+              },
+              {
+                  "name": "Video Streaming"
+              },
+              {
+                  "name": "Audio Streaming"
+              },
+              {
+                  "name": "Touch Input"
+              },
+              {
+                  "name": "Keyboard Input"
+              },
+              {
+                  "name": "Displaying Turn By Turn Advices"
+              }
+            ]
+        },
+        {
+            "name": "Developer Tools",
+            "navigation" : [
+                {
+                    "name": "Relay"
+                },
+                {
+                    "name": "RPC Builder"
+                }
+            ]
         }
     ]
 }
