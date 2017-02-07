@@ -54,62 +54,52 @@ sdlManager.send(display) { (request, response, error) in
 ### Available Templates
 There are fifteen standard templates to choose from, however some head units may only support a subset of these templates. Please check the `RegisterAppInterface` response for the supported templates. The following examples show how templates will appear on the generic head unit.
 
-#### 1. Media
+#### 1. MEDIA - with and without progress bar
 ##### Ford HMI
-![Media](assets/ford/media.png)
+![MEDIA - with progress bar](assets/MediaWithProgressBar.png)
 
-#### 2. Non-Media
+![MEDIA - without progress bar](assets/MediaWithoutProgressBar.png)
+#### 2. NON-MEDIA - with and without soft buttons
 ##### Ford HMI
-![Non-Media](assets/ford/non_media.png)
+![NON-MEDIA - with soft buttons](assets/NonMediaWithSoftButtons.png)
 
-#### 3. Graphic with Text
+![NON-MEDIA - without soft buttons](assets/NonMediaWithoutSoftButtons.png)
+#### 3. GRAPHIC_WITH_TEXT
 ##### Ford HMI
-![Graphic with Text](assets/ford/graphic_with_text.png)
-
-#### 4. Text with Graphic
+![GRAPHIC_WITH_TEXT](assets/GraphicWithText.png)
+#### 4. TEXT_WITH_GRAPHIC
 ##### Ford HMI
-![Text with Graphic](assets/ford/text_with_graphic.png)
-
-#### 5. Tiles Only
+![TEXT_WITH_GRAPHIC](assets/TextWithGraphic.png)
+#### 5. TILES_ONLY
 ##### Ford HMI
 ![TILES_ONLY](assets/TilesOnly.png)
-
-#### 6. Graphic with Tiles
+#### 6. GRAPHIC_WITH_TILES
 ##### Ford HMI
 ![GRAPHIC_WITH_TILES](assets/GraphicWithTiles.png)
-
-#### 7. Tiles with Graphic
+#### 7. TILES_WITH_GRAPHIC
 ##### Ford HMI
 ![TILES_WITH_GRAPHIC](assets/TilesWithGraphic.png)
-
-#### 8. Graphic with Text and SoftButtons
+#### 8. GRAPHIC_WITH_TEXT_AND_SOFTBUTTONS
 ##### Ford HMI
-![Graphic with Text and SoftButtons](assets/ford/graphic_with_text_and_softbuttons.png)
-
-#### 9. Text and SoftButtons with Graphic
+![GRAPHIC_WITH_TEXT_AND_SOFTBUTTONS](assets/GraphicWithTextAndSoftButtons.png)
+#### 9. TEXT_AND_SOFTBUTTONS_WITH_GRAPHIC
 ##### Ford HMI
-![Text and SoftButtons with Graphic](assets/ford/text_and_softbuttons_with_graphic.png)
-
-#### 10. Graphic with Text Buttons
+![TEXT_AND_SOFTBUTTONS_WITH_GRAPHIC](assets/TextAndSoftButtonsWithGraphic.png)
+#### 10. GRAPHIC_WITH_TEXTBUTTONS
 ##### Ford HMI
 ![GRAPHIC_WITH_TEXTBUTTONS](assets/GraphicWithTextButtons.png)
-
-#### 11. Double Graphic SoftButtons
+#### 11. DOUBLE_GRAPHIC_SOFTBUTTONS
 ##### Ford HMI
 ![DOUBLE_GRAPHIC_SOFTBUTTONS](assets/DoubleGraphicSoftButtons.png)
-
-#### 12. Text Buttons with Graphic
+#### 12. TEXTBUTTONS_WITH_GRAPHIC
 ##### Ford HMI
 ![TEXTBUTTONS_WITH_GRAPHIC](assets/TextButtonsWithGraphic.png)
-
-#### 13. Text Buttons Only
+#### 13. TEXTBUTTONS_ONLY
 ##### Ford HMI
 ![TEXTBUTTONS_ONLY](assets/TextButtonsOnly.png)
-
-#### 14. Large Graphic with SoftButtons
+#### 14. LARGE_GRAPHIC_WITH_SOFTBUTTONS
 ##### Ford HMI
 ![LARGE_GRAPHIC_WITH_SOFTBUTTONS](assets/LargeGraphicWithSoftButtons.png)
-
-#### 15. Large Graphic Only
+#### 15. LARGE_GRAPHIC_ONLY
 ##### Ford HMI
 ![LARGE_GRAPHIC_ONLY](assets/LargeGraphicOnly.png)
