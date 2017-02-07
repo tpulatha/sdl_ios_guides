@@ -1,4 +1,4 @@
-## Uploading Graphics
+## Uploading Files and Graphics
 Graphics allows for you to better customize what you would like to have your users see, and provide a better User Interface.
 
 To learn how to use these graphics once they are uploaded, please see [Displaying Information](Displaying Information).
@@ -47,8 +47,8 @@ sdlManager.start { (success, error) in
 }
 ```
 
-### Uploading an Image Using SDLFileManager
-As of SDL 4.3, we have taken the liberty to make uploading files easier for you. `SDLFileManager` handles uploading files, and keeping track of what already exists and what does not. To assist, there are two classes: `SDLFile` and `SDLArtwork`. `SDLFile` is the base class for file uploads and handles pulling data from local `NSURL`s and `NSData`. `SDLArtwork` is subclass of this, and provides additional functionality such as creating a file from a `UIImage`.
+### Uploading a File using SDLFileManager
+As of SDL 4.3, we have provided a class that makes managing files easier. `SDLFileManager` handles uploading files, like images, and keeping track of what already exists and what does not. To assist, there are two classes: `SDLFile` and `SDLArtwork`. `SDLFile` is the base class for file uploads and handles pulling data from local `NSURL`s and `NSData`. `SDLArtwork` is subclass of this, and provides additional functionality such as creating a file from a `UIImage`.
 
 #### Objective-C
 ```objc
@@ -58,9 +58,9 @@ if (!image) {
     return;    
 }
 
-SDLArtwork* artwork = [SDLArtwork artworkWithImage:image name:@"<#Name to Upload As#>" asImageFormat:SDLArtworkImageFormatJPG /* or SDLArtworkImageFormatPNG */];
+SDLArtwork* file = [SDLArtwork artworkWithImage:image name:@"<#Name to Upload As#>" asImageFormat:SDLArtworkImageFormatJPG /* or SDLArtworkImageFormatPNG */];
 
-[self.sdlManager.fileManager uploadFile:artwork completionHandler:^(BOOL success, NSUInteger bytesAvailable, NSError * _Nullable error) {
+[self.sdlManager.fileManager uploadFile:file completionHandler:^(BOOL success, NSUInteger bytesAvailable, NSError * _Nullable error) {
 	if (error) {
 		if (error.code == SDLFileManagerErrorCannotOverwrite) {
 	        // Attempting to replace a file, but failed due to settings in SDLArtwork.
@@ -80,9 +80,9 @@ guard let image = UIImage(named: "<#Image Name#>") else {
 	print("Error reading from Assets")
 	return
 }
-let artwork = SDLArtwork.artwork(with: image, name: "<#Name to Upload As#>", as: .JPG /* or .PNG */)
+let file = SDLArtwork.artwork(with: image, name: "<#Name to Upload As#>", as: .JPG /* or .PNG */)
 
-sdlManager.fileManager.uploadFile(artwork) { (success, bytesAvailable, error) in
+sdlManager.fileManager.uploadFile(file) { (success, bytesAvailable, error) in
     if let error = error as? NSError {
         if error.code == SDLFileManagerError.cannotOverwrite.rawValue {
             // Attempting to replace a file, but failed due to settings in SDLArtwork.
@@ -96,40 +96,37 @@ sdlManager.fileManager.uploadFile(artwork) { (success, bytesAvailable, error) in
 }
 ```
 
-### Image File Name
-The image name can only consist of letters (a-Z) and numbers (0-9), otherwise the SDL Core may fail to find the uploaded image (even if it was uploaded successfully).
-
-### Image File Type
-Images may be formatted as PNG, JPEG, or BMP. Check the `displayCapability` properties to find out what image formats the head unit supports.
+### File Naming
+The file name can only consist of letters (a-Z) and numbers (0-9), otherwise the SDL Core may fail to find the uploaded file (even if it was uploaded successfully).
 
 ### File Persistance
 `SDLFile`, and it's subclass `SDLArtwork`, support uploading persistant images, i.e. images that do not become deleted when your application disconnects. Persistance should be used for images relating to your UI, and not for dynamic aspects, such as Album Artwork.
 
 #### Objective-C
 ```objc
-artwork.persistent = YES;
+file.persistent = YES;
 ```
 
 #### Swift
 ```swift
-artwork.persistent = true
+file.persistent = true
 ```
 
 !!! note
 Be aware that persistance will not work if space on the head unit is limited. `SDLFileManager` will always handle uploading images if they are non-existant. 
 !!!
 
-### Overwrite Stored Images
-If an image being uploaded has the same name as an already uploaded image, the new image will be ignored. To override this setting, set the `SDLArtwork`’s `overwrite` property to true.
+### Overwrite Stored Files
+If a file being uploaded has the same name as an already uploaded image, the new image will be ignored. To override this setting, set the `SDLFile`’s `overwrite` property to true.
 
 #### Objective-C
 ```objc
-artwork.overwrite = YES;
+file.overwrite = YES;
 ```
 
 #### Swift
 ```swift
-artwork.overwrite = true
+file.overwrite = true
 ```
 
 ### Check the Amount of File Storage
@@ -145,8 +142,8 @@ NSUInteger bytesAvailable = self.sdlManager.fileManager.bytesAvailable;
 let bytesAvailable = sdlManager.fileManager.bytesAvailable
 ```
 
-### Check if an Image Has Already Been Uploaded
-Although the file manager will return with an error if you attempt to upload an image of the same name that already exists, you may still be able to find out the currently uploaded images via `SDLFileManager`'s `remoteFileNames` property.
+### Check if a File Has Already Been Uploaded
+Although the file manager will return with an error if you attempt to upload a file of the same name that already exists, you may still be able to find out the currently uploaded images via `SDLFileManager`'s `remoteFileNames` property.
 
 #### Objective-C
 ```objc
@@ -158,8 +155,8 @@ BOOL isFileOnHeadUnit = [self.sdlManager.fileManager.remoteFileNames containsObj
 let isFileOnHeadUnit = sdlManager.fileManager.remoteFileNames.contains("<#Name Uploaded As#>")
 ```
 
-### Delete Stored Images
-Use the file manager’s delete request to delete an image associated with an image name.
+### Delete Stored Files
+Use the file manager’s delete request to delete a file associated with a file name.
 
 #### Objective-C
 ```objc
@@ -178,6 +175,10 @@ sdlManager.fileManager.deleteRemoteFileWithName("<#Save As Name#>") { (success, 
     }
 }
 ```
+
+## Image Specifics
+### Image File Type
+Images may be formatted as PNG, JPEG, or BMP. Check the `displayCapability` properties to find out what image formats the head unit supports.
 
 ### Image Sizes
 If an image is uploaded that is larger than the supported size, that image will be scaled down to accomodate. All image sizes are available from the `SDLManager`'s `registerResponse` property once in the completion handler for `startWithReadyHandler`.
