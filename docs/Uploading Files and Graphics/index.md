@@ -1,7 +1,7 @@
 ## Uploading Files and Graphics
 Graphics allows for you to better customize what you would like to have your users see, and provide a better User Interface.
 
-To learn how to use these graphics once they are uploaded, please see [Displaying Information > Text Images and Buttons](Displaying Information/Text Images and Buttons).
+To learn how to use these graphics once they are uploaded, please see [Displaying Information > Text, Images, and Buttons](Displaying Information/Text, Images, and Buttons).
 
 When developing an application using SmartDeviceLink, two things must always be remembered when using graphics:
 
