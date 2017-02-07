@@ -118,9 +118,7 @@ sdlManager.send(endAudioPassThru)
 You will receive a `resultCode` of `SUCCESS`, and should expect to handle this audio passthrough as though it was successful.
 
 ### Handling the Response
-To process the response that we received from an ended audio capture, we have two approaches.
-
-**First**,  Using the `withResponseHandler` property in `SDLManager`'s `send(_ :)` function.
+To process the response that we received from an ended audio capture, we use the `withResponseHandler` property in `SDLManager`'s `send(_ :)` function.
 
 #### Objective-C
 ```objc
@@ -148,57 +146,6 @@ To process the response that we received from an ended audio capture, we have tw
 ```swift
 sdlManager.send(performAudioPassThru) { (request, response, error) in
     guard let response = response, let resultCode = response.resultCode else {
-        return
-    }
-    
-    if resultCode.isEqual(to: SDLResult.success()) {
-        // Process audio data
-    } else {
-        // Cancel any usage of the audio data.
-    }
-}
-```
-
-**Or**, observe the `SDLDidReceivePerformAudioPassThruResponse` notification coming from `SDLNotificationConstants.h`:
-
-**First**, register:
-
-#### Objective-C
-```objc
-[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(audioPassThruResponse:) name:SDLDidReceivePerformAudioPassThruResponse object:nil];
-```
-
-#### Swift
-```swift
-NotificationCenter.default.addObserver(self, selector: #selector(audioPassThruResponse(_:)), name: SDLDidReceivePerformAudioPassThruResponse, object: nil)
-```
-
-**Then**, observe:
-
-#### Objective-C
-```objc
-- (void)audioPassThruResponse:(SDLRPCResponseNotification *)notification {
-    if (![notification.response isKindOfClass:SDLPerformAudioPassThruResponse.class]) {
-        return;
-    }
-    
-    SDLPerformAudioPassThruResponse *response = (SDLPerformAudioPassThruResponse *)notification.response;
-    SDLResult *resultCode = response.resultCode;
-    
-    if ([resultCode isEqualToEnum:SDLResult.SUCCESS]) {
-        // Process audio data
-    } else {
-        // Cancel any usage of the audio data
-    }
-}
-```
-
-#### Swift
-```swift
-func audioPassThruResponse(_ notification: SDLRPCResponseNotification) {
-    guard let response = notification.response as? SDLPerformAudioPassThruResponse,
-        let resultCode = response.resultCode else
-         {
         return
     }
     
