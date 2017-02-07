@@ -230,6 +230,10 @@ The items in the perform interaction can be shown as a grid of buttons (with opt
 | List with search | A vertical list of text with a search field in the HMI |
 | Keyboard         | A keyboard shows up immediately in the HMI |
 
+!!! note
+Keyboard is currently only supported for the navigation app type.
+!!!
+
 #### Objective-C
 ```objc
 performInteraction.interactionLayout = SDLLayoutMode.LIST_ONLY;
