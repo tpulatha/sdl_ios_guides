@@ -1,6 +1,6 @@
 ## Getting In-Car Audio
 
-Capturing in-car audio allows developers to interact with customers via raw audio data provided to them from the car's microphones. In order to gather the raw audio from the vehicle, we must leverage the [`SDLPerformAudioPassThru`](https://github.com/smartdevicelink/sdl_ios/blob/master/SmartDeviceLink/SDLPerformAudioPassThru.h) RPC.
+Capturing in-car audio allows developers to interact with users via raw audio data provided to them from the car's microphones. In order to gather the raw audio from the vehicle, we must leverage the [`SDLPerformAudioPassThru`](https://github.com/smartdevicelink/sdl_ios/blob/master/SmartDeviceLink/SDLPerformAudioPassThru.h) RPC.
 
 !!! note
 PerformAudioPassThru does not support automatic speech cancellation detection, so if this feature is desired, it is up to the developer to implement.
