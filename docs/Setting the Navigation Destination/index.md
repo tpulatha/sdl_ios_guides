@@ -1,5 +1,5 @@
 ## Setting the Navigation Destination
-Setting a Navigation Destination allows you to send a GPS location that you would like to prompt that user to navigate to using their embedded navigation. When using the `SendLocation` RPC, you will not receive a callback when issuing a SendLocation as to how the user interacted with this location, only if it was successfully sent to Core and received.
+Setting a Navigation Destination allows you to send a GPS location that you would like to prompt that user to navigate to using their embedded navigation. When using the `SendLocation` RPC, you will not receive a callback about how the user interacted with this location, only if it was successfully sent to Core and received. It will be handled by Core from that point on using the embedded navigation system.
 
 !!! note
 This currently is only supported for Embedded Navigation. This does not work with Mobile Navigation Apps at this time.
@@ -17,7 +17,7 @@ SendLocation has 3 possible results that you should expect:
 3. DISALLOWED - Your app does not have permission to use SendLocation.
 
 ### Detecting if SendLocation is Available
-`SendLocation` is a newer RPC, so there is a possibility that not all head units will support it, especially if you are connected to a head unit that does not have an embedded navigation. In order to see if SendLocation is available, take a look at `SDLManager`'s `registerResponse` property once in the completion handler for `startWithReadyHandler`.
+`SendLocation` is a newer RPC, so there is a possibility that not all head units will support it, especially if you are connected to a head unit that does not have an embedded navigation. To see if SendLocation is supported, you may look at `SDLManager`'s `registerResponse` property after the ready handler is called. Or, you may use `SDLManager`'s `permissionManager` property to ask for the permission status of `SendLocation`.
 
 !!! note 
 If you need to know how to create and setup `SDLManager`, please see [Getting Started > Integration Basics](Getting Started/Integration Basics).
