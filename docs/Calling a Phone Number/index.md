@@ -12,6 +12,45 @@ DialNumber has 3 possible results that you should expect:
 2. REJECTED - DialNumber was sent, and a phone call was cancelled by the user. Also, this could mean that there is no phone connected via Bluetooth.
 3. DISALLOWED - Your app does not have permission to use DialNumber.
 
+### Detecting is DialNumber is Available
+`DialNumber` is a newer RPC, so there is a possibility that not all head units will support it. To see if `DialNumber` is supported, you may look at `SDLManager`'s `registerResponse` property after the ready handler is called.
+
+!!! note 
+If you need to know how to create and setup `SDLManager`, please see [Getting Started > Integration Basics](Getting Started/Integration Basics).
+!!!
+
+#### Objective-C
+```objc
+__weak typeof (self) weakSelf = self;
+[self.sdlManager startWithReadyHandler:^(BOOL success, NSError * _Nullable error) {
+    if (!success) {
+        NSLog(@"SDL errored starting up: %@", error);
+        return;
+    } 
+
+    SDLHMICapabilities *hmiCapabilities = weakSelf.sdlManager.registerResponse.hmiCapabilities;
+    BOOL isPhoneCallSupported = NO;
+    if (hmiCapabilities != nil) {
+        isPhoneCallSupported = hmiCapabilities.phoneCall.boolValue;
+    } 
+}];
+```
+
+#### Swift
+```swift
+sdlManager.start { (success, error) in
+    if success == false {
+        print("SDL errored starting up: \(error)")
+        return
+    }
+    
+    var isPhoneCallSupported = false
+    if let hmiCapabilities = self.sdlManager.registerResponse?.hmiCapabilities {
+        isPhoneCallSupported = hmiCapabilities.phoneCall.boolValue
+    }
+}
+```
+
 ### How to Use
 !!! note
 For DialNumber, all characters are stripped except for `0`-`9`, `*`, `#`, `,`, `;`, and `+`
