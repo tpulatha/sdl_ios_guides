@@ -78,15 +78,25 @@ If a button type is set to `image` or `both` but no image is stored on the head 
 ```objc
 SDLSoftButton* softButton = [[SDLSoftButton alloc] init];
 
+// Button Id
+softButton.softButtonID = @(<#Unique Button Id#>);
+
+// Button handler - This is called when user presses the button
 softButton.handler = ^(SDLRPCNotification *notification) {
-    if (![notification isKindOfClass:SDLOnButtonEvent.class]) {
-        return;
-    }
-    SDLOnButtonEvent* onButtonEvent = (SDLOnButtonEvent*)notification;
-    if ([onButtonEvent.buttonEventMode isEqualToEnum:SDLButtonEventMode.BUTTONDOWN]) {
-      // The user has pressed down on the button
-    } else if ([onButtonEvent.buttonEventMode isEqualToEnum:SDLButtonEventMode.BUTTONUP]) {
-      // The user has released the button
+    if ([notification isKindOfClass:[SDLOnButtonPress class]]) {
+        SDLOnButtonPress *onButtonPress = (SDLOnButtonPress*)notification;
+        if ([onButtonPress.buttonPressMode isEqualToEnum:SDLButtonPressMode.SHORT]) {
+            // Short button press
+        } else if ([onButtonPress.buttonPressMode isEqualToEnum:SDLButtonPressMode.LONG]) {
+            // Long button press
+        }
+    } else if ([notification isKindOfClass:[SDLOnButtonEvent class]]) {
+        SDLOnButtonEvent *onButtonEvent = (SDLOnButtonEvent*)notification;
+        if ([onButtonEvent.buttonEventMode isEqualToEnum:SDLButtonEventMode.BUTTONUP]) {
+            // Button up
+        } else if ([onButtonEvent.buttonEventMode isEqualToEnum:SDLButtonEventMode.BUTTONDOWN]) {
+            // Button down
+        }
     }
 };
 
@@ -116,13 +126,23 @@ show.softButtons = [NSMutableArray arrayWithObject:softButton]
 ```swift
 let softButton = SDLSoftButton()!
 
+// Button Id
+softButton.softButtonID = <#Unique Button Id#>
+
 // Button handler - This is called when user presses the button
 softButton.handler = { (notification) in
-    guard let onButtonEvent = notification as? SDLOnButtonEvent else { return }
-    if onButtonEvent.buttonEventMode.isEqual(to: SDLButtonEventMode.buttondown()) {
-        // The user has pressed down on the button
-    } else if onButtonEvent.buttonEventMode.isEqual(to: SDLButtonEventMode.buttonup()) {
-        // The user has released the button
+    if let onButtonPress = notification as? SDLOnButtonPress {
+        if onButtonPress.buttonPressMode.isEqual(to: SDLButtonPressMode.short()) {
+            // Short button press
+        } else if onButtonPress.buttonPressMode.isEqual(to: SDLButtonPressMode.long()) {
+            // Long button press
+        }
+    } else if let onButtonEvent = notification as? SDLOnButtonEvent {
+        if onButtonEvent.buttonEventMode.isEqual(to: SDLButtonEventMode.buttonup()) {
+            // Button up
+        } else if onButtonEvent.buttonEventMode.isEqual(to: SDLButtonEventMode.buttondown()) {
+            // Button down
+        }
     }
 }
 
