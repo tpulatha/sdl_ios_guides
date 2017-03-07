@@ -270,7 +270,7 @@ let configuration = SDLConfiguration(lifecycle: lifecycleConfiguration, lockScre
 A lock screen is used to prevent the user from interacting with the app on the smartphone while they are driving. When the vehicle starts moving, the lock screen is activated. Similarly, when the vehicle stops moving, the lock screen is removed. You must implement the lock screen in your app for safety reasons. Any application without a lock screen will not get approval for release to the public.  
 The SDL SDK takes care of the lock screen implementation for you, and even includes the resources for a default lock screen, as well as using the app icon you set, and a connected vehicle's logo. If you do not want to use the default lock screen, you can implement your own custom lock screen.  
 
-For more information, please refer to the [Adding the LockScreen](Adding the LockScreen) section, for this guide we will be using `SDLLockScreenConfiguration`'s `enabledConfiguration`.
+For more information, please refer to the [Adding the Lock Screen](Adding the Lock Screen) section, for this guide we will be using `SDLLockScreenConfiguration`'s `enabledConfiguration`.
 
 #### Objective-C
 ```objc
