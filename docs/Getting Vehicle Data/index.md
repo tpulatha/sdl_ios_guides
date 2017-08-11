@@ -161,7 +161,7 @@ subscribeVehicleData.prndl = @YES;
 
 #### Swift
 ```swift
-let subscribeVehicleData = SDLGetVehicleData()!
+let subscribeVehicleData = SDLSubscribeVehicleData()!
 subscribeVehicleData.prndl = true
 
 sdlManager.send(subscribeVehicleData) { (request, response, error) in
