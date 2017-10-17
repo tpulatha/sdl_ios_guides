@@ -45,6 +45,7 @@ This is only required for USB and Bluetooth enabled head units. It is not necess
 <string>com.smartdevicelink.prot2</string>
 <string>com.smartdevicelink.prot1</string>
 <string>com.smartdevicelink.prot0</string>
+<string>com.smartdevicelink.multisession</string>
 <string>com.ford.sync.prot0</string>
 </array>
 ```  
